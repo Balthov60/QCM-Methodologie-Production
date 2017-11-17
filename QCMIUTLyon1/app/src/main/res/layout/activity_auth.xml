@@ -6,11 +6,41 @@
     tools:context=".AuthActivity">
 
 
+
+
     <!--
 
         ID : auth_login_button, auth_username, auth_password
 
-
     -->
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:id="@+id/auth_username"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/auth_password"
+        android:layout_below="@+id/auth_username"
+        android:layout_alignParentStart="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:id="@+id/auth_login_button"
+        android:layout_below="@+id/auth_password"
+        android:layout_alignParentStart="true"
+        />
 
 </RelativeLayout>
