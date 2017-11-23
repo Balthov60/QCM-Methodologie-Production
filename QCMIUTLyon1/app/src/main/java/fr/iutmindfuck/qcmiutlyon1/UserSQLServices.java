@@ -1,12 +1,14 @@
 package fr.iutmindfuck.qcmiutlyon1;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class UserSQLServices extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "IUT-BG-QCM";
 
     private static final String USER_TABLE = "User";
@@ -31,6 +33,27 @@ public class UserSQLServices extends SQLiteOpenHelper {
                 USER_PASSWORD + " varchar(64), " +
                 USER_IS_TEACHER + " bool)"
         );
+
+        // Insert Basic ID for test
+
+        ContentValues user = new ContentValues();
+        user.put(USER_ID, "user");
+        user.put(USER_LASTNAME, "lastname");
+        user.put(USER_FIRSTNAME, "firstname");
+        user.put(USER_EMAIL, "user@mail.com");
+        user.put(USER_PASSWORD, "password");
+        user.put(USER_IS_TEACHER, false);
+
+        ContentValues teacher = new ContentValues();
+        teacher.put(USER_ID, "teacher");
+        teacher.put(USER_LASTNAME, "lastname");
+        teacher.put(USER_FIRSTNAME, "firstname");
+        teacher.put(USER_EMAIL, "teacher@mail.com");
+        teacher.put(USER_PASSWORD, "password");
+        teacher.put(USER_IS_TEACHER, true);
+
+        db.insertWithOnConflict(USER_TABLE, null, user, SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict(USER_TABLE, null, teacher, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     @Override
@@ -40,26 +63,31 @@ public class UserSQLServices extends SQLiteOpenHelper {
     }
 
 
-    public boolean canConnect(String id, String password) {
-        if(userExist(id))
-            return isPasswordCorrectFor(id, password);
-
-        return false;
+    public boolean isPasswordCorrectFor(String id, String password) {
+        return isResultsMatching(USER_TABLE, new String[]{USER_ID},
+                USER_ID + " = ? AND " + USER_PASSWORD + " = ?",
+                new String[]{id, password});
     }
-
-    private boolean isPasswordCorrectFor(String id, String password) {
-        return false;
-    }
-
     public boolean isTeacher(String id) {
-        if (!userExist(id))
-            return false;
-
-        return false;
+        return isResultsMatching(USER_TABLE, new String[]{USER_ID},
+                                  USER_ID + " = ? AND " + USER_IS_TEACHER + " = ?",
+                                  new String[]{id, "1"});
     }
 
-    private boolean userExist(String id) {
-        return false;
+
+    private boolean isResultsMatching(String table, String[] select,
+                                      String where, String[] whereValues) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(table, select,
+                where, whereValues,
+                null, null, null);
+
+        cursor.moveToFirst();
+        boolean isResult = ! cursor.isAfterLast();
+        cursor.close();
+
+        return isResult;
     }
 
 }
