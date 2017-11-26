@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class UserSQLServices extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 1;
     private static final String DB_NAME = "IUT-BG-QCM";
 
     private static final String USER_TABLE = "User";
-    private static final String USER_ID = "id";
+    private static final String USER_ID = "idUser";
     private static final String USER_LASTNAME = "lastName";
     private static final String USER_FIRSTNAME = "firstName";
     private static final String USER_EMAIL = "email";
