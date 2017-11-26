@@ -5,24 +5,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import fr.iutmindfuck.qcmiutlyon1.databasehandlers.UserSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
+
 public class AuthActivity extends AppCompatActivity {
 
-    UserSQLServices userSQLServices;
+    UserSQLHandler userSQLHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        userSQLServices = new UserSQLServices(this);
+        userSQLHandler = new UserSQLHandler(new SQLServices(this));
     }
 
     public void onClickLoginButton(View view) {
         String username = ((TextView)findViewById(R.id.auth_username)).getText().toString();
         String password = ((TextView)findViewById(R.id.auth_password)).getText().toString();
 
-        if (userSQLServices.isPasswordCorrectFor(username, password)) {
-            if (userSQLServices.isTeacher(username)) {
+        if (userSQLHandler.isPasswordCorrectFor(username, password)) {
+            if (userSQLHandler.isTeacher(username)) {
                 // TODO: Redirect Prof Panel & remove setText
                 ((TextView)findViewById(R.id.auth_error)).setText("PROF");
             }
