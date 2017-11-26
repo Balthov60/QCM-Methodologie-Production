@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">QCM IUT Lyon1</string>
-
-    <!-- Strings related to login -->
-    <string name="auth_error">Nom d\'utilisateur ou mot de passe incorrect.</string>
-</resources>
