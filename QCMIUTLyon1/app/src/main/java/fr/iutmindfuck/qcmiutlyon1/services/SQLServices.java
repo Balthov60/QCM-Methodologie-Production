@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import fr.iutmindfuck.qcmiutlyon1.databasehandlers.UserSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 
 public class SQLServices extends SQLiteOpenHelper {
 
@@ -40,7 +40,7 @@ public class SQLServices extends SQLiteOpenHelper {
     }
 
     public boolean isResultsMatching(String table, String[] select,
-                                      String where, String[] whereValues) {
+                                     String where, String[] whereValues) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(table, select,

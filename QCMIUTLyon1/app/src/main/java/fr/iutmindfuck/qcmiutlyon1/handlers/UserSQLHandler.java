@@ -1,5 +1,4 @@
-package fr.iutmindfuck.qcmiutlyon1.databasehandlers;
-
+package fr.iutmindfuck.qcmiutlyon1.handlers;
 
 import android.content.ContentValues;
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import fr.iutmindfuck.qcmiutlyon1.databasehandlers.UserSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class AuthActivity extends AppCompatActivity {
