@@ -23,19 +23,16 @@ public class SQLServices extends SQLiteOpenHelper {
         // createMCQLinkedTables();
     }
     private void createUserLinkedTables(SQLiteDatabase db) {
-        db.execSQL(UserSQLHandler.getSQLForTableCreation());
+        db.execSQL(UserSQLHandler.getSQLForGroupTableCreation());
+        db.execSQL(UserSQLHandler.getSQLForUserTableCreation());
 
-        // Insert Basic ID for test (will not exists in final version)
-        ContentValues user = UserSQLHandler.getUserDBEntry();
-        ContentValues teacher = UserSQLHandler.getTeacherDBEntry();
-
-        db.insertWithOnConflict("User", null, user, SQLiteDatabase.CONFLICT_REPLACE);
-        db.insertWithOnConflict("User", null, teacher, SQLiteDatabase.CONFLICT_REPLACE);
+        insertTestData(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(UserSQLHandler.getSQLForTableSupression());
+        db.execSQL(UserSQLHandler.getSQLForGroupTableSuppression());
+        db.execSQL(UserSQLHandler.getSQLForUserTableSuppression());
         onCreate(db);
     }
 
@@ -54,4 +51,22 @@ public class SQLServices extends SQLiteOpenHelper {
         return isResult;
     }
 
+
+    /* SQL DATA INSERTION */
+    private void insertTestData(SQLiteDatabase db) {
+        // Insert Basic Group for test (will not exists in final version)
+
+        ContentValues group[] = UserSQLHandler.getGroupsDBEntry();
+
+        db.insertWithOnConflict("Group", null, group[0], SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict("Group", null, group[1], SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict("Group", null, group[2], SQLiteDatabase.CONFLICT_REPLACE);
+
+        // Insert Basic ID for test (will not exists in final version)
+        ContentValues user = UserSQLHandler.getUserDBEntry();
+        ContentValues teacher = UserSQLHandler.getTeacherDBEntry();
+
+        db.insertWithOnConflict("User", null, user, SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict("User", null, teacher, SQLiteDatabase.CONFLICT_REPLACE);
+    }
 }
