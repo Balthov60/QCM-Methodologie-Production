@@ -13,6 +13,13 @@ public class UserSQLHandler {
     private static final String USER_EMAIL = "email";
     private static final String USER_PASSWORD = "password";
     private static final String USER_IS_TEACHER = "isTeacher";
+    private static final String USER_GROUP = "group";
+
+    private static final String GROUP_TABLE = "Group";
+    private static final String GROUP_NAME = "groupName";
+    public static final String GROUP_1 = "bg_s3g1";
+    public static final String GROUP_2 = "bg_s3g2";
+    public static final String GROUP_3 = "bg_s3g3";
 
     private SQLServices sqlServices;
 
@@ -20,18 +27,26 @@ public class UserSQLHandler {
         this.sqlServices = sqlServices;
     }
 
-    public static String getSQLForTableCreation() {
+    public static String getSQLForUserTableCreation() {
         return "CREATE TABLE " + USER_TABLE + "(" +
                 USER_ID + " int(8) PRIMARY KEY, " +
                 USER_LASTNAME + " varchar(32), " +
                 USER_FIRSTNAME + " varchar(32), " +
                 USER_EMAIL + " varchar(256), " +
                 USER_PASSWORD + " varchar(64), " +
-                USER_IS_TEACHER + " bool)";
+                USER_IS_TEACHER + " bool, " +
+                USER_GROUP + " varchar(32))";
 
     }
-    public static String getSQLForTableSupression() {
+    public static String getSQLForGroupTableCreation() {
+        return "CREATE TABLE " + GROUP_TABLE + "(" +
+                GROUP_NAME + " varchar(32) PRIMARY KEY)";
+    }
+    public static String getSQLForUserTableSuppression() {
         return "DROP TABLE IF EXISTS " + USER_TABLE;
+    }
+    public static String getSQLForGroupTableSuppression() {
+        return "DROP TABLE IF EXISTS " + GROUP_TABLE;
     }
 
     public boolean isPasswordCorrectFor(String id, String password) {
@@ -54,6 +69,7 @@ public class UserSQLHandler {
         user.put(USER_EMAIL, "user@mail.com");
         user.put(USER_PASSWORD, "password");
         user.put(USER_IS_TEACHER, false);
+        user.put(USER_GROUP, GROUP_2);
 
         return user;
     }
@@ -67,5 +83,14 @@ public class UserSQLHandler {
         teacher.put(USER_IS_TEACHER, true);
 
         return teacher;
+    }
+    public static ContentValues[] getGroupsDBEntry() {
+        ContentValues groups[] = new ContentValues[3];
+
+        groups[0].put(GROUP_NAME, GROUP_1);
+        groups[1].put(GROUP_NAME, GROUP_2);
+        groups[2].put(GROUP_NAME, GROUP_3);
+
+        return groups;
     }
 }
