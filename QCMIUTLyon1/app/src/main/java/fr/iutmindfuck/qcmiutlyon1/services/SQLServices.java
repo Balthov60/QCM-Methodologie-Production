@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 
 public class SQLServices extends SQLiteOpenHelper {
@@ -17,14 +18,23 @@ public class SQLServices extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    /* *********************** */
+    /* DB creation/suppression */
+    /* *********************** */
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         createUserLinkedTables(db);
-        // createMCQLinkedTables();
+        createMCQLinkedTables(db);
     }
     private void createUserLinkedTables(SQLiteDatabase db) {
         db.execSQL(UserSQLHandler.getSQLForGroupTableCreation());
         db.execSQL(UserSQLHandler.getSQLForUserTableCreation());
+
+        insertTestData(db);
+    }
+    private void createMCQLinkedTables(SQLiteDatabase db) {
+        db.execSQL(MCQSQLHandler.getSQLForMCQTableCreation());
 
         insertTestData(db);
     }
@@ -33,26 +43,42 @@ public class SQLServices extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(UserSQLHandler.getSQLForGroupTableSuppression());
         db.execSQL(UserSQLHandler.getSQLForUserTableSuppression());
+        db.execSQL(MCQSQLHandler.getSQLForMCQTableSuppression());
+
         onCreate(db);
     }
 
-    public boolean isResultsMatching(String table, String[] select,
-                                     String where, String[] whereValues) {
+    /* ***************** */
+    /* Data manipulation */
+    /* ***************** */
+
+    public Cursor getData(String table, String select[], String where, String whereValues[]) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(table, select,
+        return db.query(table, select,
                 where, whereValues,
                 null, null, null);
+    }
+    public boolean isResultsMatching(String table, String[] select,
+                                     String where, String[] whereValues) {
+        Cursor cursor = getData(table, select, where, whereValues);
 
-        cursor.moveToFirst();
-        boolean isResult = ! cursor.isAfterLast();
+        boolean isResult = cursor.moveToFirst();
         cursor.close();
 
         return isResult;
     }
 
+    public void createOrReplaceData(String table, ContentValues contentValues) {
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        db.insertWithOnConflict(table, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
+    }
+
+    /* ****************** */
     /* SQL DATA INSERTION */
+    /* ****************** */
+
     private void insertTestData(SQLiteDatabase db) {
         // Insert Basic Group for test (will not exists in final version)
 
