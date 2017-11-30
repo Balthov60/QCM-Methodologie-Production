@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="auth_button_margin">100dp</dimen>
+    <dimen name="auth_edit_text_margin">50dp</dimen>
+    <dimen name="auth_edit_text_margin_top">-60dp</dimen>
+    <dimen name="auth_button_margin_top">20dp</dimen>
+    <dimen name="auth_iut_brand_margin_top">-125dp</dimen>
+    <dimen name="auth_triangle_margin_start">-60dp</dimen>
+    <dimen name="auth_triangle_margin_top">-40dp</dimen>
+
+</resources>

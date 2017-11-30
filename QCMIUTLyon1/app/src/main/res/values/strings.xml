@@ -3,4 +3,7 @@
 
     <!-- Strings related to login -->
     <string name="auth_error">Nom d\'utilisateur ou mot de passe incorrect.</string>
+    <string name="auth_login_button">Login</string>
+    <string name="auth_username_hint">Username</string>
+    <string name="auth_password_hint">Password</string>
 </resources>

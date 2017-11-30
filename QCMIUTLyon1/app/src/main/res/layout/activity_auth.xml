@@ -18,9 +18,9 @@
         android:id="@+id/upper_corner_triangle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/auth_username"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="46dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/auth_triangle_margin_start"
+        android:layout_marginTop="@dimen/auth_triangle_margin_top"
         android:src="@drawable/triangle_upper_corner" />
 
     <ImageView
@@ -29,6 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/auth_iut_brand_margin_top"
+        android:layout_below="@id/upper_corner_triangle"
         android:src="@drawable/iut_official_brand" />
 
     <EditText
@@ -36,8 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/auth_edit_text_margin"
+        android:layout_marginLeft="@dimen/auth_edit_text_margin"
+        android:layout_marginTop="@dimen/auth_edit_text_margin_top"
         android:layout_below="@id/iut_official_brand"
-        android:id="@+id/auth_username"/>
+        android:id="@+id/auth_username"
+        android:hint="@string/auth_username_hint"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,6 +51,8 @@
         android:id="@+id/auth_error"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/auth_edit_text_margin"
+        android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_below="@id/auth_username"/>
 
     <EditText
@@ -53,12 +61,22 @@
         android:id="@+id/auth_password"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/auth_error"/>
+        android:layout_marginRight="@dimen/auth_edit_text_margin"
+        android:layout_marginLeft="@dimen/auth_edit_text_margin"
+        android:layout_below="@id/auth_error"
+        android:hint="@string/auth_password_hint"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/auth_login_button"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/auth_password"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/auth_button_margin"
+        android:layout_marginTop="@dimen/auth_button_margin_top"
+        android:layout_marginLeft="@dimen/auth_button_margin"
+        android:text="@string/auth_login_button"
+        android:layout_below="@id/auth_password"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/auth_button_shape"/>
 </RelativeLayout>
