@@ -34,16 +34,19 @@
         android:src="@drawable/iut_official_brand" />
 
     <EditText
+        android:id="@+id/auth_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/auth_edit_text_margin"
-        android:layout_marginLeft="@dimen/auth_edit_text_margin"
-        android:layout_marginTop="@dimen/auth_edit_text_margin_top"
+        android:layout_alignParentStart="true"
         android:layout_below="@id/iut_official_brand"
-        android:id="@+id/auth_username"
-        android:hint="@string/auth_username_hint"/>
+        android:layout_marginLeft="@dimen/auth_edit_text_margin"
+        android:layout_marginRight="@dimen/auth_edit_text_margin"
+        android:layout_marginTop="@dimen/auth_edit_text_margin_top"
+        android:background="@drawable/auth_edit_text_shape"
+        android:hint="@string/auth_username_hint"
+        android:inputType="text"
+        android:padding="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,12 +62,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/auth_password"
+        android:inputType="textPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="@dimen/auth_edit_text_margin"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_below="@id/auth_error"
-        android:hint="@string/auth_password_hint"/>
+        android:background="@drawable/auth_edit_text_shape"
+        android:padding="10dp"
+        android:hint="@string/auth_password_hint" />
 
     <Button
         android:layout_width="wrap_content"
