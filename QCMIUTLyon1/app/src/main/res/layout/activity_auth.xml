@@ -10,46 +10,55 @@
     <!--
 
         ID : auth_login_button, auth_username, auth_password, auth_error
+        Ordre : ImageView ImageView EditText TextView EditText Button
 
     -->
+
+    <ImageView
+        android:id="@+id/upper_corner_triangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/auth_username"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="46dp"
+        android:src="@drawable/triangle_upper_corner" />
+
+    <ImageView
+        android:id="@+id/iut_official_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/iut_official_brand" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:id="@+id/auth_username"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/iut_official_brand"
+        android:id="@+id/auth_username"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:id="@+id/auth_error"
-        android:layout_below="@+id/auth_username"
         android:layout_alignParentStart="true"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/auth_username"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
         android:id="@+id/auth_password"
-        android:layout_below="@+id/auth_error"
         android:layout_alignParentStart="true"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/auth_error"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log In"
         android:id="@+id/auth_login_button"
-        android:onClick="onClickLoginButton"
-        android:layout_below="@+id/auth_password"
-        android:layout_alignParentStart="true"
-        />
-
+        android:layout_centerInParent="true"
+        android:layout_below="@id/auth_password"/>
 </RelativeLayout>
