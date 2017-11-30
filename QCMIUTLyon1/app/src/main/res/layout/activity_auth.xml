@@ -39,24 +39,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
+        android:drawableLeft="@mipmap/ic_person_username"
         android:layout_below="@id/iut_official_brand"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_marginRight="@dimen/auth_edit_text_margin"
         android:layout_marginTop="@dimen/auth_edit_text_margin_top"
         android:background="@drawable/auth_edit_text_shape"
         android:hint="@string/auth_username_hint"
-        android:inputType="text"
-        android:padding="10dp" />
+        android:inputType="text" />
 
     <TextView
+        android:id="@+id/auth_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/auth_error"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/auth_edit_text_margin"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/auth_username"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
-        android:layout_below="@id/auth_username"/>
+        android:layout_marginRight="@dimen/auth_edit_text_margin"
+        android:visibility="visible" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -65,24 +66,27 @@
         android:inputType="textPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:drawableLeft="@mipmap/ic_lock_password"
         android:layout_marginRight="@dimen/auth_edit_text_margin"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_below="@id/auth_error"
         android:background="@drawable/auth_edit_text_shape"
-        android:padding="10dp"
         android:hint="@string/auth_password_hint" />
 
     <Button
+        android:id="@+id/auth_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/auth_login_button"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/auth_password"
+        android:layout_marginLeft="@dimen/auth_button_margin"
         android:layout_marginRight="@dimen/auth_button_margin"
         android:layout_marginTop="@dimen/auth_button_margin_top"
-        android:layout_marginLeft="@dimen/auth_button_margin"
+        android:background="@drawable/auth_button_shape"
+        android:elevation="10dp"
+        android:onClick="onClickLoginButton"
         android:text="@string/auth_login_button"
-        android:layout_below="@id/auth_password"
         android:textColor="@color/colorWhite"
-        android:background="@drawable/auth_button_shape"/>
+        android:visibility="visible" />
 </RelativeLayout>

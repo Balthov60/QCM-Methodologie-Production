@@ -6,4 +6,6 @@
     <string name="auth_login_button">Login</string>
     <string name="auth_username_hint">Username</string>
     <string name="auth_password_hint">Password</string>
+    <string name="set_prof">prof</string>
+    <string name="set_user">user</string>
 </resources>
