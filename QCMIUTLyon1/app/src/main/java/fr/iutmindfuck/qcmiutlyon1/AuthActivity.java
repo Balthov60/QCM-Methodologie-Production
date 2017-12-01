@@ -1,11 +1,15 @@
 package fr.iutmindfuck.qcmiutlyon1;
 
 import android.annotation.SuppressLint;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import java.util.logging.Logger;
 
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
