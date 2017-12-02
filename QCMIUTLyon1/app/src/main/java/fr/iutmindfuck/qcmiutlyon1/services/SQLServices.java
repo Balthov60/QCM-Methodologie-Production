@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import fr.iutmindfuck.qcmiutlyon1.handlers.AnswerSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 
 public class SQLServices extends SQLiteOpenHelper {
@@ -26,24 +28,26 @@ public class SQLServices extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         createUserLinkedTables(db);
         createMCQLinkedTables(db);
+
+        insertTestData(db);
     }
     private void createUserLinkedTables(SQLiteDatabase db) {
         db.execSQL(UserSQLHandler.getSQLForGroupTableCreation());
         db.execSQL(UserSQLHandler.getSQLForUserTableCreation());
-
-        insertTestData(db);
     }
     private void createMCQLinkedTables(SQLiteDatabase db) {
-        db.execSQL(MCQSQLHandler.getSQLForMCQTableCreation());
-
-        insertTestData(db);
+        db.execSQL(MCQSQLHandler.getSQLForTableCreation());
+        db.execSQL(QuestionSQLHandler.getSQLForTableCreation());
+        db.execSQL(AnswerSQLHandler.getSQLForTableCreation());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(UserSQLHandler.getSQLForGroupTableSuppression());
         db.execSQL(UserSQLHandler.getSQLForUserTableSuppression());
-        db.execSQL(MCQSQLHandler.getSQLForMCQTableSuppression());
+        db.execSQL(MCQSQLHandler.getSQLForTableSuppression());
+        db.execSQL(QuestionSQLHandler.getSQLForTableSuppression());
+        db.execSQL(AnswerSQLHandler.getSQLForTableSuppression());
 
         onCreate(db);
     }

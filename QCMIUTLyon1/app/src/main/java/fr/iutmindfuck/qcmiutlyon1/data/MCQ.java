@@ -2,13 +2,13 @@ package fr.iutmindfuck.qcmiutlyon1.data;
 
 public class MCQ {
 
-    private String id;
+    private int id;
     private String name;
     private String description;
     private String type;
     private float coef;
 
-    public MCQ(String id, String name, String description, String type, float coef) {
+    public MCQ(int id, String name, String description, String type, float coef) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -16,7 +16,7 @@ public class MCQ {
         this.coef = coef;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
     public String getName() {
@@ -30,21 +30,5 @@ public class MCQ {
     }
     public float getCoef() {
         return coef;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public void setCoef(float coef) {
-        this.coef = coef;
     }
 }
