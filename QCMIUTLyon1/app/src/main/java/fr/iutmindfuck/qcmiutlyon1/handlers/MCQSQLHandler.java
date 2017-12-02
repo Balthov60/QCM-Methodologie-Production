@@ -33,9 +33,9 @@ public class MCQSQLHandler {
         return "DROP TABLE IF EXISTS " + MCQ_TABLE;
     }
 
-    public MCQ getMCQ(String idMCQ) {
+    public MCQ getMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null,
-                                      MCQ_ID + " = ?", new String[] {idMCQ});
+                                      MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});
 
         if (!cursor.moveToFirst()) {
             cursor.close();
@@ -53,7 +53,6 @@ public class MCQSQLHandler {
 
     public void createOrReplaceMCQ(MCQ mcq) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MCQ_ID, mcq.getId());
         contentValues.put(MCQ_NAME, mcq.getName());
         contentValues.put(MCQ_DESCRIPTION, mcq.getDescription());
         contentValues.put(MCQ_TYPE, mcq.getType());
