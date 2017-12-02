@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
+import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
@@ -47,14 +51,21 @@ public class AuthActivity extends AppCompatActivity {
         else
         {
             MCQSQLHandler mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
-            MCQ mcq = new MCQ("Mon Super QCM", "yolo", "test", 1);
-            mcqSQLHandler.createOrReplaceMCQ(mcq);
+            MCQ mcq = mcqSQLHandler.getMCQ(2);
 
-            Log.d("test", "creation OK");
+            QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
+            ArrayList<Answer> answers = new ArrayList<>();
+            answers.add(new Answer("Ma super Reponse juste", true));
+            answers.add(new Answer("Ma super Reponse fausse", false));
+            questionSQLHandler.createOrReplaceQuestion(new Question(1, "Ma super Question", answers), mcq.getId());
 
-            MCQ _mcq = mcqSQLHandler.getMCQ(1);
+            Log.d("test", "Creation OK" + mcq.getId());
+            Question question = questionSQLHandler.getQuestion(mcq.getId(), 1);
 
-            Log.d("test", "recuperation OK" + _mcq.getName());
+            Log.d("test", "récuperation OK " + question.getTitle());
+            for(Answer answer : question.getAnswers()) {
+                Log.d("test", "Answer : " + answer.getTitle());
+            }
 
             ((TextView)findViewById(R.id.auth_error))
                     .setText(getResources().getText(R.string.auth_error));

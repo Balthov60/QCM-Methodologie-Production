@@ -3,6 +3,8 @@ package fr.iutmindfuck.qcmiutlyon1.handlers;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
@@ -27,17 +29,17 @@ public class QuestionSQLHandler {
         return "CREATE TABLE " + QUESTION_TABLE + "(" +
                 QUESTION_MCQ_ID + " INTEGER, " +
                 QUESTION_ID + " INTEGER, " +
-                QUESTION_TITLE + " varchar(32) " +
+                QUESTION_TITLE + " varchar(32), " +
                 "PRIMARY KEY (" + QUESTION_MCQ_ID + ", " + QUESTION_ID + "))";
     }
     public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + QUESTION_TABLE;
     }
-
+    
     public Question getQuestion(int idMCQ, int idQuestion) {
         Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
                 QUESTION_MCQ_ID + " = ? AND " + QUESTION_ID +" = ? ",
-                      new String[] {String.valueOf(idQuestion), String.valueOf(idMCQ)});
+                      new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
 
         if (!cursor.moveToFirst()) {
             cursor.close();
