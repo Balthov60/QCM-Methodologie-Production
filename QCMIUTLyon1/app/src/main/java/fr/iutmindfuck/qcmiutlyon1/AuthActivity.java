@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.logging.Logger;
 
+import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
+import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
@@ -44,6 +46,16 @@ public class AuthActivity extends AppCompatActivity {
         }
         else
         {
+            MCQSQLHandler mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
+            MCQ mcq = new MCQ("Mon Super QCM", "yolo", "test", 1);
+            mcqSQLHandler.createOrReplaceMCQ(mcq);
+
+            Log.d("test", "creation OK");
+
+            MCQ _mcq = mcqSQLHandler.getMCQ(1);
+
+            Log.d("test", "recuperation OK" + _mcq.getName());
+
             ((TextView)findViewById(R.id.auth_error))
                     .setText(getResources().getText(R.string.auth_error));
         }

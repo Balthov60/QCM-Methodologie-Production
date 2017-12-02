@@ -21,27 +21,27 @@ public class MCQSQLHandler {
         this.sqlServices = sqlServices;
     }
 
-    public static String getSQLForMCQTableCreation() {
+    public static String getSQLForTableCreation() {
         return "CREATE TABLE " + MCQ_TABLE + "(" +
-                MCQ_ID + " varchar(32) PRIMARY KEY, " +
+                MCQ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 MCQ_NAME + " varchar(64), " +
                 MCQ_DESCRIPTION + " varchar(256), " +
                 MCQ_TYPE + " varchar(7), " +
                 MCQ_COEF + " float)";
     }
-    public static String getSQLForMCQTableSuppression() {
+    public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + MCQ_TABLE;
     }
 
-    public MCQ getMCQ(String idMCQ) {
+    public MCQ getMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null,
-                                      MCQ_ID + " = ?", new String[] {idMCQ});
+                                      MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});
 
         if (!cursor.moveToFirst()) {
             cursor.close();
             return null;
         }
-        MCQ mcq = new MCQ(cursor.getString(cursor.getColumnIndex(MCQ_ID)),
+        MCQ mcq = new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
                           cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
                           cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
                           cursor.getString(cursor.getColumnIndex(MCQ_TYPE)),
@@ -53,7 +53,6 @@ public class MCQSQLHandler {
 
     public void createOrReplaceMCQ(MCQ mcq) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MCQ_ID, mcq.getId());
         contentValues.put(MCQ_NAME, mcq.getName());
         contentValues.put(MCQ_DESCRIPTION, mcq.getDescription());
         contentValues.put(MCQ_TYPE, mcq.getType());
