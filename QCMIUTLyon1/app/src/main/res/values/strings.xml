@@ -2,12 +2,14 @@
     <string name="app_name">QCM IUT Lyon1</string>
 
     <!-- Strings related to login -->
-    <string name="auth_error">Nom d\'utilisateur ou mot de passe incorrect.</string>
-    <string name="auth_login_button">Login</string>
     <string name="auth_username_hint">Username</string>
     <string name="auth_password_hint">Password</string>
-    <string name="set_prof">prof</string>
-    <string name="set_user">user</string>
+    <string name="auth_login_button">Login</string>
+    <string name="auth_error">Nom d\'utilisateur ou mot de passe incorrect.</string>
+
     <string name="contentDescriptionOnIutBrand">Official IUT brand</string>
     <string name="contentDescriptionOnRightHandUpperCorner">Pink triangle</string>
+
+    <string name="set_prof">prof</string>
+    <string name="set_user">user</string>
 </resources>

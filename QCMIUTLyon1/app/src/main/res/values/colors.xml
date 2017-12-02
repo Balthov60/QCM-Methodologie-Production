@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#D83E6E</color>
-    <color name="colorPrimaryDark">#BE3761</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorIUT">#D83E6E</color>
+
+    <!-- main color -->
+    <color name="pinkIUT">#D83E6E</color>
+    <color name="greyIUT">#403e3f</color>
+
+    <color name="darkPinkIUT">#BE3761</color>
+    <color name="lightPinkIUT">#FF4081</color>
+
+    <!-- useful color -->
     <color name="colorPressedButton">#BE3761</color>
+    <color name="errorRedColor">#FF0000</color>
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorEditTextBackground">#D3D4D3</color>
-    <color name="errorRedColor">#FF0000</color>
+
 </resources>
