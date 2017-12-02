@@ -13,9 +13,9 @@ public class UserSQLHandler {
     private static final String USER_EMAIL = "email";
     private static final String USER_PASSWORD = "password";
     private static final String USER_IS_TEACHER = "isTeacher";
-    private static final String USER_GROUP = "group";
+    private static final String USER_GROUP = "studentGroup";
 
-    private static final String GROUP_TABLE = "Group";
+    private static final String GROUP_TABLE = "StudentGroup";
     private static final String GROUP_NAME = "groupName";
     public static final String GROUP_1 = "bg_s3g1";
     public static final String GROUP_2 = "bg_s3g2";
@@ -86,6 +86,9 @@ public class UserSQLHandler {
     }
     public static ContentValues[] getGroupsDBEntry() {
         ContentValues groups[] = new ContentValues[3];
+        for (int i = 0; i < 3; i++) {
+            groups[i] = new ContentValues();
+        }
 
         groups[0].put(GROUP_NAME, GROUP_1);
         groups[1].put(GROUP_NAME, GROUP_2);
