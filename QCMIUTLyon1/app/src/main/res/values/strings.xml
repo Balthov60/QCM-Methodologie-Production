@@ -8,4 +8,6 @@
     <string name="auth_password_hint">Password</string>
     <string name="set_prof">prof</string>
     <string name="set_user">user</string>
+    <string name="contentDescriptionOnIutBrand">Official IUT brand</string>
+    <string name="contentDescriptionOnRightHandUpperCorner">Pink triangle</string>
 </resources>

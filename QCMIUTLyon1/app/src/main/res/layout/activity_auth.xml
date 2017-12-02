@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.iutmindfuck.qcmiutlyon1.AuthActivity">
 
+    <!-- xmlns:app="http://schemas.android.com/apk/res-auto"
+    -->
 
     <!--
 
@@ -21,7 +23,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/auth_triangle_margin_start"
         android:layout_marginTop="@dimen/auth_triangle_margin_top"
-        android:src="@drawable/triangle_upper_corner" />
+        android:src="@drawable/triangle_upper_corner"
+        android:contentDescription="@string/contentDescriptionOnRightHandUpperCorner" />
 
     <ImageView
         android:id="@+id/iut_official_brand"
@@ -31,7 +34,8 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/auth_iut_brand_margin_top"
         android:layout_below="@id/upper_corner_triangle"
-        android:src="@drawable/iut_official_brand" />
+        android:src="@drawable/iut_official_brand"
+        android:contentDescription="@string/contentDescriptionOnIutBrand" />
 
     <EditText
         android:id="@+id/auth_username"
@@ -69,13 +73,13 @@
         android:inputType="textPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:drawableLeft="@mipmap/ic_lock_password"
+        android:drawableStart="@mipmap/ic_lock_password"
         android:layout_marginRight="@dimen/auth_edit_text_margin"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_below="@id/auth_error"
         android:background="@drawable/auth_edit_text_shape"
         android:hint="@string/auth_password_hint"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="@dimen/auth_password_margin_top"/>
 
     <Button
         android:id="@+id/auth_login_button"
@@ -88,7 +92,6 @@
         android:layout_marginRight="@dimen/auth_button_margin"
         android:layout_marginTop="@dimen/auth_button_margin_top"
         android:background="@drawable/auth_button_shape"
-        android:elevation="10dp"
         android:onClick="onClickLoginButton"
         android:text="@string/auth_login_button"
         android:textColor="@color/colorWhite"
