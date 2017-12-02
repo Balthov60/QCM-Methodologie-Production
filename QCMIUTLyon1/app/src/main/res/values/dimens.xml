@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Style linked dimens -->
+    <dimen name="wide_view_margin_horizontal">10dp</dimen>
+
+    <!-- Auth linked dimens -->
+    <dimen name="auth_iut_brand_margin_top">20dp</dimen>
+
+    <dimen name="auth_edit_text_margin_top">20dp</dimen>
+
+    <dimen name="auth_error_text_size">14sp</dimen>
+
+    <dimen name="auth_password_margin_top">15dp</dimen>
+
+    <dimen name="auth_button_margin">50dp</dimen>
+    <dimen name="auth_button_margin_top">45dp</dimen>
+
+
+</resources>

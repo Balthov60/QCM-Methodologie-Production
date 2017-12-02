@@ -88,9 +88,9 @@ public class SQLServices extends SQLiteOpenHelper {
 
         ContentValues group[] = UserSQLHandler.getGroupsDBEntry();
 
-        db.insertWithOnConflict("Group", null, group[0], SQLiteDatabase.CONFLICT_REPLACE);
-        db.insertWithOnConflict("Group", null, group[1], SQLiteDatabase.CONFLICT_REPLACE);
-        db.insertWithOnConflict("Group", null, group[2], SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict("StudentGroup", null, group[0], SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict("StudentGroup", null, group[1], SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict("StudentGroup", null, group[2], SQLiteDatabase.CONFLICT_REPLACE);
 
         // Insert Basic ID for test (will not exists in final version)
         ContentValues user = UserSQLHandler.getUserDBEntry();
