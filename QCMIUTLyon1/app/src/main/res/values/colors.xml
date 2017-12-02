@@ -7,4 +7,5 @@
     <color name="colorPressedButton">#BE3761</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorEditTextBackground">#D3D4D3</color>
+    <color name="errorRedColor">#FF0000</color>
 </resources>

@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:drawableLeft="@mipmap/ic_person_username"
+        android:drawableStart="@mipmap/ic_person_username"
         android:layout_below="@id/iut_official_brand"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_marginRight="@dimen/auth_edit_text_margin"
@@ -57,7 +57,10 @@
         android:layout_below="@id/auth_username"
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_marginRight="@dimen/auth_edit_text_margin"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:textColor="@color/errorRedColor"
+        android:textSize="@dimen/auth_error_text_size"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -71,7 +74,8 @@
         android:layout_marginLeft="@dimen/auth_edit_text_margin"
         android:layout_below="@id/auth_error"
         android:background="@drawable/auth_edit_text_shape"
-        android:hint="@string/auth_password_hint" />
+        android:hint="@string/auth_password_hint"
+        android:layout_marginTop="15dp"/>
 
     <Button
         android:id="@+id/auth_login_button"

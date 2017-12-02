@@ -7,5 +7,6 @@
     <dimen name="auth_iut_brand_margin_top">-425dp</dimen>
     <dimen name="auth_triangle_margin_start">-60dp</dimen>
     <dimen name="auth_triangle_margin_top">-195dp</dimen>
+    <dimen name="auth_error_text_size">14sp</dimen>
 
 </resources>
