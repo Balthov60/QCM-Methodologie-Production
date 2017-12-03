@@ -1,6 +1,7 @@
 package fr.iutmindfuck.qcmiutlyon1;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +41,11 @@ public class AuthActivity extends AppCompatActivity {
         if (userSQLHandler.isPasswordCorrectFor(username, password)) {
             if (userSQLHandler.isTeacher(username)) {
                 // TODO: Redirect Prof Panel & remove setText
-                ((TextView)findViewById(R.id.auth_error)).setText(getResources().getText(R.string.set_prof));
+                Intent intent = new Intent(AuthActivity.this, TeacherPanelActivity.class);
+                startActivity(intent
+
+
+                );
             }
             else
             {

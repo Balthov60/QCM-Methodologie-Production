@@ -25,7 +25,10 @@
             android:layout_height="180dp"
 
             android:text="@string/teacher_panel_mcq"
-            android:background="@drawable/mcq"/>
+            android:background="@drawable/mcq"
+            android:onClick="onClickMCQ"
+            android:clickable="true"
+            android:focusable="true" />
 
 
         <TextView style="@style/BigButtonText"
@@ -36,7 +39,11 @@
             android:layout_marginTop="40dp"
 
             android:text="@string/teacher_panel_marks"
-            android:background="@drawable/mark" />
+            android:background="@drawable/mark"
+
+            android:onClick="onClickMark"
+            android:clickable="true"
+            android:focusable="true" />
 
     </LinearLayout>
 
