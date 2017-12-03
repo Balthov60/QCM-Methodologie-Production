@@ -1,13 +1,21 @@
 package fr.iutmindfuck.qcmiutlyon1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 
 public class TeacherPanelActivity extends AppCompatActivity {
+
+    private static final String UNIMPLEMENTED_MARK_MESSAGE
+                                      = "La gestion des notes n'a pas été implémenté";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +30,19 @@ public class TeacherPanelActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.basic_menu, menu);
         return true;
+    }
+
+
+    public void onClickMCQ(View view){
+        startActivity(new Intent(TeacherPanelActivity.this, MCQEditionActivity.class));
+    }
+
+
+    public void onClickMark(View view){
+        Context context = getApplicationContext();
+
+        Toast toast = Toast.makeText(context, UNIMPLEMENTED_MARK_MESSAGE, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM,0,50);
+        toast.show();
     }
 }
