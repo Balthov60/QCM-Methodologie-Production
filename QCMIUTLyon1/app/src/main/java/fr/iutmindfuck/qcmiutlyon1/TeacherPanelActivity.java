@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 public class TeacherPanelActivity extends AppCompatActivity {
 
+    private static final String UNIMPLEMENTED_MARK_MESSAGE
+                                      = "La gestion des notes n'a pas été implémenté";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +34,14 @@ public class TeacherPanelActivity extends AppCompatActivity {
 
 
     public void onClickMCQ(View view){
-        Intent mcqEdition = new Intent(TeacherPanelActivity.this, MCQEditionActivity.class);
-        startActivity(mcqEdition);
+        startActivity(new Intent(TeacherPanelActivity.this, MCQEditionActivity.class));
     }
 
 
     public void onClickMark(View view){
         Context context = getApplicationContext();
-        CharSequence text = "La gestion des notes n'a pas été implémenté";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(context, UNIMPLEMENTED_MARK_MESSAGE, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
     }
