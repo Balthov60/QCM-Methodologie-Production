@@ -64,4 +64,10 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="BigButtonText" parent="BasicText">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
+
 </resources>

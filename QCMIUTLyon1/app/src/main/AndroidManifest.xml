@@ -18,9 +18,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MCQEditionActivity" >
-
-        </activity>
+        <activity android:name=".MCQEditionActivity" />
+        <activity android:name=".TeacherPanelActivity" />
     </application>
 
 </manifest>
