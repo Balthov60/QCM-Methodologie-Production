@@ -2,7 +2,8 @@ package fr.iutmindfuck.qcmiutlyon1.handlers;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
+
+import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
@@ -14,7 +15,7 @@ public class MCQSQLHandler {
     private static final String MCQ_NAME = "name";
     private static final String MCQ_DESCRIPTION = "description";
     private static final String MCQ_TYPE = "type";
-    private static final String MCQ_COEF = "coef";
+    private static final String MCQ_COEFFICIENT = "coefficient";
 
     private SQLServices sqlServices;
 
@@ -28,12 +29,33 @@ public class MCQSQLHandler {
                 MCQ_NAME + " varchar(128), " +
                 MCQ_DESCRIPTION + " varchar(256), " +
                 MCQ_TYPE + " varchar(7), " +
-                MCQ_COEF + " float)";
+                MCQ_COEFFICIENT + " float)";
     }
     public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + MCQ_TABLE;
     }
 
+    public ArrayList<MCQ> getMCQs() {
+        Cursor cursor = sqlServices.getData(MCQ_TABLE, null, null, null);
+
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+
+        ArrayList<MCQ> mcqs = new ArrayList<>();
+        do {
+            mcqs.add(new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
+                             cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
+                             cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
+                             cursor.getString(cursor.getColumnIndex(MCQ_TYPE)),
+                             cursor.getFloat(cursor.getColumnIndex(MCQ_COEFFICIENT))));
+        }
+        while(cursor.moveToNext());
+
+        cursor.close();
+        return mcqs;
+    }
     public MCQ getMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null,
                                       MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});
@@ -46,7 +68,7 @@ public class MCQSQLHandler {
                           cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
                           cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
                           cursor.getString(cursor.getColumnIndex(MCQ_TYPE)),
-                          cursor.getFloat(cursor.getColumnIndex(MCQ_COEF)));
+                          cursor.getFloat(cursor.getColumnIndex(MCQ_COEFFICIENT)));
 
         cursor.close();
         return mcq;
@@ -65,7 +87,7 @@ public class MCQSQLHandler {
         contentValues.put(MCQ_NAME, mcq.getName());
         contentValues.put(MCQ_DESCRIPTION, mcq.getDescription());
         contentValues.put(MCQ_TYPE, mcq.getType());
-        contentValues.put(MCQ_COEF, mcq.getCoef());
+        contentValues.put(MCQ_COEFFICIENT, mcq.getCoefficient());
 
         sqlServices.createOrReplaceData(MCQ_TABLE, contentValues);
     }

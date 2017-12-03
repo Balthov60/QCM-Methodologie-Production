@@ -50,23 +50,6 @@ public class AuthActivity extends AppCompatActivity {
         }
         else
         {
-            MCQSQLHandler mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
-            MCQ mcq = mcqSQLHandler.getMCQ(2);
-
-            QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
-            ArrayList<Answer> answers = new ArrayList<>();
-            answers.add(new Answer("Ma super Reponse juste", true));
-            answers.add(new Answer("Ma super Reponse fausse", false));
-            questionSQLHandler.createOrReplaceQuestion(new Question(1, "Ma super Question", answers), mcq.getId());
-
-            Log.d("test", "Creation OK" + mcq.getId());
-            Question question = questionSQLHandler.getQuestion(mcq.getId(), 1);
-
-            Log.d("test", "récuperation OK " + question.getTitle());
-            for(Answer answer : question.getAnswers()) {
-                Log.d("test", "Answer : " + answer.getTitle());
-            }
-
             ((TextView)findViewById(R.id.auth_error))
                     .setText(getResources().getText(R.string.auth_error));
         }

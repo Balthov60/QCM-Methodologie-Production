@@ -35,7 +35,28 @@ public class QuestionSQLHandler {
     public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + QUESTION_TABLE;
     }
-    
+
+    public ArrayList<Question> getQuestions(int idMCQ) {
+        Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
+                QUESTION_MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});
+
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+
+        ArrayList<Question> questions = new ArrayList<>();
+        do {
+            int id = cursor.getInt(cursor.getColumnIndex(QUESTION_ID));
+
+            questions.add(new Question(id, cursor.getString(cursor.getColumnIndex(QUESTION_TITLE)),
+                                       answerSQLHandler.getAnswers(idMCQ, id)));
+        }
+        while (cursor.moveToNext());
+
+        cursor.close();
+        return questions;
+    }
     public Question getQuestion(int idMCQ, int idQuestion) {
         Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
                 QUESTION_MCQ_ID + " = ? AND " + QUESTION_ID +" = ? ",

@@ -6,14 +6,14 @@ public class MCQ {
     private String name;
     private String description;
     private String type;
-    private float coef;
+    private float coefficient;
 
-    public MCQ(int id, String name, String description, String type, float coef) {
+    public MCQ(int id, String name, String description, String type, float coefficient) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.type = type;
-        this.coef = coef;
+        this.coefficient = coefficient;
     }
 
     public int getId() {
@@ -28,7 +28,7 @@ public class MCQ {
     public String getType() {
         return type;
     }
-    public float getCoef() {
-        return coef;
+    public float getCoefficient() {
+        return coefficient;
     }
 }
