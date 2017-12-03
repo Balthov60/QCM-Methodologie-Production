@@ -33,4 +33,6 @@
     <string name="group2_1">S2G1</string>
     <string name="group2_2">S2G2</string>
     <string name="group2_3">S2G3</string>
+    <string name="teacher_panel_marks">Notes</string>
+    <string name="teacher_panel_mcq">QCM</string>
 </resources>
