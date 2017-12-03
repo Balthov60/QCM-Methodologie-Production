@@ -25,7 +25,7 @@
         android:src="@drawable/iut_official_brand"
         android:contentDescription="@string/contentDescriptionOnIutBrand" />
 
-    <EditText style="@style/wideView"
+    <EditText style="@style/WideView"
         android:id="@+id/auth_username"
 
         android:layout_below="@id/iut_official_brand"
@@ -36,7 +36,7 @@
         android:hint="@string/auth_username_hint"
         android:inputType="text" />
 
-    <TextView style="@style/wideView"
+    <TextView style="@style/WideView"
         android:id="@+id/auth_error"
 
         android:layout_below="@id/auth_username"
@@ -44,7 +44,7 @@
         android:textColor="@color/errorRedColor"
         android:textSize="@dimen/auth_error_text_size" />
 
-    <EditText style="@style/wideView"
+    <EditText style="@style/WideView"
         android:id="@+id/auth_password"
 
         android:layout_below="@id/auth_error"
@@ -55,23 +55,13 @@
         android:hint="@string/auth_password_hint"
         android:inputType="textPassword" />
 
-    <Button
+    <Button style="@style/BasicButton"
         android:id="@+id/auth_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
         android:layout_below="@id/auth_password"
         android:layout_marginTop="@dimen/auth_button_margin_top"
 
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/auth_button_margin"
-        android:layout_marginRight="@dimen/auth_button_margin"
-
-        android:background="@drawable/auth_button_shape"
         android:text="@string/auth_login_button"
-        android:textColor="@color/colorWhite"
-
         android:onClick="onClickLoginButton"/>
 
 </RelativeLayout>

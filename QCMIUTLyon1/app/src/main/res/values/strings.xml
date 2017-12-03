@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">QCM IUT Lyon1</string>
 
+    <!-- Global view string -->
+    <string name="separator">graphic separator</string>
+
     <!-- Strings related to login -->
     <string name="auth_username_hint">Username</string>
     <string name="auth_password_hint">Password</string>
@@ -12,4 +15,22 @@
 
     <string name="set_prof">prof</string>
     <string name="set_user">user</string>
+
+    <!-- Strings related to qcm edition -->
+    <string name="mcq_edition_title">Nom du QCM :</string>
+    <string name="mcq_edition_description">Description :</string>
+    <string name="mcq_edition_type">Type de QCM :</string>
+    <string name="mcq_edition_type_negative">-1 point mauvaise réponse</string>
+    <string name="mcq_edition_type_classic">0 point mauvaise réponse</string>
+    <string name="mcq_edition_group">Groupes :</string>
+    <string name="mcq_edition_coefficient">Coefficient :</string>
+    <string name="mcq_edition_submit">Créer le QCM</string>
+
+    <!-- Strings related to group -->
+    <string name="group1_1">S1G1</string>
+    <string name="group1_2">S1G2</string>
+    <string name="group1_3">S1G3</string>
+    <string name="group2_1">S2G1</string>
+    <string name="group2_2">S2G2</string>
+    <string name="group2_3">S2G3</string>
 </resources>
