@@ -7,8 +7,24 @@
         <item name="colorAccent">@color/lightPinkIUT</item>
     </style>
 
+    <!-- Basic Button -->
+    <style name="BasicButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_marginLeft">@dimen/basic_button_margin</item>
+        <item name="android:layout_marginRight">@dimen/basic_button_margin</item>
+
+        <item name="android:background">@drawable/auth_button_shape</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- Base wide view theme. -->
-    <style name="wideView">
+    <style name="WideView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
 
@@ -16,6 +32,36 @@
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:layout_marginLeft">@dimen/wide_view_margin_horizontal</item>
         <item name="android:layout_marginRight">@dimen/wide_view_margin_horizontal</item>
+    </style>
+    <style name="WideFormView" parent="WideView">
+        <item name="android:layout_marginTop">@dimen/form_top_margin</item>
+        <item name="android:textAppearance">@style/BasicText</item>
+    </style>
+    <style name="WideEditView" parent="WideFormView">
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginTop">@dimen/form_top_margin</item>
+
+        <item name="android:background">@drawable/form_edit_text_shape</item>
+    </style>
+
+    <!-- Graphic styles -->
+    <style name="separator">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/pinkIUT</item>
+
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_marginLeft">@dimen/wide_view_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/wide_view_margin_horizontal</item>
+    </style>
+
+    <!-- Text Styles -->
+    <style name="BasicText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/greyIUT</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
 </resources>

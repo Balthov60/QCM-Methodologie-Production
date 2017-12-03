@@ -3,6 +3,7 @@
 
     <!-- Style linked dimens -->
     <dimen name="wide_view_margin_horizontal">10dp</dimen>
+    <dimen name="basic_button_margin">50dp</dimen>
 
     <!-- Auth linked dimens -->
     <dimen name="auth_iut_brand_margin_top">20dp</dimen>
@@ -13,8 +14,10 @@
 
     <dimen name="auth_password_margin_top">15dp</dimen>
 
-    <dimen name="auth_button_margin">50dp</dimen>
     <dimen name="auth_button_margin_top">45dp</dimen>
+
+    <!-- Form linked dimens -->
+    <dimen name="form_top_margin">10dp</dimen>
 
 
 </resources>

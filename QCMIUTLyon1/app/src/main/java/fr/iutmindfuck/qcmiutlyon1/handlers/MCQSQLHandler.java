@@ -14,7 +14,7 @@ public class MCQSQLHandler {
     private static final String MCQ_ID = "idMCQ";
     private static final String MCQ_NAME = "name";
     private static final String MCQ_DESCRIPTION = "description";
-    private static final String MCQ_TYPE = "type";
+    private static final String MCQ_TYPE = "isNegative";
     private static final String MCQ_COEFFICIENT = "coefficient";
 
     private SQLServices sqlServices;
@@ -28,7 +28,7 @@ public class MCQSQLHandler {
                 MCQ_ID + " INTEGER PRIMARY KEY, " +
                 MCQ_NAME + " varchar(128), " +
                 MCQ_DESCRIPTION + " varchar(256), " +
-                MCQ_TYPE + " varchar(7), " +
+                MCQ_TYPE + " bool, " +
                 MCQ_COEFFICIENT + " float)";
     }
     public static String getSQLForTableSuppression() {
@@ -48,7 +48,7 @@ public class MCQSQLHandler {
             mcqs.add(new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
                              cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
                              cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
-                             cursor.getString(cursor.getColumnIndex(MCQ_TYPE)),
+                            (cursor.getInt(cursor.getColumnIndex(MCQ_TYPE)) == 1),
                              cursor.getFloat(cursor.getColumnIndex(MCQ_COEFFICIENT))));
         }
         while(cursor.moveToNext());
@@ -67,7 +67,7 @@ public class MCQSQLHandler {
         MCQ mcq = new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
                           cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
                           cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
-                          cursor.getString(cursor.getColumnIndex(MCQ_TYPE)),
+                         (cursor.getInt(cursor.getColumnIndex(MCQ_TYPE)) == 1),
                           cursor.getFloat(cursor.getColumnIndex(MCQ_COEFFICIENT)));
 
         cursor.close();
@@ -86,7 +86,7 @@ public class MCQSQLHandler {
 
         contentValues.put(MCQ_NAME, mcq.getName());
         contentValues.put(MCQ_DESCRIPTION, mcq.getDescription());
-        contentValues.put(MCQ_TYPE, mcq.getType());
+        contentValues.put(MCQ_TYPE, mcq.getPointNegative());
         contentValues.put(MCQ_COEFFICIENT, mcq.getCoefficient());
 
         sqlServices.createOrReplaceData(MCQ_TABLE, contentValues);
