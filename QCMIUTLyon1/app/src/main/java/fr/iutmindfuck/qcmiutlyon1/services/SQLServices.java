@@ -72,6 +72,11 @@ public class SQLServices extends SQLiteOpenHelper {
 
         return isResult;
     }
+    public int getSizeOf(String table) {
+        Cursor cursor = getData(table, null, null, null);
+
+        return cursor.getCount();
+    }
 
     public void createOrReplaceData(String table, ContentValues contentValues) {
         SQLiteDatabase db = this.getReadableDatabase();

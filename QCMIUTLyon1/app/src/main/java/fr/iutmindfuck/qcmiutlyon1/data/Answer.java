@@ -3,7 +3,7 @@ package fr.iutmindfuck.qcmiutlyon1.data;
 public class Answer {
 
     private String title;
-    private boolean isRightAnswer = false;
+    private boolean isRightAnswer;
 
     public Answer(String title, boolean isRightAnswer) {
         this.title = title;

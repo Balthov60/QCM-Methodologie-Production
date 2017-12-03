@@ -3,7 +3,6 @@ package fr.iutmindfuck.qcmiutlyon1.handlers;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
@@ -51,7 +50,7 @@ public class AnswerSQLHandler {
         ArrayList<Answer> answers = new ArrayList<>();
         do {
             answers.add(new Answer(cursor.getString(cursor.getColumnIndex(ANSWER_TITLE)),
-                                  (cursor.getInt(cursor.getColumnIndex(ANSWER_IS_RIGHT)) == 1)));
+                    (cursor.getInt(cursor.getColumnIndex(ANSWER_IS_RIGHT)) == 1)));
         }
         while (cursor.moveToNext());
 
