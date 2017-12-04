@@ -52,8 +52,6 @@ public class MCQEditionActivity extends AppCompatActivity {
                     .createOrReplaceMCQ(new MCQ(0, title, description, isNegative, coefficient));
             displaySuccessToast();
         }
-
-        Log.d("test", title + " " + description + " " + coefficient + " " + isNegative);
     }
 
     /* Get Value from MCQ Edition Form */
