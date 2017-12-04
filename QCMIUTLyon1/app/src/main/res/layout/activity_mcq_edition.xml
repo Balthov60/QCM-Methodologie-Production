@@ -145,6 +145,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_below="@+id/mcq_edition_coefficient_input"
 
+                android:onClick="submitMCQ"
                 android:text="@string/mcq_edition_submit"/>
 
         </RelativeLayout>
