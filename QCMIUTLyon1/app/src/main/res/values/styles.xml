@@ -30,6 +30,14 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <style name="ImageButtonQCMList">
+        <item name="android:layout_width">100px</item>
+        <item name="android:layout_height">100px</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
     <!-- Base wide view theme. -->
     <style name="WideView">
         <item name="android:layout_width">wrap_content</item>

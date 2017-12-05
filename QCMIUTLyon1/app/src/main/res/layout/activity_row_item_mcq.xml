@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="10dp" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="10dp">
 
     <TextView android:id="@+id/id_mcq" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/black" android:layout_marginLeft="10dp"  android:textStyle="bold" tools:text="QCM 1" />
 
     <TextView android:id="@+id/mcq_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/black" android:layout_alignLeft="@+id/id_mcq" android:layout_below="@+id/id_mcq" tools:text="Nom du QCM" />
 
+    <ImageView
+        android:id="@+id/searchImageButton"
+        style="@style/ImageButtonQCMList"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="70dp"
+        android:src="@drawable/action_edit_pencil"
+        android:visibility="visible" />
 </RelativeLayout>
