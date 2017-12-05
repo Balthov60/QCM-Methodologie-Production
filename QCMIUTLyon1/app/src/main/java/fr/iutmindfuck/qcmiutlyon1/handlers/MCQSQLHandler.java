@@ -56,6 +56,8 @@ public class MCQSQLHandler {
         cursor.close();
         return mcqs;
     }
+
+
     public MCQ getMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null,
                                       MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});
