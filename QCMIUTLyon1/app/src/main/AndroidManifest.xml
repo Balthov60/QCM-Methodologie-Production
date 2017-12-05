@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         
-        <activity android:name=".AuthActivity">
+        <activity android:name=".QuestionEditionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,6 +19,7 @@
         </activity>
 
         <activity android:name=".MCQEditionActivity" />
+        <activity android:name=".AuthActivity" />
         <activity android:name=".TeacherPanelActivity" />
     </application>
 
