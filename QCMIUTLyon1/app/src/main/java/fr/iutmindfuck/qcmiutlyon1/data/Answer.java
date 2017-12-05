@@ -1,5 +1,7 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
+import java.util.ArrayList;
+
 public class Answer {
 
     private String title;
@@ -15,5 +17,19 @@ public class Answer {
     }
     public boolean isRight() {
         return isRightAnswer;
+    }
+
+    public static boolean checkAnswersValidity(ArrayList<Answer> answers) {
+        if (answers.size() < 2)
+            return false;
+
+        boolean containRightAnswer = false;
+        for (Answer answer : answers) {
+            if (answer.isRight())
+                containRightAnswer = true;
+            if (answer.getTitle().isEmpty())
+                return false;
+        }
+        return containRightAnswer;
     }
 }

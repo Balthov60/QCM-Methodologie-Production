@@ -11,7 +11,7 @@
         android:layout_gravity="center"/>
 
     <EditText
-        android:id="@+id/answer_edition_title_input"
+        android:id="@+id/question_edition_answer"
         android:background="@drawable/form_edit_text_shape"
 
         android:layout_width="match_parent"
@@ -33,6 +33,10 @@
         android:layout_gravity="center"
 
         android:src="@drawable/ic_action_remove_answer"
-        android:contentDescription="@string/answer_remove_button_content_description" />
+        android:contentDescription="@string/answer_remove_button_content_description"
+
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="removeAnswer"/>
 
 </LinearLayout>
