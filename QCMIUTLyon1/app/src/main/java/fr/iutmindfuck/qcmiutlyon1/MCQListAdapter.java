@@ -39,8 +39,8 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
         MCQ mcq = getItem(position);
 
         //il ne reste plus qu'à remplir notre vue
-        viewHolder.id.setText("QCM " + mcq.getId());
-        viewHolder.mcq_name.setText(mcq.getName());
+        viewHolder.id.setText("QCM " + mcq.getName());
+        viewHolder.mcq_name.setText(mcq.getDescription());
 
         return convertView;
     }

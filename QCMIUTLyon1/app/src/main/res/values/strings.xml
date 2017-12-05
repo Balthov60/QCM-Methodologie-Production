@@ -25,6 +25,7 @@
     <string name="mcq_edition_group">Groupes :</string>
     <string name="mcq_edition_coefficient">Coefficient :</string>
     <string name="mcq_edition_submit">Créer le QCM</string>
+    <string name="mcq_menu_list_create_mcq">Ajouter un QCM</string>
 
     <!-- Strings related to group -->
     <string name="group1_1">S1G1</string>

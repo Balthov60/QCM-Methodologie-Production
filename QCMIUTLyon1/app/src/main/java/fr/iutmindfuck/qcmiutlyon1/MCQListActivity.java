@@ -2,6 +2,7 @@ package fr.iutmindfuck.qcmiutlyon1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class MCQListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mcq_list);
         mListView = (ListView) findViewById(R.id.mcq_list_view);
         mcqsqlHandler =new MCQSQLHandler(new SQLServices(MCQListActivity.this));
-        mcqsqlHandler.createOrReplaceMCQ(new MCQ(0,"Loi Exponentielle", "C'est un test",false, 1.5f ));
+        mcqsqlHandler.createOrReplaceMCQ(new MCQ(0,"Loi Exponentielle", "C'est un putain de test super super super super super super super super super super long",false, 1.5f ));
         List<MCQ> mcqList = generateMCQ();
 
         MCQListAdapter adapter = new MCQListAdapter(MCQListActivity.this, mcqList);
@@ -36,5 +37,15 @@ public class MCQListActivity extends AppCompatActivity {
     private List<MCQ> generateMCQ(){
         List<MCQ> mcqList = this.mcqsqlHandler.getMCQs();
         return mcqList;
+    }
+
+    public void onModifyMCQButtonClick(View view)
+    {
+
+    }
+
+    public void onRemoveMCQButtonClick(View v)
+    {
+
     }
 }
