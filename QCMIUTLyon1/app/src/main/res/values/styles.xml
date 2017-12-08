@@ -30,6 +30,20 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <!-- Basic Image Button -->
+    <style name="ImageButtonMCQList">
+            <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+
+        <item name="android:visibility">visible</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
     <!-- Base wide view theme. -->
     <style name="WideView">
         <item name="android:layout_width">wrap_content</item>
@@ -37,8 +51,8 @@
 
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_alignParentStart">true</item>
-        <item name="android:layout_marginLeft">@dimen/wide_view_margin_horizontal</item>
-        <item name="android:layout_marginRight">@dimen/wide_view_margin_horizontal</item>
+        <item name="android:layout_marginLeft">@dimen/wide_view_margin</item>
+        <item name="android:layout_marginRight">@dimen/wide_view_margin</item>
     </style>
     <style name="WideFormView" parent="WideView">
         <item name="android:layout_marginTop">@dimen/form_top_margin</item>
@@ -60,8 +74,8 @@
 
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_alignParentStart">true</item>
-        <item name="android:layout_marginLeft">@dimen/wide_view_margin_horizontal</item>
-        <item name="android:layout_marginRight">@dimen/wide_view_margin_horizontal</item>
+        <item name="android:layout_marginLeft">@dimen/wide_view_margin</item>
+        <item name="android:layout_marginRight">@dimen/wide_view_margin</item>
     </style>
 
     <!-- Text Styles -->
