@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/question_edition_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Question title -->
+
+            <TextView style="@style/WideFormView"
+                android:id="@+id/question_edition_title"
+
+                android:labelFor="@+id/question_edition_title_input"
+                android:text="@string/question_edition_title"/>
+
+            <ImageView style="@style/separator"
+                android:layout_below="@+id/question_edition_title"
+                android:contentDescription="@string/separator" />
+
+            <EditText style="@style/WideEditView"
+                android:id="@+id/question_edition_title_input"
+                android:layout_below="@id/question_edition_title"
+
+                android:maxLength="128"
+                android:inputType="text" />
+
+            <!-- Section response -->
+
+            <TextView style="@style/WideFormView"
+                android:id="@+id/question_edition_answer"
+                android:layout_below="@id/question_edition_title_input"
+
+                android:labelFor="@+id/question_edition_title_input"
+                android:text="@string/question_edition_answer_title"/>
+
+            <ImageView style="@style/separator"
+                android:layout_below="@+id/question_edition_answer"
+                android:contentDescription="@string/separator" />
+
+            <!-- Answer list -->
+
+            <LinearLayout
+                android:id="@+id/question_edition_answer_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/question_edition_answer"
+                android:orientation="vertical"
+
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp">
+
+                <include layout="@layout/answer_edition_section"/>
+                <include layout="@layout/answer_edition_section"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/question_edition_answer_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/question_edition_answer_container"
+                android:layout_marginStart="65dp"
+
+                android:text="@string/question_edition_answer_add_text"
+                android:textStyle="italic"
+                android:textSize="18sp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="addAnswer"/>
+
+            <Button style="@style/BasicButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/question_edition_answer_add"
+                android:layout_marginTop="@dimen/basic_button_margin"
+
+                android:text="@string/questions_edition_add_button"
+                android:onClick="submitQuestion"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

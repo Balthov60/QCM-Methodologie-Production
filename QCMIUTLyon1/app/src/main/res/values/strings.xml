@@ -16,6 +16,14 @@
     <string name="set_prof">prof</string>
     <string name="set_user">user</string>
 
+    <!-- Strings related to group -->
+    <string name="group1_1">S1G1</string>
+    <string name="group1_2">S1G2</string>
+    <string name="group1_3">S1G3</string>
+    <string name="group2_1">S2G1</string>
+    <string name="group2_2">S2G2</string>
+    <string name="group2_3">S2G3</string>
+
     <!-- Strings related to qcm edition -->
     <string name="mcq_edition_title">Nom du QCM :</string>
     <string name="mcq_edition_description">Description :</string>
@@ -26,13 +34,7 @@
     <string name="mcq_edition_coefficient">Coefficient :</string>
     <string name="mcq_edition_submit">Créer le QCM</string>
 
-    <!-- Strings related to group -->
-    <string name="group1_1">S1G1</string>
-    <string name="group1_2">S1G2</string>
-    <string name="group1_3">S1G3</string>
-    <string name="group2_1">S2G1</string>
-    <string name="group2_2">S2G2</string>
-    <string name="group2_3">S2G3</string>
+    <!-- Strings related to teacher panel -->
     <string name="teacher_panel_marks">Notes</string>
     <string name="teacher_panel_mcq">QCM</string>
 
@@ -41,4 +43,13 @@
 
     <string name="mcq_list_item_remove_description">Icon de supression qcm</string>
     <string name="mcq_list_item_edit_description">Icon modification qcm</string>
+
+    <!-- Strings related to question edition -->
+    <string name="question_edition_title">Intitulé de la question</string>
+    <string name="question_edition_answer_title">Entrez vos réponses (cochez si vrai)</string>
+    <string name="question_edition_answer_content_hint">Reponse</string>
+    <string name="question_edition_answer_add_text">Ajouter une réponse</string>
+    <string name="questions_edition_add_button">Valider</string>
+    <string name="answer_remove_button_content_description">Remove answer button</string>
+
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/question_edition_answer"
+        android:background="@drawable/form_edit_text_shape"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="4"
+        android:layout_gravity="center"
+        android:padding="5dp"
+
+        android:maxLength="128"
+        android:inputType="text"
+        android:hint="@string/question_edition_answer_content_hint"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:layout_weight="1"
+        android:layout_gravity="center"
+
+        android:src="@drawable/ic_action_remove_answer"
+        android:contentDescription="@string/answer_remove_button_content_description"
+
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="removeAnswer"/>
+
+</LinearLayout>
