@@ -3,10 +3,12 @@ package fr.iutmindfuck.qcmiutlyon1.views.mcqlistview;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
         initView(convertView, position);
         setRemoveClickListener(convertView, position);
         setModifyClickListener(convertView, position);
+        setQuestionsClickListener(convertView, position);
 
         return convertView;
     }
@@ -82,6 +85,20 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
                         context.startActivity(intent);
                     }
                 }
+        );
+    }
+
+    private void setQuestionsClickListener(View questionsClickListener, final int position) {
+        questionsClickListener.setOnClickListener(
+             new View.OnClickListener() {
+
+                 @Override
+                 public void onClick(View v) {
+                     Toast toast = Toast.makeText(context, "Non implementé, Quesitons " + position, Toast.LENGTH_SHORT);
+                     toast.setGravity(Gravity.BOTTOM,0,50);
+                     toast.show();
+                 }
+             }
         );
     }
 }
