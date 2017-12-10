@@ -1,4 +1,4 @@
-package fr.iutmindfuck.qcmiutlyon1;
+package fr.iutmindfuck.qcmiutlyon1.activity;
 
 
 import android.content.Context;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;

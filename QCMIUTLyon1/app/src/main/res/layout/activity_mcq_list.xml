@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="fr.iutmindfuck.qcmiutlyon1.MCQListActivity"
+    tools:context="fr.iutmindfuck.qcmiutlyon1.activity.MCQListActivity"
     tools:showIn="@layout/activity_mcq_list">
 
     <android.support.v7.widget.Toolbar
@@ -32,10 +32,11 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
-
         <Button style="@style/BasicButton"
             android:layout_below="@+id/mcq_list_container"
             android:layout_marginTop="35dp"
+
+            android:onClick="createNewMCQ"
             android:text="@string/mcq_list_create_mcq" />
 
     </RelativeLayout>

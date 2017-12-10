@@ -84,6 +84,12 @@ public class SQLServices extends SQLiteOpenHelper {
         db.insertWithOnConflict(table, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
+    public void removeEntry(String table, String where, String[] args) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        db.delete(table, where, args);
+    }
+
     /* ****************** */
     /* SQL DATA INSERTION */
     /* ****************** */

@@ -1,6 +1,7 @@
-package fr.iutmindfuck.qcmiutlyon1;
+package fr.iutmindfuck.qcmiutlyon1.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
@@ -52,6 +54,8 @@ public class MCQEditionActivity extends AppCompatActivity {
                     .createOrReplaceMCQ(new MCQ(0, title, description, isNegative, coefficient));
             displaySuccessToast();
         }
+
+        startActivity(new Intent(MCQEditionActivity.this, MCQListActivity.class));
     }
 
     /* Get Value from MCQ Edition Form */

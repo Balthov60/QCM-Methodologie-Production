@@ -86,5 +86,12 @@ public class QuestionSQLHandler {
             answerSQLHandler.createOrReplaceAnswer(answer, idMCQ, question.getId());
     }
 
+    void removeQuestionsFor(int idMCQ) {
+        answerSQLHandler.removeAnswersFor(idMCQ);
+
+        sqlServices.removeEntry(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
+                                                      new String[] {String.valueOf(idMCQ)});
+    }
+
 
 }

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:padding="@dimen/wide_view_margin">
+    android:padding="@dimen/wide_view_margin"
+    tools:context="fr.iutmindfuck.qcmiutlyon1.activity.MCQListActivity">
 
     <TextView tools:text="QCM 1"
         android:id="@+id/mcq_list_item_name"
@@ -30,24 +31,23 @@
         android:textColor="@android:color/black"
         android:ellipsize="end" />
 
-    <ImageView style="@style/ImageButtonMCQList"
-        android:id="@+id/removeMCQImageButton"
-
-        android:layout_marginEnd="@dimen/wide_view_margin"
-        android:layout_marginTop="7dp"
-
-        android:src="@drawable/remove_mcq_button"
-        android:onClick="onModifyMCQButtonClick"
-        android:contentDescription="@string/mcq_list_item_remove_description" />
-
-    <ImageView style="@style/ImageButtonMCQList"
+    <ImageView style="@style/smallImageButton"
         android:id="@+id/modifyMCQImageButton"
 
         android:layout_marginEnd="55dp"
         android:layout_marginTop="6dp"
 
         android:src="@drawable/action_edit_pencil"
-        android:onClick="onRemoveMCQButtonClick"
+        android:onClick="modifyMCQ"
         android:contentDescription="@string/mcq_list_item_edit_description" />
+
+    <ImageView style="@style/smallImageButton"
+        android:id="@+id/removeMCQImageButton"
+
+        android:layout_marginEnd="@dimen/wide_view_margin"
+        android:layout_marginTop="7dp"
+
+        android:src="@drawable/remove_mcq_button"
+        android:contentDescription="@string/mcq_list_item_remove_description" />
 
 </RelativeLayout>

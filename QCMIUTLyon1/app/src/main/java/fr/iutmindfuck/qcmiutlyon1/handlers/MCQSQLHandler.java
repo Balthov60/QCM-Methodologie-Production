@@ -91,4 +91,11 @@ public class MCQSQLHandler {
 
         sqlServices.createOrReplaceData(MCQ_TABLE, contentValues);
     }
+
+    public void removeMCQ(int idMCQ) {
+        new QuestionSQLHandler(sqlServices).removeQuestionsFor(idMCQ);
+
+        sqlServices.removeEntry(MCQ_TABLE, MCQ_ID + " = ?",
+                new String[] {String.valueOf(idMCQ)});
+    }
 }

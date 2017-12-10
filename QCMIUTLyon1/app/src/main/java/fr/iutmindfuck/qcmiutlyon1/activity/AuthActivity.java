@@ -1,26 +1,16 @@
-package fr.iutmindfuck.qcmiutlyon1;
+package fr.iutmindfuck.qcmiutlyon1.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.logging.Logger;
-
-import fr.iutmindfuck.qcmiutlyon1.data.Answer;
-import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
-import fr.iutmindfuck.qcmiutlyon1.data.Question;
-import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
-import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
