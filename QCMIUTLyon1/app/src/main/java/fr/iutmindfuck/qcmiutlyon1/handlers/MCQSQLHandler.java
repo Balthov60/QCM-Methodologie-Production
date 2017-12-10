@@ -86,7 +86,7 @@ public class MCQSQLHandler {
 
         contentValues.put(MCQ_NAME, mcq.getName());
         contentValues.put(MCQ_DESCRIPTION, mcq.getDescription());
-        contentValues.put(MCQ_TYPE, mcq.getPointNegative());
+        contentValues.put(MCQ_TYPE, mcq.isPointNegative());
         contentValues.put(MCQ_COEFFICIENT, mcq.getCoefficient());
 
         sqlServices.createOrReplaceData(MCQ_TABLE, contentValues);

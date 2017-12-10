@@ -38,7 +38,6 @@
         android:layout_marginTop="6dp"
 
         android:src="@drawable/action_edit_pencil"
-        android:onClick="modifyMCQ"
         android:contentDescription="@string/mcq_list_item_edit_description" />
 
     <ImageView style="@style/smallImageButton"

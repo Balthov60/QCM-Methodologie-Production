@@ -1,6 +1,7 @@
-package fr.iutmindfuck.qcmiutlyon1.view.mcqlistview;
+package fr.iutmindfuck.qcmiutlyon1.views.mcqlistview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.activity.MCQEditionActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 
@@ -17,11 +19,13 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
 
     private final List<MCQ> mcqList;
     private final MCQSQLHandler mcqsqlHandler;
+    private final Context context;
 
     public MCQListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
         super(context, 0, mcqList);
         this.mcqList = mcqList;
         this.mcqsqlHandler = mcqsqlHandler;
+        this.context = context;
     }
 
     @NonNull
@@ -34,6 +38,7 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
 
         initView(convertView, position);
         setRemoveClickListener(convertView, position);
+        setModifyClickListener(convertView, position);
 
         return convertView;
     }
@@ -61,6 +66,20 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
                         mcqList.remove(mcq);
 
                         notifyDataSetChanged();
+                    }
+                }
+        );
+    }
+    private void setModifyClickListener(final View convertView, final int position) {
+        convertView.findViewById(R.id.modifyMCQImageButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MCQ mcq = mcqList.get(position);
+
+                        Intent intent = new Intent(context, MCQEditionActivity.class);
+                        intent.putExtra("mcq", mcq);
+                        context.startActivity(intent);
                     }
                 }
         );

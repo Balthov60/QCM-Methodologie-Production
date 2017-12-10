@@ -1,4 +1,4 @@
-package fr.iutmindfuck.qcmiutlyon1.view.mcqlistview;
+package fr.iutmindfuck.qcmiutlyon1.views.mcqlistview;
 
 import android.view.View;
 import android.widget.TextView;
