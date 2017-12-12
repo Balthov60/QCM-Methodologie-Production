@@ -43,8 +43,9 @@ public class QuestionAnswerActivity extends AppCompatActivity{
 
     public void addCheckboxView(){
         for(int i = 0; i < question.getAnswers().size(); i++){
+            String indice = String.valueOf(i);
             TextView indication = (TextView) findViewById(R.id.question_selected_label);
-            indication.setText(questionIndication);
+            indication.setText("Question n°"+indice+question.getTitle());
 
 
         }

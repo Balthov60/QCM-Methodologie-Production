@@ -13,33 +13,11 @@
 
         android:id="@+id/question_selected_label"
 
-        android:text="@string/label_question_selected"
 
         android:layout_marginTop="@dimen/label_question_selected_margin_top"
-        android:layout_marginStart="@dimen/label_question_selected_margin_right"
+        android:layout_centerHorizontal="true"
         />
 
-    <TextView style="@style/QuestionToAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/question_answer_indication"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="@dimen/label_question_selected_margin_top"
-
-        android:layout_toEndOf="@id/question_selected_label"/>
-
-    <TextView style="@style/QuestionToAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/label_question_selected_margin_top"
-
-        android:layout_toEndOf="@id/question_selected_label"
-
-        android:id="@+id/question_answer_title_label"
-
-        android:text="Le titre de la question"/>
 
     <ImageView style="@style/separator"
         android:layout_below="@id/question_selected_label"
