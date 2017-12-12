@@ -5,13 +5,9 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 
-import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.data.Mark;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
-/**
- * Created by sntri on 12/12/2017.
- */
 public class MarkSQLHandler {
     private static final String MARK_ID_MCQ = "idMCQ";
     private static final String MARK_ID_STUDENT = "idStudent";
@@ -42,7 +38,8 @@ public class MarkSQLHandler {
             return null;
         }
 
-            ArrayList<Mark> marks = new ArrayList<>();
+        ArrayList<Mark> marks = new ArrayList<>();
+        
         do {
             marks.add(new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
                     cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
@@ -87,7 +84,7 @@ public class MarkSQLHandler {
         return new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)), cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)), cursor.getFloat(cursor.getColumnIndex(MARK_VALUE)));
     }
 
-    public void create(Mark mark) {
+    public void createMark(Mark mark) {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(MARK_ID_MCQ, mark.getIdMCQ());
@@ -97,7 +94,7 @@ public class MarkSQLHandler {
         sqlServices.createOrReplaceData(MARK_TABLE, contentValues);
     }
 
-    public void remove(Mark mark) {
+    public void removeMark(Mark mark) {
         sqlServices.removeEntry(MARK_TABLE, MARK_ID_MCQ + " = " + mark.getIdMCQ() + " AND "
                                                 + MARK_ID_STUDENT + " = " + mark.getIdStudent(), null);
     }
