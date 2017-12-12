@@ -19,11 +19,11 @@ public class MarkSQLHandler {
     public MarkSQLHandler(SQLServices sqlServices){ this.sqlServices = sqlServices; }
 
     public static String getSQLForTableCreation() {
-        return "CREATE TABLE " + MARK_TABLE + "(" +
+        return "CREATE TABLE " + MARK_TABLE + " (" +
                 MARK_ID_MCQ + " INTEGER, " +
-                MARK_ID_STUDENT + " INT(8), " +
+                MARK_ID_STUDENT + " INTEGER, " +
                 MARK_VALUE + " FLOAT, " +
-                "CONSTRAINTS PK_Mark PRIMARY KEY(" + MARK_ID_MCQ + ", " + MARK_ID_STUDENT + " )";
+                "CONSTRAINT PK_Mark PRIMARY KEY (" + MARK_ID_MCQ + ", " + MARK_ID_STUDENT + "));";
     }
     public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + MARK_TABLE;
@@ -39,12 +39,11 @@ public class MarkSQLHandler {
         }
 
         ArrayList<Mark> marks = new ArrayList<>();
-        
+
         do {
             marks.add(new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
                     cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
                     cursor.getFloat(cursor.getColumnIndex(MARK_VALUE))));
-
         }
         while(cursor.moveToNext());
 
@@ -86,7 +85,7 @@ public class MarkSQLHandler {
 
     public void createMark(Mark mark) {
         ContentValues contentValues = new ContentValues();
-
+        System.out.println(mark.getIdMCQ() + "\n" + mark.getIdStudent() + "\n" + mark.getValue());
         contentValues.put(MARK_ID_MCQ, mark.getIdMCQ());
         contentValues.put(MARK_ID_STUDENT, mark.getIdStudent());
         contentValues.put(MARK_VALUE, mark.getValue());

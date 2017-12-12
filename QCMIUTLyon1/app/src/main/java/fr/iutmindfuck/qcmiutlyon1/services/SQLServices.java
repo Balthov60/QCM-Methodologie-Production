@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.AnswerSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 
@@ -39,6 +41,7 @@ public class SQLServices extends SQLiteOpenHelper {
         db.execSQL(MCQSQLHandler.getSQLForTableCreation());
         db.execSQL(QuestionSQLHandler.getSQLForTableCreation());
         db.execSQL(AnswerSQLHandler.getSQLForTableCreation());
+        db.execSQL(MarkSQLHandler.getSQLForTableCreation());
     }
 
     @Override
@@ -46,6 +49,7 @@ public class SQLServices extends SQLiteOpenHelper {
         db.execSQL(UserSQLHandler.getSQLForGroupTableSuppression());
         db.execSQL(UserSQLHandler.getSQLForUserTableSuppression());
         db.execSQL(MCQSQLHandler.getSQLForTableSuppression());
+        db.execSQL(MarkSQLHandler.getSQLForTableSuppression());
         db.execSQL(QuestionSQLHandler.getSQLForTableSuppression());
         db.execSQL(AnswerSQLHandler.getSQLForTableSuppression());
 
