@@ -1,6 +1,8 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
-public class MCQ {
+import java.io.Serializable;
+
+public class MCQ implements Serializable {
 
     private int id;
     private String name;
@@ -25,7 +27,7 @@ public class MCQ {
     public String getDescription() {
         return description;
     }
-    public boolean getPointNegative() {
+    public boolean isPointNegative() {
         return isPointNegative;
     }
     public float getCoefficient() {

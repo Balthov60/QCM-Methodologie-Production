@@ -1,4 +1,4 @@
-package fr.iutmindfuck.qcmiutlyon1;
+package fr.iutmindfuck.qcmiutlyon1.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
+
+import fr.iutmindfuck.qcmiutlyon1.R;
 
 
 public class TeacherPanelActivity extends AppCompatActivity {
@@ -34,7 +36,7 @@ public class TeacherPanelActivity extends AppCompatActivity {
 
 
     public void onClickMCQ(View view){
-        startActivity(new Intent(TeacherPanelActivity.this, MCQEditionActivity.class));
+        startActivity(new Intent(TeacherPanelActivity.this, MCQListActivity.class));
     }
 
 

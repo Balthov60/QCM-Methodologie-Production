@@ -69,4 +69,8 @@ public class AnswerSQLHandler {
     }
 
 
+    void removeAnswersFor(int idMCQ) {
+        sqlServices.removeEntry(ANSWER_TABLE, ANSWER_ID_MCQ + " = ?",
+                new String[] {String.valueOf(idMCQ)});
+    }
 }
