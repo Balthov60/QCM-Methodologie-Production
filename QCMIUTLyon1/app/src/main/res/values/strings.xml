@@ -51,5 +51,6 @@
     <string name="question_edition_answer_add_text">Ajouter une réponse</string>
     <string name="questions_edition_add_button">Valider</string>
     <string name="answer_remove_button_content_description">Remove answer button</string>
+    <string name="label_question_selected">Question n°</string>
 
 </resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fr.iutmindfuck.qcmiutlyon1.activity.AuthActivity">
+
+
+    <TextView style="@style/QuestionToAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/question_selected_label"
+
+        android:text="@string/label_question_selected"
+
+        android:layout_marginTop="@dimen/label_question_selected_margin_top"
+        android:layout_marginStart="@dimen/label_question_selected_margin_right"
+        />
+
+    <TextView style="@style/QuestionToAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/question_answer_indication"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="@dimen/label_question_selected_margin_top"
+
+        android:layout_toEndOf="@id/question_selected_label"/>
+
+    <TextView style="@style/QuestionToAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_question_selected_margin_top"
+
+        android:layout_toEndOf="@id/question_selected_label"
+
+        android:id="@+id/question_answer_title_label"
+
+        android:text="Le titre de la question"/>
+
+    <ImageView style="@style/separator"
+        android:layout_below="@id/question_selected_label"
+        android:contentDescription="@string/separator"
+
+        android:id="@+id/question_answer_separator"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question_answer_separator"
+        android:layout_marginStart="@dimen/label_question_selected_margin_right"
+        android:layout_marginTop="@dimen/question_answer_checkbox_margin_top"
+        android:background="@drawable/answer_question_checkbox_shape"
+        />
+
+
+</RelativeLayout>

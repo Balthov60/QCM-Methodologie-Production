@@ -86,4 +86,10 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="QuestionToAnswer">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/greyIUT</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>
