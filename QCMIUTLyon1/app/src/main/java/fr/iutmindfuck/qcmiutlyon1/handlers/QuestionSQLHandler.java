@@ -38,11 +38,6 @@ public class QuestionSQLHandler {
 
     /* Data Manipulation */
 
-    public int getQuestionsQty(int idMCQ) {
-        return sqlServices.getSizeOf(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
-                                                           new String[] {String.valueOf(idMCQ)});
-    }
-
     public ArrayList<Question> getQuestions(int idMCQ) {
         Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
                 QUESTION_MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});

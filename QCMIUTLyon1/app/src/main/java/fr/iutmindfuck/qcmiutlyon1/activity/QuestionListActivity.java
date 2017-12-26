@@ -17,14 +17,13 @@ import fr.iutmindfuck.qcmiutlyon1.views.QuestionListAdapter;
 public class QuestionListActivity extends AppCompatActivity {
 
     private int idMCQ;
-    private QuestionSQLHandler questionSQLHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_list);
 
-        questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
+        QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
         ListView mcqListView = findViewById(R.id.default_list_view);
 
 
