@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
@@ -15,7 +17,7 @@ public class QuestionAnswerActivity extends AppCompatActivity{
 
     protected String questionIndication = "1";
     protected Question question;
-
+    protected final RelativeLayout relativeLayout = new RelativeLayout(this);
 
 
     @Override
@@ -26,10 +28,11 @@ public class QuestionAnswerActivity extends AppCompatActivity{
         Bundle extra = getIntent().getExtras();
         if(extra == null){
             //TODO: Trigger an error
+            addCheckboxView();
+
         }
         else {
-            //TODO: Add to the indicationTextView the proper indication of the question selected
-            addCheckboxView();
+            //TODO: Add to the indicationTextView, the proper indication of the question selected
 
         }
 
@@ -41,14 +44,22 @@ public class QuestionAnswerActivity extends AppCompatActivity{
         return true;
     }
 
-    public void addCheckboxView(){
-        for(int i = 0; i < question.getAnswers().size(); i++){
-            String indice = String.valueOf(i);
-            TextView indication = (TextView) findViewById(R.id.question_selected_label);
-            indication.setText("Question n°"+indice+question.getTitle());
+    private void addCheckboxView(){
+        String questionTitle = "Quelle est la capitale de la France";
+        String indice = "1";
 
+        TextView indication = (TextView) findViewById(R.id.question_selected_label);
+        indication.setText(questionTitle);
 
+        //String indice = String.valueOf(i);
+        //indication.setText("Question n°"+indice+question.getTitle());
+        for(int i = 0; i < 2; i++){
+            CheckBox c = new CheckBox(getApplicationContext());
+            c.setText("Dynamic Checkbox "+i);
+            relativeLayout.addView(c);
         }
+        this.setContentView(relativeLayout);
+
     }
 
 
