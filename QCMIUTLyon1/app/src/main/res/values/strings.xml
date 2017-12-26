@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QCM IUT Lyon1</string>
+    <string name="app_name">QCM Lyon 1</string>
 
     <!-- Global view string -->
     <string name="separator">graphic separator</string>

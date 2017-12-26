@@ -3,6 +3,7 @@ package fr.iutmindfuck.qcmiutlyon1.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
@@ -32,6 +33,26 @@ public class MCQListActivity extends AppCompatActivity {
         mcqListView.setAdapter(new MCQListAdapter(MCQListActivity.this,
                                                          mcqs,
                                                          mcqSQLHandler));
+
+        Toolbar toolbar = findViewById(R.id.default_list_toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), TeacherPanelActivity.class));
+            }
+        });
     }
 
     public void onListButtonClick(View v)
