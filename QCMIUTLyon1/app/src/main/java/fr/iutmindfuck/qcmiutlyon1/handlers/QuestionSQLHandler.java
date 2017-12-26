@@ -36,6 +36,13 @@ public class QuestionSQLHandler {
         return "DROP TABLE IF EXISTS " + QUESTION_TABLE;
     }
 
+    /* Data Manipulation */
+
+    public int getQuestionsQty(int idMCQ) {
+        return sqlServices.getSizeOf(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
+                                                           new String[] {String.valueOf(idMCQ)});
+    }
+
     public ArrayList<Question> getQuestions(int idMCQ) {
         Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
                 QUESTION_MCQ_ID + " = ?", new String[] {String.valueOf(idMCQ)});
@@ -75,15 +82,23 @@ public class QuestionSQLHandler {
     }
     public void createOrReplaceQuestion(Question question, int idMCQ) {
         ContentValues contentValues = new ContentValues();
+        Integer id = question.getId();
 
         contentValues.put(QUESTION_MCQ_ID, idMCQ);
-        contentValues.put(QUESTION_ID, question.getId());
+
+        if (id == null) {
+            id = sqlServices.getHighestID(QUESTION_TABLE, QUESTION_ID, QUESTION_MCQ_ID + " = ?",
+                                          new String[] {String.valueOf(idMCQ)});
+        }
+
+        contentValues.put(QUESTION_ID, id);
         contentValues.put(QUESTION_TITLE, question.getTitle());
 
         sqlServices.createOrReplaceData(QUESTION_TABLE, contentValues);
 
+        answerSQLHandler.removeAnswersFor(idMCQ, id);
         for(Answer answer : question.getAnswers())
-            answerSQLHandler.createOrReplaceAnswer(answer, idMCQ, question.getId());
+            answerSQLHandler.createAnswer(answer, idMCQ, id);
     }
 
     void removeQuestionsFor(int idMCQ) {
@@ -91,6 +106,14 @@ public class QuestionSQLHandler {
 
         sqlServices.removeEntry(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
                                                       new String[] {String.valueOf(idMCQ)});
+    }
+
+    public void removeQuestion(int idMCQ, int idQuestion) {
+        answerSQLHandler.removeAnswersFor(idMCQ, idQuestion);
+
+        sqlServices.removeEntry(QUESTION_TABLE,
+                          QUESTION_MCQ_ID + " = ? AND " + QUESTION_ID + " = ?",
+                                new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
     }
 
 

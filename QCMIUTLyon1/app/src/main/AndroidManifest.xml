@@ -10,18 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         
-        <activity android:name=".activity.AuthActivity" />
-
-        <activity android:name=".activity.MCQEditionActivity"/>
-        <activity android:name=".activity.TeacherPanelActivity" />
-        <activity android:name=".activity.MCQListActivity">
+        <activity android:name=".activity.TeacherPanelActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.MCQEditionActivity"/>
+        <activity android:name=".activity.MCQListActivity" />
         <activity android:name=".activity.QuestionEditionActivity" />
+        <activity android:name=".activity.AuthActivity" />
+        <activity android:name=".activity.QuestionListActivity" />
     </application>
 
 </manifest>
