@@ -1,8 +1,9 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Answer {
+public class Answer implements Serializable {
 
     private String title;
     private boolean isRightAnswer;

@@ -1,5 +1,6 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -22,7 +24,8 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 public class MCQEditionActivity extends AppCompatActivity {
 
     private static final String INVALID_SUBMISSION = "Vous devez renseigner tout les champs.";
-    private static final String SUCCESSFUL_SUBMISSION = "Votre QCM à bien été ajouté.";
+    private static final String SUCCESSFUL_CREATION = "Votre QCM à bien été ajouté.";
+    private static final String SUCCESSFUL_MODIFICATION = "Votre QCM à bien été modifié.";
 
     private MCQ currentMCQ;
 
@@ -53,6 +56,8 @@ public class MCQEditionActivity extends AppCompatActivity {
         setMCQDescription(currentMCQ.getDescription());
         setMCQNegative(currentMCQ.isPointNegative());
         setMCQCoefficient(currentMCQ.getCoefficient());
+
+        ((Button) findViewById(R.id.mcq_edition_submit)).setText(R.string.mcq_edition_edit);
     }
 
 
@@ -66,9 +71,20 @@ public class MCQEditionActivity extends AppCompatActivity {
             displayErrorToast();
         }
         else {
-            new MCQSQLHandler(new SQLServices(this))
-                    .createOrReplaceMCQ(new MCQ(0, title, description, isNegative, coefficient));
-            displaySuccessToast();
+            if (currentMCQ == null)
+            {
+                new MCQSQLHandler(new SQLServices(this))
+                        .createOrReplaceMCQ(new MCQ(null, title,
+                                description, isNegative, coefficient));
+                displaySuccessToast(false);
+            }
+            else
+            {
+                new MCQSQLHandler(new SQLServices(this))
+                        .createOrReplaceMCQ(new MCQ(currentMCQ.getId(), title,
+                                description, isNegative, coefficient));
+                displaySuccessToast(true);
+            }
         }
 
         startActivity(new Intent(MCQEditionActivity.this, MCQListActivity.class));
@@ -125,10 +141,19 @@ public class MCQEditionActivity extends AppCompatActivity {
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
     }
-    public void displaySuccessToast() {
+
+    @SuppressLint("ShowToast")
+    public void displaySuccessToast(boolean isEdition) {
         Context context = this.getApplicationContext();
 
-        Toast toast = Toast.makeText(context, SUCCESSFUL_SUBMISSION, Toast.LENGTH_SHORT);
+        Toast toast;
+        if (isEdition) {
+            toast = Toast.makeText(context, SUCCESSFUL_MODIFICATION, Toast.LENGTH_SHORT);
+        }
+        else {
+            toast = Toast.makeText(context, SUCCESSFUL_CREATION, Toast.LENGTH_SHORT);
+        }
+
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
     }
