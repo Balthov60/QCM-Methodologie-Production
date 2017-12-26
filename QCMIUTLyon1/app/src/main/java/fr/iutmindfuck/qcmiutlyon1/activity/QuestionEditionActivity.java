@@ -37,7 +37,7 @@ public class QuestionEditionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_question_edition);
-        setSupportActionBar((Toolbar) findViewById(R.id.mcq_edition_toolbar));
+        setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
 
         questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
 
@@ -51,6 +51,25 @@ public class QuestionEditionActivity extends AppCompatActivity {
 
             idMCQ = extra.getInt("idMCQ");
         }
+    }
+
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
+                intent.putExtra("idMCQ", idMCQ);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initFormField() {

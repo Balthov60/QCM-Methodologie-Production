@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.iutmindfuck.qcmiutlyon1">
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:theme="@style/AppTheme"
         android:roundIcon="@mipmap/ic_launcher_round"
+
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        
-        <activity android:name=".activity.TeacherPanelActivity">
+        android:allowBackup="false">
+
+        <activity
+            android:name=".activity.TeacherPanelActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MCQEditionActivity"/>
-        <activity android:name=".activity.MCQListActivity" />
-        <activity android:name=".activity.QuestionEditionActivity" />
-        <activity android:name=".activity.AuthActivity" />
-        <activity android:name=".activity.QuestionListActivity" />
+        <activity
+            android:name=".activity.MCQEditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MCQListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QuestionEditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QuestionListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

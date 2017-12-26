@@ -51,6 +51,23 @@ public class MCQEditionActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MCQListActivity.class));
+            }
+        });
+    }
+
     private void initFormField() {
         setMCQTitle(currentMCQ.getName());
         setMCQDescription(currentMCQ.getDescription());
