@@ -38,6 +38,10 @@
     <string name="teacher_panel_marks">Notes</string>
     <string name="teacher_panel_mcq">QCM</string>
 
+    <!-- Strings related to student panel -->
+    <string name="student_panel_mcq_to_do">A faire</string>
+    <string name="student_panel_mcq_done">Fait</string>
+
     <!-- Strings related to MCQ List View item -->
     <string name="mcq_list_create_mcq">Ajouter un QCM</string>
 
