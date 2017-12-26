@@ -21,8 +21,6 @@
 
         <TextView style="@style/BigButton"
             android:id="@+id/teacher_panel_mcq"
-            android:layout_width="310dp"
-            android:layout_height="180dp"
 
             android:text="@string/teacher_panel_mcq"
             android:background="@drawable/mcq"
@@ -31,14 +29,10 @@
 
         <TextView style="@style/BigButton"
             android:id="@+id/teacher_panel_marks"
-            android:layout_width="310dp"
-            android:layout_height="180dp"
-
             android:layout_marginTop="40dp"
 
             android:text="@string/teacher_panel_marks"
             android:background="@drawable/mark"
-
             android:onClick="onClickMark" />
 
     </LinearLayout>
