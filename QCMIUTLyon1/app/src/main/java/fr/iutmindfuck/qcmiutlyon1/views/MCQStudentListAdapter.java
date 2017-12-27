@@ -11,21 +11,17 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
-import fr.iutmindfuck.qcmiutlyon1.activity.MCQEditionActivity;
 import fr.iutmindfuck.qcmiutlyon1.activity.QuestionListActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
-import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 
 public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
 
     private final List<MCQ> mcqList;
-    private final MCQSQLHandler mcqsqlHandler;
     private final Context context;
 
-    public MCQStudentListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
+    public MCQStudentListAdapter(Context context, List<MCQ> mcqList) {
         super(context, 0, mcqList);
         this.mcqList = mcqList;
-        this.mcqsqlHandler = mcqsqlHandler;
         this.context = context;
     }
 

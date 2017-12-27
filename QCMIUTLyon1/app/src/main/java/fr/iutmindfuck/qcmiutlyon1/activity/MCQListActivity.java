@@ -45,8 +45,7 @@ public class MCQListActivity extends AppCompatActivity {
             mcqListView.setAdapter(new MCQTeacherListAdapter(MCQListActivity.this,
                                                              mcqs, mcqSQLHandler));
         else
-            mcqListView.setAdapter(new MCQStudentListAdapter(MCQListActivity.this,
-                                                             mcqs, mcqSQLHandler));
+            mcqListView.setAdapter(new MCQStudentListAdapter(MCQListActivity.this, mcqs));
     }
     private void getExtra() {
         Bundle extra = getIntent().getExtras();
