@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
@@ -38,10 +39,10 @@ public class QuestionAnswerActivity extends AppCompatActivity{
         questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
 
         Bundle extra = getIntent().getExtras();
-        if (extra != null) {
+        if (extra == null) {
             question = (Question) extra.getSerializable("question");
 
-            if (question != null) {
+            if (question == null) {
                 initFormField();
             }
 
@@ -57,7 +58,7 @@ public class QuestionAnswerActivity extends AppCompatActivity{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
+        /*
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,9 +66,13 @@ public class QuestionAnswerActivity extends AppCompatActivity{
                 intent.putExtra("idMCQ", idMCQ);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
+    public void initFormField(){
+        if (question.getAnswers() != null)
+            setAnswers(question.getAnswers());
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.basic_menu, menu);
@@ -80,13 +85,7 @@ public class QuestionAnswerActivity extends AppCompatActivity{
 
         for (Answer answer : answers) {
             View custom = getLayoutInflater().inflate(R.layout.answer_edition_section, null);
-
-            if (answer.isRight()) {
-                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(true);
-            }
-            else {
-                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(false);
-            }
+                ((CheckBox) custom.findViewById(R.id.answer_reply)).setChecked(false);
 
             parent.addView(custom);
         }
