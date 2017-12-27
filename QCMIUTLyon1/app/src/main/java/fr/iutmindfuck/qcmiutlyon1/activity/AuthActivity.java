@@ -44,8 +44,7 @@ public class AuthActivity extends AppCompatActivity {
     }
     private void launchPanelFor(String username) {
         if (userSQLHandler.isTeacher(username)) {
-            startActivity(new Intent(AuthActivity.this,
-                    TeacherPanelActivity.class));
+            startActivity(new Intent(AuthActivity.this, TeacherPanelActivity.class));
         }
         else
         {
@@ -54,6 +53,8 @@ public class AuthActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(context, UNIMPLEMENTED_STUDENT_MESSAGE, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.BOTTOM,0,50);
             toast.show();
+
+            startActivity(new Intent(AuthActivity.this, MCQListActivity.class));
         }
     }
 }
