@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.AnswerSQLHandler;
@@ -76,12 +77,30 @@ public class SQLServices extends SQLiteOpenHelper {
 
         return isResult;
     }
-    public int getSizeOf(String table) {
-        Cursor cursor = getData(table, null, null, null);
+    public int getSizeOf(String table, String where, String whereValues[]) {
+        Cursor cursor = getData(table, null, where, whereValues);
 
-        return cursor.getCount();
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
     }
+    public int getHighestID(String table, String idCol, String where, String whereValues[]) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(table, new String[]{idCol}, where, whereValues, null, null, idCol);
 
+        int id;
+        if (cursor.moveToLast()) {
+            id = cursor.getInt(cursor.getColumnIndex(idCol)) + 1;
+            Log.d("Log ", "" + id);
+        }
+        else {
+            id = 0;
+        }
+
+        cursor.close();
+        return id;
+    }
     public void createOrReplaceData(String table, ContentValues contentValues) {
         SQLiteDatabase db = this.getReadableDatabase();
 

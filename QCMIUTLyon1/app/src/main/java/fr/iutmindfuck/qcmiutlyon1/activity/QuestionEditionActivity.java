@@ -1,15 +1,16 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,34 +29,55 @@ public class QuestionEditionActivity extends AppCompatActivity {
     private static final String INVALID_SUBMISSION = "Votre question n'est pas valide.";
 
     QuestionSQLHandler questionSQLHandler;
-    int questionID;
-    int mcqID;
+    Question question;
+    int idMCQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_question_edition);
-        setSupportActionBar((Toolbar) findViewById(R.id.mcq_edition_toolbar));
-
-        Bundle extra = getIntent().getExtras();
-        if (extra == null) {
-            // TODO send List question activity
-            questionID = 0;
-            mcqID = 0;
-        }
-        else {
-            questionID = extra.getInt("questionID");
-            mcqID = extra.getInt("mcqID");
-        }
+        setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
 
         questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
+
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            question = (Question) extra.getSerializable("question");
+
+            if (question != null) {
+                initFormField();
+            }
+
+            idMCQ = extra.getInt("idMCQ");
+        }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.basic_menu, menu);
-        return true;
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
+                intent.putExtra("idMCQ", idMCQ);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initFormField() {
+        setQuestionTitle(question.getTitle());
+        if (question.getAnswers() != null)
+            setAnswers(question.getAnswers());
+
+        ((Button) findViewById(R.id.question_edition_submit)).setText(R.string.mcq_edition_edit);
     }
 
     public void addAnswer(View view) {
@@ -75,10 +97,20 @@ public class QuestionEditionActivity extends AppCompatActivity {
             return;
         }
 
-        questionSQLHandler.createOrReplaceQuestion(
-                new Question(questionID, title, answers),
-                mcqID
-        );
+        if (question == null) {
+            questionSQLHandler.createOrReplaceQuestion(
+                    new Question(null, title, answers), idMCQ
+            );
+        }
+        else {
+            questionSQLHandler.createOrReplaceQuestion(
+                    new Question(question.getId(), title, answers), idMCQ
+            );
+        }
+
+        Intent intent = new Intent(this, QuestionListActivity.class);
+        intent.putExtra("idMCQ", idMCQ);
+        startActivity(intent);
     }
 
     /* Get Value from Question Form */
@@ -107,6 +139,30 @@ public class QuestionEditionActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, INVALID_SUBMISSION, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
+    }
+
+    /* View Setters */
+    public void setQuestionTitle(String title) {
+        ((EditText) findViewById(R.id.question_edition_title_input)).setText(title);
+    }
+
+    @SuppressLint("InflateParams")
+    public void setAnswers(ArrayList<Answer> answers) {
+        LinearLayout parent = findViewById(R.id.question_edition_answer_container);
+
+        for (Answer answer : answers) {
+            View custom = getLayoutInflater().inflate(R.layout.answer_edition_section, null);
+
+            if (answer.isRight()) {
+                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(true);
+            }
+            else {
+                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(false);
+            }
+            ((EditText) custom.findViewById(R.id.answer_title)).setText(answer.getTitle());
+
+            parent.addView(custom);
+        }
     }
 
 }
