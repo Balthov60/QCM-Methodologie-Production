@@ -29,73 +29,69 @@ public class MarkSQLHandler {
         return "DROP TABLE IF EXISTS " + MARK_TABLE;
     }
 
-    public ArrayList<Mark> getAllMarksForMCQ(int idMCQ)
-    {
-        Cursor cursor = sqlServices.getData(MARK_TABLE, null, MARK_ID_MCQ + " = " + idMCQ, null);
-
-        if (!cursor.moveToFirst()) {
-            cursor.close();
-            return null;
-        }
-
-        ArrayList<Mark> marks = new ArrayList<>();
-
-        do {
-            marks.add(new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
-                    cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
-                    cursor.getFloat(cursor.getColumnIndex(MARK_VALUE))));
-        }
-        while(cursor.moveToNext());
-
-        cursor.close();
-        return marks;
-    }
-
-    public ArrayList<Mark> getAllMarksForStudent(int idStudent) {
-        Cursor cursor = sqlServices.getData(MARK_TABLE, null, MARK_ID_STUDENT + " = " + idStudent, null);
-
-        if (!cursor.moveToFirst()) {
-            cursor.close();
-            return null;
-        }
-
-        ArrayList<Mark> marks = new ArrayList<>();
-        do {
-            marks.add(new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
-                    cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
-                    cursor.getFloat(cursor.getColumnIndex(MARK_VALUE))));
-
-        }
-        while(cursor.moveToNext());
-
-        cursor.close();
-        return marks;
-    }
+    /* **********/
+    /* Get Data */
+    /************/
 
     public Mark getMark(int idMCQ, int idStudent) {
-        Cursor cursor = sqlServices.getData(MARK_TABLE, null, MARK_ID_STUDENT + " = " + idStudent, null);
+        Cursor cursor = sqlServices.getData(MARK_TABLE, null,
+                MARK_ID_STUDENT + " = ? AND " + MARK_ID_MCQ + " = ?",
+                new String[] {String.valueOf(idStudent), String.valueOf(idMCQ)});
+        Mark mark = null;
 
+        if (cursor.moveToFirst())
+            mark = new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
+                    cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
+                    cursor.getFloat(cursor.getColumnIndex(MARK_VALUE)));
+
+        cursor.close();
+        return mark;
+    }
+
+    public ArrayList<Mark> getAllMarksForMCQ(int idMCQ) {
+        Cursor cursor = sqlServices.getData(MARK_TABLE, null,
+                                      MARK_ID_MCQ + " = ?",
+                                            new String[] {String.valueOf(idMCQ)});
+
+        return getMarksFromCursor(cursor);
+    }
+    public ArrayList<Mark> getAllMarksForStudent(int idStudent) {
+        Cursor cursor = sqlServices.getData(MARK_TABLE, null,
+                                      MARK_ID_STUDENT + " = ?",
+                                            new String[] {String.valueOf(idStudent)});
+
+        return getMarksFromCursor(cursor);
+    }
+    private ArrayList<Mark> getMarksFromCursor(Cursor cursor) {
         if (!cursor.moveToFirst()) {
             cursor.close();
             return null;
         }
 
-        return new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)), cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)), cursor.getFloat(cursor.getColumnIndex(MARK_VALUE)));
+        ArrayList<Mark> marks = new ArrayList<>();
+        do {
+            marks.add(new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
+                    cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
+                    cursor.getFloat(cursor.getColumnIndex(MARK_VALUE))));
+
+        }
+        while(cursor.moveToNext());
+
+        cursor.close();
+        return marks;
     }
 
-    public void createMark(Mark mark) {
+    /* *******************/
+    /* Data Manipulation */
+    /*********************/
+
+    public void addMark(Mark mark) {
         ContentValues contentValues = new ContentValues();
-        System.out.println(mark.getIdMCQ() + "\n" + mark.getIdStudent() + "\n" + mark.getValue());
+
         contentValues.put(MARK_ID_MCQ, mark.getIdMCQ());
         contentValues.put(MARK_ID_STUDENT, mark.getIdStudent());
         contentValues.put(MARK_VALUE, mark.getValue());
 
         sqlServices.createOrReplaceData(MARK_TABLE, contentValues);
     }
-
-    public void removeMark(Mark mark) {
-        sqlServices.removeEntry(MARK_TABLE, MARK_ID_MCQ + " = " + mark.getIdMCQ() + " AND "
-                                                + MARK_ID_STUDENT + " = " + mark.getIdStudent(), null);
-    }
-
 }
