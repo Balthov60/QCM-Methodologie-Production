@@ -1,38 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.iutmindfuck.qcmiutlyon1.activity.AuthActivity">
+    android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/question_edition_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView style="@style/QuestionToAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        android:id="@+id/question_selected_label"
+            <!-- Question title -->
 
+            <TextView style="@style/WideFormView"
+                android:id="@+id/question_edition_title"
 
-        android:layout_marginTop="@dimen/label_question_selected_margin_top"
-        android:layout_centerHorizontal="true"
-        />
+                android:labelFor="@+id/question_edition_title_input"/>
 
+            <ImageView style="@style/separator"
+                android:layout_below="@+id/question_edition_title"
+                android:contentDescription="@string/separator" />
 
-    <ImageView style="@style/separator"
-        android:layout_below="@id/question_selected_label"
-        android:contentDescription="@string/separator"
+            <!-- Answer list -->
 
-        android:id="@+id/question_answer_separator"/>
+            <LinearLayout
+                android:id="@+id/question_edition_answer_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question_answer_separator"
-        android:layout_marginStart="@dimen/label_question_selected_margin_right"
-        android:layout_marginTop="@dimen/question_answer_checkbox_margin_top"
-        android:background="@drawable/answer_question_checkbox_shape"
-        />
+                android:layout_below="@id/question_edition_title"
+                android:orientation="vertical"
 
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp">
 
-</RelativeLayout>
+                <include layout="@layout/answer_reply_section"/>
+                <include layout="@layout/answer_reply_section"/>
+
+            </LinearLayout>
+
+            <ImageView style="@style/PreviousNextButton"
+                android:id="@+id/previous_button"
+
+                android:layout_below="@id/question_edition_answer_container"
+                android:layout_marginTop="@dimen/basic_button_margin"
+
+                android:background="@mipmap/previous_question"
+                android:onClick="previousQuestion"/>
+
+            <ImageView
+                android:id="@+id/next_button"
+                style="@style/PreviousNextButton"
+
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:background="@mipmap/next_question"
+                android:onClick="nextQuestion" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

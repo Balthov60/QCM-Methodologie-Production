@@ -1,41 +1,71 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.ViewGroup;
+import android.view.View;
+import android.view.Window;
 import android.widget.CheckBox;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+
+
+import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
+import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class QuestionAnswerActivity extends AppCompatActivity{
 
-    protected String questionIndication = "1";
-    protected Question question;
-    protected final RelativeLayout relativeLayout = new RelativeLayout(this);
+    private static final String INVALID_SUBMISSION = "Votre question n'est pas valide.";
 
+    QuestionSQLHandler questionSQLHandler;
+    Question question;
+    int idMCQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_question_answer);
+        setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
+
+        questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
 
         Bundle extra = getIntent().getExtras();
-        if(extra == null){
-            //TODO: Trigger an error
-            addCheckboxView();
+        if (extra != null) {
+            question = (Question) extra.getSerializable("question");
 
+            if (question != null) {
+                initFormField();
+            }
+
+            idMCQ = extra.getInt("idMCQ");
         }
-        else {
-            //TODO: Add to the indicationTextView, the proper indication of the question selected
+    }
 
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
+                intent.putExtra("idMCQ", idMCQ);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -44,23 +74,23 @@ public class QuestionAnswerActivity extends AppCompatActivity{
         return true;
     }
 
-    private void addCheckboxView(){
-        String questionTitle = "Quelle est la capitale de la France";
-        String indice = "1";
+    @SuppressLint("InflateParams")
+    public void setAnswers(ArrayList<Answer> answers) {
+        LinearLayout parent = findViewById(R.id.question_edition_answer_container);
 
-        TextView indication = (TextView) findViewById(R.id.question_selected_label);
-        indication.setText(questionTitle);
+        for (Answer answer : answers) {
+            View custom = getLayoutInflater().inflate(R.layout.answer_edition_section, null);
 
-        //String indice = String.valueOf(i);
-        //indication.setText("Question n°"+indice+question.getTitle());
-        for(int i = 0; i < 2; i++){
-            CheckBox c = new CheckBox(getApplicationContext());
-            c.setText("Dynamic Checkbox "+i);
-            relativeLayout.addView(c);
+            if (answer.isRight()) {
+                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(true);
+            }
+            else {
+                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(false);
+            }
+
+            parent.addView(custom);
         }
-        this.setContentView(relativeLayout);
-
     }
-
-
 }
+
+
