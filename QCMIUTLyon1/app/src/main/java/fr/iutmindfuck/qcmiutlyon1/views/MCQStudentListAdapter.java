@@ -16,13 +16,13 @@ import fr.iutmindfuck.qcmiutlyon1.activity.QuestionListActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 
-public class MCQListAdapter extends ArrayAdapter<MCQ> {
+public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
 
     private final List<MCQ> mcqList;
     private final MCQSQLHandler mcqsqlHandler;
     private final Context context;
 
-    public MCQListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
+    public MCQStudentListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
         super(context, 0, mcqList);
         this.mcqList = mcqList;
         this.mcqsqlHandler = mcqsqlHandler;
@@ -38,9 +38,7 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
         }
 
         initView(convertView, position);
-        setRemoveClickListener(convertView, position);
-        setModifyClickListener(convertView, position);
-        setQuestionsClickListener(convertView, position);
+        setQuestionClickListener(convertView, position);
 
         return convertView;
     }
@@ -55,45 +53,20 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
         final MCQ mcq = getItem(position);
         viewHolder.title.setText(mcq != null ? mcq.getName() : null);
         viewHolder.description.setText(mcq != null ? mcq.getDescription() : null);
+        viewHolder.list_item_first_interaction.setVisibility(View.GONE);
+        viewHolder.list_item_second_interaction.setVisibility(View.GONE);
     }
 
-    private void setRemoveClickListener(View convertView, final int position) {
-        convertView.findViewById(R.id.list_item_second_interaction).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MCQ mcq = mcqList.get(position);
-
-                        mcqsqlHandler.removeMCQ(mcq.getId());
-                        mcqList.remove(mcq);
-
-                        notifyDataSetChanged();
-                    }
-                }
-        );
-    }
-    private void setModifyClickListener(final View convertView, final int position) {
-        convertView.findViewById(R.id.list_item_first_interaction).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MCQ mcq = mcqList.get(position);
-
-                        Intent intent = new Intent(context, MCQEditionActivity.class);
-                        intent.putExtra("mcq", mcq);
-                        context.startActivity(intent);
-                    }
-                }
-        );
-    }
-
-    private void setQuestionsClickListener(View questionsClickListener, final int position) {
-        questionsClickListener.setOnClickListener(
+    private void setQuestionClickListener(View questionClickListener, final int position) {
+        questionClickListener.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(context, QuestionListActivity.class);
+
                         intent.putExtra("idMCQ", mcqList.get(position).getId());
+                        intent.putExtra("isTeacher", false);
+
                         context.startActivity(intent);
                     }
                 }

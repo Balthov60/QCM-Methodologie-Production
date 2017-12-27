@@ -66,7 +66,7 @@ public class QuestionListActivity extends AppCompatActivity {
     public void onListButtonClick(View v)
     {
         Intent intent = new Intent(QuestionListActivity.this,
-                                              QuestionEditionActivity.class);
+                                                QuestionEditionActivity.class);
         intent.putExtra("idMCQ", idMCQ);
 
         startActivity(intent);
