@@ -33,6 +33,7 @@
         </LinearLayout>
 
         <Button style="@style/BasicButton"
+            android:id="@+id/default_list_button"
             android:layout_below="@+id/default_list_container"
             android:layout_marginTop="35dp"
 

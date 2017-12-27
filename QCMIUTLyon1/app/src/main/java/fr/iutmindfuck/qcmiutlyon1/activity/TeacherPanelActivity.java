@@ -55,7 +55,9 @@ public class TeacherPanelActivity extends AppCompatActivity {
     }
 
     public void onClickMCQ(View view){
-        startActivity(new Intent(TeacherPanelActivity.this, MCQListActivity.class));
+        Intent intent = new Intent(TeacherPanelActivity.this, MCQListActivity.class);
+        intent.putExtra("isTeacher", true);
+        startActivity(intent);
     }
 
 

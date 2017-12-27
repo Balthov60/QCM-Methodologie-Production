@@ -16,13 +16,13 @@ import fr.iutmindfuck.qcmiutlyon1.activity.QuestionListActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 
-public class MCQListAdapter extends ArrayAdapter<MCQ> {
+public class MCQTeacherListAdapter extends ArrayAdapter<MCQ> {
 
     private final List<MCQ> mcqList;
     private final MCQSQLHandler mcqsqlHandler;
     private final Context context;
 
-    public MCQListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
+    public MCQTeacherListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
         super(context, 0, mcqList);
         this.mcqList = mcqList;
         this.mcqsqlHandler = mcqsqlHandler;
@@ -93,7 +93,10 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(context, QuestionListActivity.class);
+
                         intent.putExtra("idMCQ", mcqList.get(position).getId());
+                        intent.putExtra("isTeacher", true);
+
                         context.startActivity(intent);
                     }
                 }

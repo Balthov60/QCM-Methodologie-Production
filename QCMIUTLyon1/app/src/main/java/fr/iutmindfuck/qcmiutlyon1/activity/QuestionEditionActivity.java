@@ -67,6 +67,7 @@ public class QuestionEditionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
                 intent.putExtra("idMCQ", idMCQ);
+                intent.putExtra("isTeacher", true);
                 startActivity(intent);
             }
         });
@@ -110,6 +111,7 @@ public class QuestionEditionActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, QuestionListActivity.class);
         intent.putExtra("idMCQ", idMCQ);
+        intent.putExtra("isTeacher", true);
         startActivity(intent);
     }
 

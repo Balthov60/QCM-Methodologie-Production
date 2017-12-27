@@ -63,7 +63,9 @@ public class MCQEditionActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MCQListActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MCQListActivity.class);
+                intent.putExtra("isTeacher", true);
+                startActivity(intent);
             }
         });
     }
@@ -104,7 +106,9 @@ public class MCQEditionActivity extends AppCompatActivity {
             }
         }
 
-        startActivity(new Intent(MCQEditionActivity.this, MCQListActivity.class));
+        Intent intent = new Intent(MCQEditionActivity.this, MCQListActivity.class);
+        intent.putExtra("isTeacher", true);
+        startActivity(intent);
     }
 
     /* Get Value from MCQ Edition Form */

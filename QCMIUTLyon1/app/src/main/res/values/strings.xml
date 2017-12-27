@@ -54,4 +54,7 @@
     <string name="answer_remove_button_content_description">Remove answer button</string>
     <string name="question_id_display">Question n°%d</string>
 
+    <!-- Strings related to student sections -->
+    <string name="student_submit_mcq">Valider QCM</string>
+
 </resources>
