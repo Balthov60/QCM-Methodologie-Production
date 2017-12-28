@@ -3,6 +3,8 @@ package fr.iutmindfuck.qcmiutlyon1.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -25,7 +27,8 @@ public class TeacherPanelActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_teacher_panel);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.teacher_panel_toolbar));
+        Toolbar toolbar = findViewById(R.id.teacher_panel_toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -34,9 +37,27 @@ public class TeacherPanelActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+            }
+        });
+    }
 
     public void onClickMCQ(View view){
-        startActivity(new Intent(TeacherPanelActivity.this, MCQListActivity.class));
+        Intent intent = new Intent(TeacherPanelActivity.this, MCQListActivity.class);
+        intent.putExtra("isTeacher", true);
+        startActivity(intent);
     }
 
 

@@ -25,7 +25,7 @@ public class MCQSQLHandler {
 
     public static String getSQLForTableCreation() {
         return "CREATE TABLE " + MCQ_TABLE + "(" +
-                MCQ_ID + " INTEGER PRIMARY KEY, " +
+                MCQ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 MCQ_NAME + " varchar(128), " +
                 MCQ_DESCRIPTION + " varchar(256), " +
                 MCQ_TYPE + " bool, " +
@@ -76,14 +76,8 @@ public class MCQSQLHandler {
 
     public void createOrReplaceMCQ(MCQ mcq) {
         ContentValues contentValues = new ContentValues();
-        if (sqlServices.isResultsMatching(MCQ_TABLE, null,
-                MCQ_ID + " = ?", new String[] {String.valueOf(mcq.getId())})) {
-            contentValues.put(MCQ_ID, mcq.getId());
-        }
-        else {
-            contentValues.put(MCQ_ID, sqlServices.getSizeOf(MCQ_TABLE) + 1);
-        }
 
+        contentValues.put(MCQ_ID, mcq.getId());
         contentValues.put(MCQ_NAME, mcq.getName());
         contentValues.put(MCQ_DESCRIPTION, mcq.getDescription());
         contentValues.put(MCQ_TYPE, mcq.isPointNegative());

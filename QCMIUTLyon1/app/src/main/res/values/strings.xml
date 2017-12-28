@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QCM IUT Lyon1</string>
+    <string name="app_name">QCM Lyon 1</string>
 
     <!-- Global view string -->
     <string name="separator">graphic separator</string>
@@ -33,6 +33,7 @@
     <string name="mcq_edition_group">Groupes :</string>
     <string name="mcq_edition_coefficient">Coefficient :</string>
     <string name="mcq_edition_submit">Créer le QCM</string>
+    <string name="mcq_edition_edit">Valider les modifications</string>
 
     <!-- Strings related to teacher panel -->
     <string name="teacher_panel_marks">Notes</string>
@@ -43,7 +44,7 @@
     <string name="student_panel_mcq_done">Fait</string>
 
     <!-- Strings related to MCQ List View item -->
-    <string name="mcq_list_create_mcq">Ajouter un QCM</string>
+    <string name="default_list_create_button">Ajouter</string>
 
     <string name="mcq_list_item_remove_description">Icon de supression qcm</string>
     <string name="mcq_list_item_edit_description">Icon modification qcm</string>
@@ -51,9 +52,13 @@
     <!-- Strings related to question edition -->
     <string name="question_edition_title">Intitulé de la question</string>
     <string name="question_edition_answer_title">Entrez vos réponses (cochez si vrai)</string>
-    <string name="question_edition_answer_content_hint">Reponse</string>
+    <string name="question_edition_answer_content_hint">Réponse</string>
     <string name="question_edition_answer_add_text">Ajouter une réponse</string>
     <string name="questions_edition_add_button">Valider</string>
     <string name="answer_remove_button_content_description">Remove answer button</string>
+    <string name="question_id_display">Question n°%d</string>
+
+    <!-- Strings related to student sections -->
+    <string name="student_submit_mcq">Valider QCM</string>
 
 </resources>

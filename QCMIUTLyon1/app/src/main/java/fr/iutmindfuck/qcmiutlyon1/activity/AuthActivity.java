@@ -42,8 +42,7 @@ public class AuthActivity extends AppCompatActivity {
     }
     private void launchPanelFor(String username) {
         if (userSQLHandler.isTeacher(username)) {
-            startActivity(new Intent(AuthActivity.this,
-                    TeacherPanelActivity.class));
+            startActivity(new Intent(AuthActivity.this, TeacherPanelActivity.class));
         }
         else
         {
