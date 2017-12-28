@@ -61,7 +61,8 @@
                 android:layout_marginStart="20dp"
 
                 android:background="@mipmap/previous_question"
-                android:onClick="previousQuestion" />
+                android:onClick="previousQuestion"
+                android:contentDescription="@string/previous_question_button" />
 
             <ImageView style="@style/PreviousNextButton"
                 android:id="@+id/next_button"
@@ -71,7 +72,8 @@
                 android:layout_alignParentEnd="true"
                 android:background="@mipmap/next_question"
 
-                android:onClick="nextQuestion" />
+                android:onClick="nextQuestion"
+                android:contentDescription="@string/next_question_button" />
 
             <TextView
                 style="@style/PreviousNextTextView"

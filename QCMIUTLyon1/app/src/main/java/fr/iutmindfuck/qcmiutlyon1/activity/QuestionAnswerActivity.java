@@ -1,27 +1,22 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
-import fr.iutmindfuck.qcmiutlyon1.handlers.AnswerSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
@@ -116,6 +111,13 @@ public class QuestionAnswerActivity extends AppCompatActivity{
 
     public void displayQuestionTitle(String questionTitle) {
         ((TextView) findViewById(R.id.question_answer_title)).setText(questionTitle);
+    }
+
+    public void nextQuestion(View view) {
+
+    }
+
+    public void previousQuestion(View view) {
     }
 }
 
