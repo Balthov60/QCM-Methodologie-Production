@@ -13,12 +13,8 @@ import android.widget.Toast;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 
-/**
- * Created by mateo on 26/12/2017.
- */
 
 public class StudentPanelActivity extends AppCompatActivity{
-
 
     private final String UNIMPLEMENTED_MCQ_DONE_MESSAGE = "Affichage des QCM faits";
 
@@ -37,10 +33,8 @@ public class StudentPanelActivity extends AppCompatActivity{
         return true;
     }
 
-    public void onClickMCQTodo(View view){
-
+    public void onClickMCQTodo(View view) {
         Intent intent = new Intent(StudentPanelActivity.this, MCQListActivity.class);
-
         intent.putExtra("Type","TODO");
 
         startActivity(intent);
@@ -48,10 +42,8 @@ public class StudentPanelActivity extends AppCompatActivity{
     }
 
 
-    public void onClickMCQDone(View view){
-
+    public void onClickMCQDone(View view) {
         Intent intent = new Intent(StudentPanelActivity.this, MCQListActivity.class);
-
         intent.putExtra("Type","DONE");
 
         startActivity(intent);
