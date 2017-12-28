@@ -37,18 +37,23 @@ public class StudentPanelActivity extends AppCompatActivity{
         return true;
     }
 
-    public void onClicMCQTodo(View view){
+    public void onClickMCQTodo(View view){
 
-        startActivity(new Intent(StudentPanelActivity.this, MCQListActivity.class));
+        Intent intent = new Intent(StudentPanelActivity.this, MCQListActivity.class);
+
+        intent.putExtra("Type","TODO");
+
+        startActivity(intent);
 
     }
 
 
     public void onClickMCQDone(View view){
-        Context context = getApplicationContext();
 
-        Toast toast = Toast.makeText(context, UNIMPLEMENTED_MCQ_DONE_MESSAGE, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM,0,50);
-        toast.show();
+        Intent intent = new Intent(StudentPanelActivity.this, MCQListActivity.class);
+
+        intent.putExtra("Type","DONE");
+
+        startActivity(intent);
     }
 }
