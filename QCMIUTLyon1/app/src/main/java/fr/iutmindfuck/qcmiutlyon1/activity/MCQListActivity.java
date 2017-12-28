@@ -67,12 +67,13 @@ public class MCQListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isTeacher)
+                {
                     startActivity(new Intent(getApplicationContext(), TeacherPanelActivity.class));
-
-                /*      Wait for StudentPanelActivity implementation
+                }
                 else
+                {
                     startActivity(new Intent(getApplicationContext(), StudentPanelActivity.class));
-                */
+                }
             }
         });
     }

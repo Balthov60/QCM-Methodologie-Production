@@ -3,14 +3,10 @@ package fr.iutmindfuck.qcmiutlyon1.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
@@ -24,17 +20,9 @@ public class TeacherPanelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_teacher_panel);
-
-        Toolbar toolbar = findViewById(R.id.teacher_panel_toolbar);
-        setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.basic_menu, menu);
-        return true;
+        setSupportActionBar((Toolbar) findViewById(R.id.teacher_panel_toolbar));
     }
 
     @Override
@@ -54,13 +42,23 @@ public class TeacherPanelActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * While user click on "MCQ" Button, launch the activity that display all MCQ.
+     *
+     * @param view MCQ Button (provided on click).
+     */
     public void onClickMCQ(View view){
         Intent intent = new Intent(TeacherPanelActivity.this, MCQListActivity.class);
         intent.putExtra("isTeacher", true);
+
         startActivity(intent);
     }
 
-
+    /**
+     * While user click on "Mark" Button, launch the activity that display MCQ's marks.
+     *
+     * @param view Mark Button (provided on click).
+     */
     public void onClickMark(View view){
         Context context = getApplicationContext();
 
