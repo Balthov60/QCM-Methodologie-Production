@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class MCQ implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private String description;
     private boolean isPointNegative;
     private float coefficient;
 
-    public MCQ(int id, String name, String description, boolean isPointNegative, float coefficient) {
+    public MCQ(Integer id, String name, String description, boolean isPointNegative, float coefficient) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,7 +18,7 @@ public class MCQ implements Serializable {
         this.coefficient = coefficient;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     public String getName() {

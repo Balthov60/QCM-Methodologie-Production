@@ -1,29 +1,28 @@
-package fr.iutmindfuck.qcmiutlyon1.views.mcqlistview;
+package fr.iutmindfuck.qcmiutlyon1.views;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.activity.MCQEditionActivity;
+import fr.iutmindfuck.qcmiutlyon1.activity.QuestionListActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 
-public class MCQListAdapter extends ArrayAdapter<MCQ> {
+public class MCQTeacherListAdapter extends ArrayAdapter<MCQ> {
 
     private final List<MCQ> mcqList;
     private final MCQSQLHandler mcqsqlHandler;
     private final Context context;
 
-    public MCQListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
+    public MCQTeacherListAdapter(Context context, List<MCQ> mcqList, MCQSQLHandler mcqsqlHandler) {
         super(context, 0, mcqList);
         this.mcqList = mcqList;
         this.mcqsqlHandler = mcqsqlHandler;
@@ -35,7 +34,7 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
     public View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext())
-                                        .inflate(R.layout.mcq_list_item, parent, false);
+                                        .inflate(R.layout.default_list_item, parent, false);
         }
 
         initView(convertView, position);
@@ -47,19 +46,19 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
     }
 
     private void initView(View convertView, final int position) {
-        MCQViewHolder viewHolder = (MCQViewHolder) convertView.getTag();
+        DefaultItemViewHolder viewHolder = (DefaultItemViewHolder) convertView.getTag();
         if(viewHolder == null) {
-            viewHolder = new MCQViewHolder(convertView);
+            viewHolder = new DefaultItemViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
 
         final MCQ mcq = getItem(position);
-        viewHolder.mcqNameView.setText(mcq != null ? mcq.getName() : null);
-        viewHolder.mcqDescriptionView.setText(mcq != null ? mcq.getDescription() : null);
+        viewHolder.title.setText(mcq != null ? mcq.getName() : null);
+        viewHolder.description.setText(mcq != null ? mcq.getDescription() : null);
     }
 
     private void setRemoveClickListener(View convertView, final int position) {
-        convertView.findViewById(R.id.removeMCQImageButton).setOnClickListener(
+        convertView.findViewById(R.id.list_item_second_interaction).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -74,7 +73,7 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
         );
     }
     private void setModifyClickListener(final View convertView, final int position) {
-        convertView.findViewById(R.id.modifyMCQImageButton).setOnClickListener(
+        convertView.findViewById(R.id.list_item_first_interaction).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -90,15 +89,17 @@ public class MCQListAdapter extends ArrayAdapter<MCQ> {
 
     private void setQuestionsClickListener(View questionsClickListener, final int position) {
         questionsClickListener.setOnClickListener(
-             new View.OnClickListener() {
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, QuestionListActivity.class);
 
-                 @Override
-                 public void onClick(View v) {
-                     Toast toast = Toast.makeText(context, "Non implementé, Quesitons " + position, Toast.LENGTH_SHORT);
-                     toast.setGravity(Gravity.BOTTOM,0,50);
-                     toast.show();
-                 }
-             }
+                        intent.putExtra("idMCQ", mcqList.get(position).getId());
+                        intent.putExtra("isTeacher", true);
+
+                        context.startActivity(intent);
+                    }
+                }
         );
     }
 }

@@ -57,7 +57,7 @@ public class AnswerSQLHandler {
         cursor.close();
         return answers;
     }
-    void createOrReplaceAnswer(Answer answer, int idMCQ, int idQuestion){
+    void createAnswer(Answer answer, int idMCQ, int idQuestion){
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(ANSWER_ID_MCQ, idMCQ);
@@ -72,5 +72,10 @@ public class AnswerSQLHandler {
     void removeAnswersFor(int idMCQ) {
         sqlServices.removeEntry(ANSWER_TABLE, ANSWER_ID_MCQ + " = ?",
                 new String[] {String.valueOf(idMCQ)});
+    }
+    void removeAnswersFor(int idMCQ, int idQuestion) {
+        sqlServices.removeEntry(ANSWER_TABLE,
+                          ANSWER_ID_MCQ + " = ? AND " + ANSWER_ID_QUESTION + " = ?",
+                                new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
     }
 }

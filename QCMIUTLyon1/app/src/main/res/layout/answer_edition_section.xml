@@ -5,15 +5,14 @@
     android:layout_height="wrap_content">
 
     <CheckBox
+        android:id="@+id/answer_is_true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_gravity="center"/>
 
     <EditText
-        android:id="@+id/question_edition_answer"
-        android:background="@drawable/form_edit_text_shape"
-
+        android:id="@+id/answer_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -21,6 +20,7 @@
         android:layout_gravity="center"
         android:padding="5dp"
 
+        android:background="@drawable/form_edit_text_shape"
         android:maxLength="128"
         android:inputType="text"
         android:hint="@string/question_edition_answer_content_hint"/>

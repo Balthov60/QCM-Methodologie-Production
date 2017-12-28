@@ -1,59 +1,62 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
-public class AuthActivity extends AppCompatActivity {
 
-    private static final String UNIMPLEMENTED_STUDENT_MESSAGE
-            = "Le panel etudiant n'a pas encore été implementé";
+public class AuthActivity extends AppCompatActivity {
 
     UserSQLHandler userSQLHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_auth);
 
+        setContentView(R.layout.activity_auth);
         userSQLHandler = new UserSQLHandler(new SQLServices(this));
     }
 
+    /**
+     * While user click on the login button, check if his username & password is correct
+     * and open his panel or display an error message.
+     *
+     * @param view Login Button (provided on click).
+     */
     public void onClickLoginButton(View view) {
         String username = ((TextView)findViewById(R.id.auth_username)).getText().toString();
         String password = ((TextView)findViewById(R.id.auth_password)).getText().toString();
 
-        if (userSQLHandler.isPasswordCorrectFor(username, password)) {
+        if (userSQLHandler.isPasswordCorrectFor(username, password))
+        {
             launchPanelFor(username);
         }
-        else {
+        else
+        {
             ((TextView)findViewById(R.id.auth_error))
                     .setText(getResources().getText(R.string.auth_error));
         }
     }
+
+    /**
+     * Check if user is teacher or student and launch the matching panel.
+     *
+     * @param username username provided by the user.
+     */
     private void launchPanelFor(String username) {
-        if (userSQLHandler.isTeacher(username)) {
-            startActivity(new Intent(AuthActivity.this,
-                    TeacherPanelActivity.class));
+        if (userSQLHandler.isTeacher(username))
+        {
+            startActivity(new Intent(AuthActivity.this, TeacherPanelActivity.class));
         }
         else
         {
-            Context context = getApplicationContext();
-
-            Toast toast = Toast.makeText(context, UNIMPLEMENTED_STUDENT_MESSAGE, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM,0,50);
-            toast.show();
+            startActivity(new Intent(AuthActivity.this, StudentPanelActivity.class));
         }
     }
 }
