@@ -1,6 +1,7 @@
 package fr.iutmindfuck.qcmiutlyon1.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.activity.QuestionActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 
 public class QuestionStudentListAdapter extends ArrayAdapter<Question> {
@@ -62,15 +64,11 @@ public class QuestionStudentListAdapter extends ArrayAdapter<Question> {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        /*  Wait for implementation
-
-                        Question question = questionsList.get(position);
-
-                        Intent intent = new Intent(context, QuestionAnswerActivity.class);
-                        intent.putExtra("question", question);
+                        Intent intent = new Intent(context, QuestionActivity.class);
+                        intent.putExtra("question", questionsList.get(position));
                         intent.putExtra("idMCQ", idMCQ);
+
                         context.startActivity(intent);
-                        */
                     }
                 }
         );

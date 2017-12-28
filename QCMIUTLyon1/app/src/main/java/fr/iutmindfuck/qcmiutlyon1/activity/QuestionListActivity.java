@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -86,10 +85,6 @@ public class QuestionListActivity extends AppCompatActivity {
             Intent intent = new Intent(this, QuestionEditionActivity.class);
             intent.putExtra("idMCQ", idMCQ);
             startActivity(intent);
-        }
-        else {
-            // TODO implement correction it
-            Log.i("Info","Not Implemented");
         }
     }
 }
