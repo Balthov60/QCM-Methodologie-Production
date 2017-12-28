@@ -1,6 +1,7 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +19,7 @@ import fr.iutmindfuck.qcmiutlyon1.R;
 
 public class StudentPanelActivity extends AppCompatActivity{
 
-    private final String UNIMPLEMENTED_MCQ_TODO_MESSAGE = "Affichage des QCM à faire";
+
     private final String UNIMPLEMENTED_MCQ_DONE_MESSAGE = "Affichage des QCM faits";
 
     @Override
@@ -37,13 +38,9 @@ public class StudentPanelActivity extends AppCompatActivity{
     }
 
     public void onClicMCQTodo(View view){
-        //startActivity(new Intent(StudentPanelActivity.this, MCQListActivity.class));
 
-        Context context = getApplicationContext();
+        startActivity(new Intent(StudentPanelActivity.this, MCQListActivity.class));
 
-        Toast toast = Toast.makeText(context, UNIMPLEMENTED_MCQ_TODO_MESSAGE, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM,0,50);
-        toast.show();
     }
 
 

@@ -16,8 +16,6 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private static final String UNIMPLEMENTED_STUDENT_MESSAGE
-            = "Le panel etudiant n'a pas encore été implementé";
 
     UserSQLHandler userSQLHandler;
 
@@ -49,11 +47,8 @@ public class AuthActivity extends AppCompatActivity {
         }
         else
         {
-            Context context = getApplicationContext();
-
-            Toast toast = Toast.makeText(context, UNIMPLEMENTED_STUDENT_MESSAGE, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM,0,50);
-            toast.show();
+            startActivity(new Intent(AuthActivity.this,
+                    StudentPanelActivity.class));
         }
     }
 }
