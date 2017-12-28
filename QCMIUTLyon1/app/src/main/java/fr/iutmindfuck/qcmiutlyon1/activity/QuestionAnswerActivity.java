@@ -32,12 +32,16 @@ public class QuestionAnswerActivity extends AppCompatActivity{
     Question question;
     ArrayList<Answer> answers = new ArrayList<>();
 
+    int idMCQ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_question_answer);
         setSupportActionBar((Toolbar) findViewById(R.id.question_answer_toolbar));
+
+        /* Test A supprimer pour la version final */
 
         answers.add(new Answer("bleu", true));
         answers.add(new Answer("pas de couleur", true));
@@ -53,7 +57,15 @@ public class QuestionAnswerActivity extends AppCompatActivity{
         questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
         questionSQLHandler.createOrReplaceQuestion(question, 1);
 
-        initFormField();
+        Bundle extra = getIntent().getExtras();
+        if (extra != null){
+            question = (Question) extra.getSerializable("question");
+            if(question !=null){
+                initFormField();
+            }
+
+            idMCQ = extra.getInt("idMCQ");
+        }
     }
 
     @Override
@@ -78,9 +90,9 @@ public class QuestionAnswerActivity extends AppCompatActivity{
 
 
     public void initFormField(){
-        setQuestionTitle(question.getTitle());
+        displayQuestionTitle(question.getTitle());
         if(question.getAnswers() != null)
-        setAnswers(question.getAnswers());
+            displayAnswers(question.getAnswers());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,7 +102,7 @@ public class QuestionAnswerActivity extends AppCompatActivity{
 
 
     @SuppressLint("InflateParams")
-    public void setAnswers(ArrayList<Answer> answers) {
+    public void displayAnswers(ArrayList<Answer> answers) {
         LinearLayout parent = findViewById(R.id.question_answer_container);
 
         for (Answer answer : answers) {
@@ -102,7 +114,7 @@ public class QuestionAnswerActivity extends AppCompatActivity{
         }
     }
 
-    public void setQuestionTitle(String questionTitle) {
+    public void displayQuestionTitle(String questionTitle) {
         ((TextView) findViewById(R.id.question_answer_title)).setText(questionTitle);
     }
 }

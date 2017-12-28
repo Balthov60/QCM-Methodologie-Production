@@ -11,7 +11,7 @@
 
         android:layout_gravity="center"/>
 
-    <TextView
+    <TextView style="@style/BasicText"
         android:id="@+id/question_reply_answer"
 
         android:layout_width="300dp"
