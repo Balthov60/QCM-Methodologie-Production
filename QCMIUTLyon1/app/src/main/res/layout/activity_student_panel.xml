@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/teacher_panel_toolbar"
+        android:id="@+id/student_panel_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -26,7 +26,7 @@
 
             android:text="@string/student_panel_mcq_to_do"
             android:background="@drawable/student_mcq_to_do"
-            android:onClick="onClickTodo" />
+            android:onClick="onClickMCQTodo" />
 
 
         <TextView style="@style/BigButton"
