@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/question_edition_toolbar"
+        android:id="@+id/question_answer_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -25,37 +25,37 @@
             <!-- Question title -->
 
             <TextView style="@style/WideFormView"
-                android:id="@+id/question_edition_title"
+                android:id="@+id/question_answer_title"
 
-                android:labelFor="@+id/question_edition_title_input"/>
+                android:layout_centerInPare
+
+                android:labelFor="@+id/question_answer_title_input"/>
 
             <ImageView style="@style/separator"
-                android:layout_below="@+id/question_edition_title"
+                android:layout_below="@+id/question_answer_title"
                 android:contentDescription="@string/separator" />
 
             <!-- Answer list -->
 
             <LinearLayout
-                android:id="@+id/question_edition_answer_container"
+                android:id="@+id/question_answer_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_below="@id/question_edition_title"
+                android:layout_below="@id/question_answer_title"
                 android:orientation="vertical"
 
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="5dp">
 
-                <include layout="@layout/answer_reply_section"/>
-                <include layout="@layout/answer_reply_section"/>
 
             </LinearLayout>
 
             <ImageView style="@style/PreviousNextButton"
                 android:id="@+id/previous_button"
 
-                android:layout_below="@id/question_edition_answer_container"
+                android:layout_below="@id/question_answer_container"
                 android:layout_marginTop="@dimen/basic_button_margin"
 
                 android:background="@mipmap/previous_question"

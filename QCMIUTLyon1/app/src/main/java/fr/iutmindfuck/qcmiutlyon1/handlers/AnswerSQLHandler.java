@@ -18,7 +18,7 @@ public class AnswerSQLHandler {
 
     private SQLServices sqlServices;
 
-    AnswerSQLHandler(SQLServices sqlServices){
+    protected AnswerSQLHandler(SQLServices sqlServices){
         this.sqlServices = sqlServices;
     }
 
