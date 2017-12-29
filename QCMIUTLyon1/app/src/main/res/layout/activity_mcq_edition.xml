@@ -5,17 +5,12 @@
     android:orientation="vertical"
 
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fr.iutmindfuck.qcmiutlyon1.activity.MCQEditionActivity"
     tools:showIn="@layout/activity_mcq_edition">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/mcq_edition_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        style="@style/Toolbar"
+        android:id="@+id/mcq_edition_toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
