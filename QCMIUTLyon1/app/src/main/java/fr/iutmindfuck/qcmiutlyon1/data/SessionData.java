@@ -45,7 +45,13 @@ public class SessionData {
 
     public static void saveAnswers(int idMCQ, int idQuestion, ArrayList<Integer> trueAnswersID) {
         if (!trueAnswersID.isEmpty())
+        {
             ourInstance.mcqUserAnswerSave.put(idMCQ + "_" + idQuestion, formatAnswersID(trueAnswersID));
+        }
+        else if (isQuestionAnswered(idMCQ, idQuestion))
+        {
+            ourInstance.mcqUserAnswerSave.remove(idMCQ + "_" + idQuestion);
+        }
     }
     private static String formatAnswersID(ArrayList<Integer> trueAnswersID) {
         String formattedAnswersID = "";
@@ -54,5 +60,9 @@ public class SessionData {
             formattedAnswersID = formattedAnswersID.concat(id + "_");
 
         return formattedAnswersID.substring(0, formattedAnswersID.length() - 1);
+    }
+
+    public static boolean isQuestionAnswered(int idMCQ, int idQuestion) {
+        return ourInstance.mcqUserAnswerSave.containsKey(idMCQ + "_" + idQuestion);
     }
 }
