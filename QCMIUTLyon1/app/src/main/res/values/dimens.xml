@@ -7,13 +7,9 @@
 
     <!-- Auth linked dimens -->
     <dimen name="auth_iut_brand_margin_top">20dp</dimen>
-
     <dimen name="auth_edit_text_margin_top">20dp</dimen>
-
     <dimen name="auth_error_text_size">14sp</dimen>
-
     <dimen name="auth_password_margin_top">15dp</dimen>
-
     <dimen name="auth_button_margin_top">45dp</dimen>
 
     <!-- Form linked dimens -->
@@ -24,7 +20,6 @@
 
     <!-- Question Answer linked dimens -->
     <dimen name="label_question_selected_margin_top">100dp</dimen>
-
     <dimen name="label_question_selected_margin_right">50dp</dimen>
     <dimen name="question_answer_checkbox_margin_top">15dp</dimen>
 

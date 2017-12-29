@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
@@ -28,7 +27,7 @@ public class QuestionActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         getExtra();
 
-        setContentView(R.layout.activity_question_answer);
+        setContentView(R.layout.activity_question);
         setSupportActionBar((Toolbar) findViewById(R.id.question_answer_toolbar));
     }
     private void getExtra() {
