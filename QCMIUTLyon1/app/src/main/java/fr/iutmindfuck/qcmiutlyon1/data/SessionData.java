@@ -1,9 +1,11 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
-import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Singleton class to keep session data and share it on all activities.
@@ -35,7 +37,7 @@ public class SessionData {
      *   Key   : <MCQ_ID>_<QUESTION_ID>
      *   Value : List of answer index that have been marked as true (with '_' separator)
      */
-    private HashMap<String, String> mcqUserAnswerSave;
+    private HashMap<String, ArrayList<Boolean>> mcqUserAnswerSave;
 
 
     public static void createNewSession(boolean isTeacher) {
@@ -43,26 +45,32 @@ public class SessionData {
         ourInstance.mcqUserAnswerSave = new HashMap<>();
     }
 
-    public static void saveAnswers(int idMCQ, int idQuestion, ArrayList<Integer> trueAnswersID) {
+    public static void saveAnswers(int idMCQ, int idQuestion,
+                                   ArrayList<Integer> trueAnswersID, int answersQuantity) {
         if (!trueAnswersID.isEmpty())
         {
-            ourInstance.mcqUserAnswerSave.put(idMCQ + "_" + idQuestion, formatAnswersID(trueAnswersID));
+            ourInstance.mcqUserAnswerSave.put(idMCQ + "_" + idQuestion,
+                                              formatAnswersID(trueAnswersID, answersQuantity));
         }
         else if (isQuestionAnswered(idMCQ, idQuestion))
         {
             ourInstance.mcqUserAnswerSave.remove(idMCQ + "_" + idQuestion);
         }
     }
-    private static String formatAnswersID(ArrayList<Integer> trueAnswersID) {
-        String formattedAnswersID = "";
-
-        for (Integer id : trueAnswersID)
-            formattedAnswersID = formattedAnswersID.concat(id + "_");
-
-        return formattedAnswersID.substring(0, formattedAnswersID.length() - 1);
-    }
 
     public static boolean isQuestionAnswered(int idMCQ, int idQuestion) {
         return ourInstance.mcqUserAnswerSave.containsKey(idMCQ + "_" + idQuestion);
+    }
+    public static ArrayList<Boolean> getAnswersStatus(int idMCQ, int idQuestion) {
+        return ourInstance.mcqUserAnswerSave.get(idMCQ + "_" + idQuestion);
+    }
+
+    private static ArrayList<Boolean> formatAnswersID(ArrayList<Integer> trueAnswersID, int size) {
+        ArrayList<Boolean> formattedAnswersID = new ArrayList<>();
+
+        for (int i = 0; i < size; i++)
+            formattedAnswersID.add(trueAnswersID.contains(i));
+
+        return formattedAnswersID;
     }
 }
