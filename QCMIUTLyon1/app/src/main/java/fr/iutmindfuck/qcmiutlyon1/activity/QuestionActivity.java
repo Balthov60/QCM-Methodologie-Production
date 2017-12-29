@@ -10,9 +10,12 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
+import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
 
 public class QuestionActivity extends AppCompatActivity{
 
@@ -33,6 +36,13 @@ public class QuestionActivity extends AppCompatActivity{
             question = (Question) extra.getSerializable("question");
             idMCQ = extra.getInt("idMCQ");
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        saveAnswerInSessionData();
     }
 
     @Override
@@ -90,6 +100,22 @@ public class QuestionActivity extends AppCompatActivity{
     }
     public void previousQuestion(View view) {
         // TODO
+    }
+
+    private void saveAnswerInSessionData() {
+        SessionData.saveAnswers(idMCQ, question.getId(), getAnswersIndexMarkedAsTrue());
+    }
+    private ArrayList<Integer> getAnswersIndexMarkedAsTrue() {
+        ArrayList<Integer> trueAnswersID = new ArrayList<>();
+        LinearLayout answersContainer = findViewById(R.id.question_answer_container);
+
+        for (int i = 0; i < answersContainer.getChildCount(); i++) {
+            LinearLayout answerSection = (LinearLayout) answersContainer.getChildAt(i);
+            if (((CheckBox) answerSection.getChildAt(0)).isChecked())
+                trueAnswersID.add(i);
+        }
+
+        return trueAnswersID;
     }
 }
 
