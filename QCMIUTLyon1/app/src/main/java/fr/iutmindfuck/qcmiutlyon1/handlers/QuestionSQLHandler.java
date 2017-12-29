@@ -5,7 +5,6 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 
-import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
@@ -92,21 +91,22 @@ public class QuestionSQLHandler {
         sqlServices.createOrReplaceData(QUESTION_TABLE, contentValues);
 
         answerSQLHandler.removeAnswersFor(idMCQ, id);
-        for(Answer answer : question.getAnswers())
-            answerSQLHandler.createAnswer(answer, idMCQ, id);
+
+        for(int i = 0; i < question.getAnswers().size(); i++)
+            answerSQLHandler.createAnswer(question.getAnswers().get(i), idMCQ, id, i);
     }
 
     void removeQuestionsFor(int idMCQ) {
         answerSQLHandler.removeAnswersFor(idMCQ);
 
-        sqlServices.removeEntry(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
+        sqlServices.removeEntries(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
                                                       new String[] {String.valueOf(idMCQ)});
     }
 
     public void removeQuestion(int idMCQ, int idQuestion) {
         answerSQLHandler.removeAnswersFor(idMCQ, idQuestion);
 
-        sqlServices.removeEntry(QUESTION_TABLE,
+        sqlServices.removeEntries(QUESTION_TABLE,
                           QUESTION_MCQ_ID + " = ? AND " + QUESTION_ID + " = ?",
                                 new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
     }

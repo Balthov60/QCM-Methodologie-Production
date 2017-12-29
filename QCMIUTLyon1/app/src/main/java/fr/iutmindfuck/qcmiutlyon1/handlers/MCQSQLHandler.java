@@ -89,7 +89,7 @@ public class MCQSQLHandler {
     public void removeMCQ(int idMCQ) {
         new QuestionSQLHandler(sqlServices).removeQuestionsFor(idMCQ);
 
-        sqlServices.removeEntry(MCQ_TABLE, MCQ_ID + " = ?",
+        sqlServices.removeEntries(MCQ_TABLE, MCQ_ID + " = ?",
                 new String[] {String.valueOf(idMCQ)});
     }
 }

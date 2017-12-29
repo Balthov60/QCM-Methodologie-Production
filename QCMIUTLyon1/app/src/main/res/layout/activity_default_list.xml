@@ -10,12 +10,8 @@
     tools:showIn="@layout/activity_default_list">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/default_list_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        style="@style/Toolbar"
+        android:id="@+id/default_list_toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

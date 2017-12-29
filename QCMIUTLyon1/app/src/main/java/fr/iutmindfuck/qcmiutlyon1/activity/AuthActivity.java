@@ -6,8 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.data.Answer;
+import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
+import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
+import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
