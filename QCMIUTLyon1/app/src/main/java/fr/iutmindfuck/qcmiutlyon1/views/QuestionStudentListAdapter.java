@@ -2,6 +2,7 @@ package fr.iutmindfuck.qcmiutlyon1.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import java.util.List;
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.activity.QuestionActivity;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
+import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
 
 public class QuestionStudentListAdapter extends ArrayAdapter<Question> {
 
@@ -55,7 +57,16 @@ public class QuestionStudentListAdapter extends ArrayAdapter<Question> {
             viewHolder.title.setText(String.format(context.getString(R.string.question_id_display), position + 1));
             viewHolder.description.setText(question.getTitle());
 
-            // TODO: Change secondItem depending on submission.
+            Drawable second_item_drawable;
+            if (SessionData.isQuestionAnswered(idMCQ, position))
+            {
+                second_item_drawable = context.getResources().getDrawable(R.drawable.icon_done);
+            }
+            else
+            {
+                second_item_drawable = context.getResources().getDrawable(R.drawable.icon_not_done);
+            }
+            viewHolder.list_item_second_interaction.setImageDrawable(second_item_drawable);
         }
     }
 

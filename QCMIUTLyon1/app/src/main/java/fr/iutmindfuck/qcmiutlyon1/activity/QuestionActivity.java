@@ -10,9 +10,13 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
+import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
 
 public class QuestionActivity extends AppCompatActivity{
 
@@ -33,6 +37,13 @@ public class QuestionActivity extends AppCompatActivity{
             question = (Question) extra.getSerializable("question");
             idMCQ = extra.getInt("idMCQ");
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        saveAnswerInSessionData();
     }
 
     @Override
@@ -73,11 +84,15 @@ public class QuestionActivity extends AppCompatActivity{
     @SuppressLint("InflateParams")
     public void displayAnswers() {
         LinearLayout parent = findViewById(R.id.question_answer_container);
+        ArrayList<Boolean> answersMarkedAsTrue = SessionData.getAnswersStatus(idMCQ, question.getId());
 
-        for (Answer answer : question.getAnswers()) {
+        for (int i = 0; i < question.getAnswers().size(); i++) {
             View custom = getLayoutInflater().inflate(R.layout.answer_reply_section, null);
+            Answer answer = question.getAnswers().get(i);
 
-            ((CheckBox) custom.findViewById(R.id.answer_reply)).setChecked(false);
+            if (answersMarkedAsTrue != null && answersMarkedAsTrue.get(i))
+                ((CheckBox) custom.findViewById(R.id.answer_reply)).setChecked(true);
+
             ((TextView) custom.findViewById(R.id.question_reply_answer)).setText(answer.getTitle());
 
             parent.addView(custom);
@@ -90,6 +105,23 @@ public class QuestionActivity extends AppCompatActivity{
     }
     public void previousQuestion(View view) {
         // TODO
+    }
+
+    private void saveAnswerInSessionData() {
+        SessionData.saveAnswers(idMCQ, question.getId(),
+                                getAnswersIndexMarkedAsTrue(), question.getAnswers().size());
+    }
+    private ArrayList<Integer> getAnswersIndexMarkedAsTrue() {
+        ArrayList<Integer> trueAnswersID = new ArrayList<>();
+        LinearLayout answersContainer = findViewById(R.id.question_answer_container);
+
+        for (int i = 0; i < answersContainer.getChildCount(); i++) {
+            LinearLayout answerSection = (LinearLayout) answersContainer.getChildAt(i);
+            if (((CheckBox) answerSection.getChildAt(0)).isChecked())
+                trueAnswersID.add(i);
+        }
+
+        return trueAnswersID;
     }
 }
 

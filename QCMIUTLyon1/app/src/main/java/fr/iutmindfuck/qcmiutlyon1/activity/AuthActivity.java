@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
 import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
@@ -52,10 +53,12 @@ public class AuthActivity extends AppCompatActivity {
     private void launchPanelFor(String username) {
         if (userSQLHandler.isTeacher(username))
         {
+            SessionData.createNewSession(true);
             startActivity(new Intent(AuthActivity.this, TeacherPanelActivity.class));
         }
         else
         {
+            SessionData.createNewSession(false);
             startActivity(new Intent(AuthActivity.this, StudentPanelActivity.class));
         }
     }
