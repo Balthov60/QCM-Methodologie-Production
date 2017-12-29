@@ -1,7 +1,5 @@
 package fr.iutmindfuck.qcmiutlyon1.handlers;
 
-import android.content.ContentValues;
-
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class UserSQLHandler {
@@ -58,42 +56,5 @@ public class UserSQLHandler {
         return sqlServices.isResultsMatching(USER_TABLE, new String[]{USER_ID},
                 USER_ID + " = ? AND " + USER_IS_TEACHER + " = ?",
                 new String[]{id, "1"});
-    }
-
-    // Test Methodes For DB Insertion (will not exist in final version)
-    public static ContentValues getUserDBEntry() {
-        ContentValues user = new ContentValues();
-        user.put(USER_ID, "user");
-        user.put(USER_LASTNAME, "lastname");
-        user.put(USER_FIRSTNAME, "firstname");
-        user.put(USER_EMAIL, "user@mail.com");
-        user.put(USER_PASSWORD, "password");
-        user.put(USER_IS_TEACHER, false);
-        user.put(USER_GROUP, GROUP_2);
-
-        return user;
-    }
-    public static ContentValues getTeacherDBEntry() {
-        ContentValues teacher = new ContentValues();
-        teacher.put(USER_ID, "teacher");
-        teacher.put(USER_LASTNAME, "lastname");
-        teacher.put(USER_FIRSTNAME, "firstname");
-        teacher.put(USER_EMAIL, "teacher@mail.com");
-        teacher.put(USER_PASSWORD, "password");
-        teacher.put(USER_IS_TEACHER, true);
-
-        return teacher;
-    }
-    public static ContentValues[] getGroupsDBEntry() {
-        ContentValues groups[] = new ContentValues[3];
-        for (int i = 0; i < 3; i++) {
-            groups[i] = new ContentValues();
-        }
-
-        groups[0].put(GROUP_NAME, GROUP_1);
-        groups[1].put(GROUP_NAME, GROUP_2);
-        groups[2].put(GROUP_NAME, GROUP_3);
-
-        return groups;
     }
 }

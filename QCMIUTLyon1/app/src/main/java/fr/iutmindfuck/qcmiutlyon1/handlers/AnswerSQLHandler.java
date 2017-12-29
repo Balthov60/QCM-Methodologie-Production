@@ -13,6 +13,7 @@ public class AnswerSQLHandler {
     private static final String ANSWER_TABLE = "Answer";
     private static final String ANSWER_ID_MCQ = "idMCQ";
     private static final String ANSWER_ID_QUESTION = "idQuestion";
+    private static final String ANSWER_ID = "idAnswer";
     private static final String ANSWER_TITLE = "title";
     private static final String ANSWER_IS_RIGHT = "isRight";
 
@@ -26,11 +27,12 @@ public class AnswerSQLHandler {
         return "CREATE TABLE " + ANSWER_TABLE + "(" +
                 ANSWER_ID_MCQ + " INTEGER, " +
                 ANSWER_ID_QUESTION + " INTEGER, " +
+                ANSWER_ID + " INTGER, " +
                 ANSWER_TITLE + " varchar(128), " +
                 ANSWER_IS_RIGHT + " bool, " +
                 "PRIMARY KEY(" + ANSWER_ID_MCQ + ", " +
                                  ANSWER_ID_QUESTION + ", " +
-                                 ANSWER_TITLE + ")" +
+                                 ANSWER_ID + ")" +
                 ")";
     }
     public static String getSQLForTableSuppression() {
@@ -57,9 +59,10 @@ public class AnswerSQLHandler {
         cursor.close();
         return answers;
     }
-    void createAnswer(Answer answer, int idMCQ, int idQuestion){
+    void createAnswer(Answer answer, int idMCQ, int idQuestion, int idAnswer){
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put(ANSWER_ID, idAnswer);
         contentValues.put(ANSWER_ID_MCQ, idMCQ);
         contentValues.put(ANSWER_ID_QUESTION, idQuestion);
         contentValues.put(ANSWER_TITLE, answer.getTitle());
@@ -70,11 +73,11 @@ public class AnswerSQLHandler {
 
 
     void removeAnswersFor(int idMCQ) {
-        sqlServices.removeEntry(ANSWER_TABLE, ANSWER_ID_MCQ + " = ?",
+        sqlServices.removeEntries(ANSWER_TABLE, ANSWER_ID_MCQ + " = ?",
                 new String[] {String.valueOf(idMCQ)});
     }
     void removeAnswersFor(int idMCQ, int idQuestion) {
-        sqlServices.removeEntry(ANSWER_TABLE,
+        sqlServices.removeEntries(ANSWER_TABLE,
                           ANSWER_ID_MCQ + " = ? AND " + ANSWER_ID_QUESTION + " = ?",
                                 new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
     }

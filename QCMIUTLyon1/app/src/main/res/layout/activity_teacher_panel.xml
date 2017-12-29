@@ -6,7 +6,7 @@
 
     <android.support.v7.widget.Toolbar
         style="@style/Toolbar"
-        android:id="@+id/teacher_panel_toolbar" />
+        android:id="@+id/teacher_panel_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"

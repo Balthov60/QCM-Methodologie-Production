@@ -10,9 +10,9 @@
 
     <android.support.v7.widget.Toolbar
         style="@style/Toolbar"
-        android:id="@+id/mcq_edition_toolbar"/>
+        android:id="@+id/mcq_edition_toolbar" />
 
-    <ScrollView
+<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout

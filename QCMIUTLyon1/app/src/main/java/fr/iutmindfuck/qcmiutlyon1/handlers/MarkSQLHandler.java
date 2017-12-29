@@ -12,7 +12,7 @@ public class MarkSQLHandler {
     private static final String MARK_ID_MCQ = "idMCQ";
     private static final String MARK_ID_STUDENT = "idStudent";
     private static final String MARK_VALUE = "value";
-    private static final String MARK_TABLE = "mark";
+    private static final String MARK_TABLE = "Mark";
 
     private SQLServices sqlServices;
 
