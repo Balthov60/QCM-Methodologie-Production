@@ -110,7 +110,7 @@ public class QuestionListActivity extends AppCompatActivity {
 
             correctionReport.saveMark(sqlServices);
             correctionReport.exportInJson();
-            correctionReport.displayPopUp();
+            correctionReport.displayPopUp(QuestionListActivity.this);
         }
     }
 }

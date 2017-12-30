@@ -1,8 +1,13 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
+import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
@@ -16,7 +21,7 @@ public class MCQCorrectionReport {
     private ArrayList<ArrayList<Boolean>> userAnswers;
 
     private float markOutOf20;
-    private float mark;
+    private int mark;
     private int maxMark;
 
     public MCQCorrectionReport(int idMCQ, SQLServices sqlServices) {
@@ -51,7 +56,7 @@ public class MCQCorrectionReport {
                 mark -= (mcq.isPointNegative()) ? 1 : 0;
             }
         }
-        markOutOf20 = mark / maxMark * 20;
+        markOutOf20 = (mark > 0) ? ((float)mark / maxMark * 20) : 0;
     }
 
     /**
@@ -102,6 +107,44 @@ public class MCQCorrectionReport {
     public void exportInJson() {
     }
 
-    public void displayPopUp() {
+    public void displayPopUp(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(R.layout.dialog_correction_report_layout);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        setDialogContent(dialog, context);
+    }
+
+    private void setDialogContent(AlertDialog dialog, Context context) {
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_title))
+                .setText(mcq.getName());
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_description))
+                .setText(mcq.getDescription());
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_mark))
+                .setText(formatMarkForAlertDialog(context));
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_coefficient))
+                .setText(formatCoefficientForAlertDialog(context));
+
+        if (mcq.isPointNegative())
+        {
+            ((TextView) dialog.findViewById(R.id.dialog_correction_report_type))
+                    .setText(context.getString(R.string.mcq_edition_type_negative));
+        }
+        else
+        {
+            ((TextView) dialog.findViewById(R.id.dialog_correction_report_type))
+                    .setText(context.getString(R.string.mcq_edition_type_classic));
+        }
+    }
+
+    private String formatMarkForAlertDialog(Context context) {
+        String raw = context.getString(R.string.dialog_correction_report_mark_text);
+        return String.format(raw, markOutOf20, mark, maxMark);
+
+    }
+    private String formatCoefficientForAlertDialog(Context context) {
+        String raw = context.getString(R.string.dialog_correction_report_coefficient_text);
+        return String.format(raw, mcq.getCoefficient());
     }
 }

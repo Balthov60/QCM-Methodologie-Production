@@ -74,6 +74,16 @@
 
         <item name="android:background">@drawable/form_edit_text_shape</item>
     </style>
+    <style name="WideTextView" parent="WideFormView">
+        <item name="android:textColor">@color/greyIUT</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="WideTitleView" parent="WideFormView">
+        <item name="android:textColor">@color/pinkIUT</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 
 
     <!-- Graphic styles -->
