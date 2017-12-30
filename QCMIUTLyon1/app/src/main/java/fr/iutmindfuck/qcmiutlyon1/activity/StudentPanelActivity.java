@@ -47,10 +47,8 @@ public class StudentPanelActivity extends AppCompatActivity {
     public void onClickMCQTodo(View view) {
         Intent intent = new Intent(StudentPanelActivity.this, MCQListActivity.class);
         intent.putExtra("Type", TODO_STUDENT_MOD);
-        intent.putExtra("isTeacher", false);
 
         startActivity(intent);
-
     }
 
     /**
@@ -61,7 +59,6 @@ public class StudentPanelActivity extends AppCompatActivity {
     public void onClickMCQDone(View view) {
         Intent intent = new Intent(StudentPanelActivity.this, MCQListActivity.class);
         intent.putExtra("Type", DONE_STUDENT_MOD);
-        intent.putExtra("isTeacher", false);
 
         startActivity(intent);
     }

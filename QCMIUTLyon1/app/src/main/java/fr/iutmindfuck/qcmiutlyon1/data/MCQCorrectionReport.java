@@ -28,7 +28,7 @@ public class MCQCorrectionReport {
 
         userAnswers = new ArrayList<>();
         for (Question question : questions) {
-            userAnswers.add(SessionData.getAnswersStatus(idMCQ, question.getId()));
+            userAnswers.add(SessionData.getInstance().getAnswersStatus(idMCQ, question.getId()));
         }
 
         mark = 0;

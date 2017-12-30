@@ -39,21 +39,6 @@ public class QuestionActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-
-        saveAnswerInSessionData();
-    }
-
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-
-        if (question != null) {
-            initQuestionField();
-        }
-    }
-    @Override
     public void setSupportActionBar(Toolbar toolbar) {
         super.setSupportActionBar(toolbar);
 
@@ -67,23 +52,30 @@ public class QuestionActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
                 intent.putExtra("idMCQ", idMCQ);
-                intent.putExtra("isTeacher", false);
                 startActivity(intent);
             }
         });
     }
 
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
 
-    public void initQuestionField(){
+        displayQuestion();
+    }
+
+    public void displayQuestion(){
         ((TextView) findViewById(R.id.question_answer_title)).setText(question.getTitle());
 
         if(question.getAnswers() != null)
             displayAnswers();
     }
+
     @SuppressLint("InflateParams")
     public void displayAnswers() {
         LinearLayout parent = findViewById(R.id.question_answer_container);
-        ArrayList<Boolean> answersMarkedAsTrue = SessionData.getAnswersStatus(idMCQ, question.getId());
+        ArrayList<Boolean> answersMarkedAsTrue
+                = SessionData.getInstance().getAnswersStatus(idMCQ, question.getId());
 
         for (int i = 0; i < question.getAnswers().size(); i++) {
             View custom = getLayoutInflater().inflate(R.layout.answer_reply_section, null);
@@ -98,17 +90,14 @@ public class QuestionActivity extends AppCompatActivity{
         }
     }
 
-
-    public void nextQuestion(View view) {
-        // TODO
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveAnswerInSessionData();
     }
-    public void previousQuestion(View view) {
-        // TODO
-    }
-
     private void saveAnswerInSessionData() {
-        SessionData.saveAnswers(idMCQ, question.getId(),
-                                getAnswersIndexMarkedAsTrue(), question.getAnswers().size());
+        SessionData.getInstance().saveAnswers(idMCQ, question.getId(), getAnswersIndexMarkedAsTrue(),
+                                              question.getAnswers().size());
     }
     private ArrayList<Integer> getAnswersIndexMarkedAsTrue() {
         ArrayList<Integer> trueAnswersID = new ArrayList<>();
@@ -121,6 +110,13 @@ public class QuestionActivity extends AppCompatActivity{
         }
 
         return trueAnswersID;
+    }
+
+    public void nextQuestion(View view) {
+        // TODO
+    }
+    public void previousQuestion(View view) {
+        // TODO
     }
 }
 

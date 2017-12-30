@@ -34,7 +34,7 @@ public class SessionData {
      *   Key   : <MCQ_ID>_<QUESTION_ID>
      *   Value : List of answer index that have been marked as true (with '_' separator)
      */
-    private HashMap<String, ArrayList<Boolean>> mcqUserAnswerSave;
+    private HashMap<String, ArrayList<Boolean>> mcqUserAnswerSave = new HashMap<>();
 
     public boolean isTeacher() {
         return isTeacher;
@@ -47,10 +47,10 @@ public class SessionData {
     public static void createNewSession(String userID, boolean isTeacher) {
         ourInstance.userID = userID;
         ourInstance.isTeacher = isTeacher;
-        ourInstance.mcqUserAnswerSave = new HashMap<>();
+        //ourInstance.mcqUserAnswerSave = new HashMap<>();
     }
 
-    public static void saveAnswers(int idMCQ, int idQuestion,
+    public void saveAnswers(int idMCQ, int idQuestion,
                                    ArrayList<Integer> trueAnswersID, int answersQuantity) {
         if (!trueAnswersID.isEmpty())
         {
@@ -63,14 +63,14 @@ public class SessionData {
         }
     }
 
-    public static boolean isQuestionAnswered(int idMCQ, int idQuestion) {
+    public boolean isQuestionAnswered(int idMCQ, int idQuestion) {
         return ourInstance.mcqUserAnswerSave.containsKey(idMCQ + "_" + idQuestion);
     }
-    public static ArrayList<Boolean> getAnswersStatus(int idMCQ, int idQuestion) {
+    public ArrayList<Boolean> getAnswersStatus(int idMCQ, int idQuestion) {
         return ourInstance.mcqUserAnswerSave.get(idMCQ + "_" + idQuestion);
     }
 
-    private static ArrayList<Boolean> formatAnswersID(ArrayList<Integer> trueAnswersID, int size) {
+    private ArrayList<Boolean> formatAnswersID(ArrayList<Integer> trueAnswersID, int size) {
         ArrayList<Boolean> formattedAnswersID = new ArrayList<>();
 
         for (int i = 0; i < size; i++)

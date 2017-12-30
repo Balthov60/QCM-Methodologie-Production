@@ -15,7 +15,7 @@ import fr.iutmindfuck.qcmiutlyon1.R;
 public class TeacherPanelActivity extends AppCompatActivity {
 
     private static final String UNIMPLEMENTED_MARK_MESSAGE
-                                      = "La gestion des notes n'a pas été implémenté";
+                                      = "La gestion des notes n'a pas encore été implémenté";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +48,7 @@ public class TeacherPanelActivity extends AppCompatActivity {
      * @param view MCQ Button (provided on click).
      */
     public void onClickMCQ(View view){
-        Intent intent = new Intent(TeacherPanelActivity.this, MCQListActivity.class);
-        intent.putExtra("isTeacher", true);
-
-        startActivity(intent);
+        startActivity(new Intent(TeacherPanelActivity.this, MCQListActivity.class));
     }
 
     /**

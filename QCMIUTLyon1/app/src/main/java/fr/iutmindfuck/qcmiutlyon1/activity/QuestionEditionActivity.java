@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -35,20 +34,17 @@ public class QuestionEditionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_question_edition);
-        setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
 
         questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
+        getExtra();
 
+        setContentView(R.layout.activity_question_edition);
+        setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
+    }
+    public void getExtra() {
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             question = (Question) extra.getSerializable("question");
-
-            if (question != null) {
-                initFormField();
-            }
-
             idMCQ = extra.getInt("idMCQ");
         }
     }
@@ -67,19 +63,55 @@ public class QuestionEditionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
                 intent.putExtra("idMCQ", idMCQ);
-                intent.putExtra("isTeacher", true);
                 startActivity(intent);
             }
         });
     }
 
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        if (question != null) {
+            initFormField();
+            ((Button) findViewById(R.id.question_edition_submit)).setText(R.string.mcq_edition_edit);
+        }
+    }
+
     private void initFormField() {
         setQuestionTitle(question.getTitle());
+
         if (question.getAnswers() != null)
             setAnswers(question.getAnswers());
-
-        ((Button) findViewById(R.id.question_edition_submit)).setText(R.string.mcq_edition_edit);
     }
+
+    public void setQuestionTitle(String title) {
+        ((EditText) findViewById(R.id.question_edition_title_input)).setText(title);
+    }
+    @SuppressLint("InflateParams")
+    public void setAnswers(ArrayList<Answer> answers) {
+        LinearLayout parent = findViewById(R.id.question_edition_answer_container);
+
+        for (Answer answer : answers) {
+            View custom = getLayoutInflater().inflate(R.layout.answer_edition_section, null);
+
+            ((EditText) custom.findViewById(R.id.answer_title)).setText(answer.getTitle());
+            if (answer.isRight())
+            {
+                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(true);
+            }
+            else
+            {
+                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(false);
+            }
+
+            parent.addView(custom);
+        }
+    }
+
+    /* ******************/
+    /* User Interaction */
+    /********************/
 
     public void addAnswer(View view) {
         LinearLayout layout = findViewById(R.id.question_edition_answer_container);
@@ -99,19 +131,17 @@ public class QuestionEditionActivity extends AppCompatActivity {
         }
 
         if (question == null) {
-            questionSQLHandler.createOrReplaceQuestion(
-                    new Question(null, title, answers), idMCQ
-            );
+            questionSQLHandler
+                    .createOrReplaceQuestion(new Question(null, title, answers), idMCQ);
         }
-        else {
-            questionSQLHandler.createOrReplaceQuestion(
-                    new Question(question.getId(), title, answers), idMCQ
-            );
+        else
+        {
+            questionSQLHandler
+                    .createOrReplaceQuestion(new Question(question.getId(), title, answers), idMCQ);
         }
 
         Intent intent = new Intent(this, QuestionListActivity.class);
         intent.putExtra("idMCQ", idMCQ);
-        intent.putExtra("isTeacher", true);
         startActivity(intent);
     }
 
@@ -141,30 +171,6 @@ public class QuestionEditionActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, INVALID_SUBMISSION, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
-    }
-
-    /* View Setters */
-    public void setQuestionTitle(String title) {
-        ((EditText) findViewById(R.id.question_edition_title_input)).setText(title);
-    }
-
-    @SuppressLint("InflateParams")
-    public void setAnswers(ArrayList<Answer> answers) {
-        LinearLayout parent = findViewById(R.id.question_edition_answer_container);
-
-        for (Answer answer : answers) {
-            View custom = getLayoutInflater().inflate(R.layout.answer_edition_section, null);
-
-            if (answer.isRight()) {
-                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(true);
-            }
-            else {
-                ((CheckBox) custom.findViewById(R.id.answer_is_true)).setChecked(false);
-            }
-            ((EditText) custom.findViewById(R.id.answer_title)).setText(answer.getTitle());
-
-            parent.addView(custom);
-        }
     }
 
 }

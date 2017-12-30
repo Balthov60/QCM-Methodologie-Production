@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -32,16 +30,17 @@ public class MCQEditionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        getExtra();
+
         setContentView(R.layout.activity_mcq_edition);
-
         setSupportActionBar((Toolbar) findViewById(R.id.mcq_edition_toolbar));
-
+    }
+    public void getExtra() {
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             currentMCQ = (MCQ) extras.getSerializable("mcq");
-            initFormField();
         }
     }
 
@@ -57,11 +56,17 @@ public class MCQEditionActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MCQListActivity.class);
-                intent.putExtra("isTeacher", true);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), MCQListActivity.class));
             }
         });
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        if (currentMCQ != null)
+            initFormField();
     }
 
     private void initFormField() {
@@ -73,6 +78,9 @@ public class MCQEditionActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.mcq_edition_submit)).setText(R.string.mcq_edition_edit);
     }
 
+    /* ******************/
+    /* User Interaction */
+    /********************/
 
     public void submitMCQ(View view) {
         String title = getMCQTitle();
@@ -100,12 +108,12 @@ public class MCQEditionActivity extends AppCompatActivity {
             }
         }
 
-        Intent intent = new Intent(MCQEditionActivity.this, MCQListActivity.class);
-        intent.putExtra("isTeacher", true);
-        startActivity(intent);
+        startActivity(new Intent(MCQEditionActivity.this, MCQListActivity.class));
     }
 
+
     /* Get Value from MCQ Edition Form */
+
     public String getMCQTitle() {
         return ((EditText) findViewById(R.id.mcq_edition_title_input)).getText().toString();
     }

@@ -58,7 +58,7 @@ public class QuestionStudentListAdapter extends ArrayAdapter<Question> {
             viewHolder.description.setText(question.getTitle());
 
             Drawable second_item_drawable;
-            if (SessionData.isQuestionAnswered(idMCQ, position))
+            if (SessionData.getInstance().isQuestionAnswered(idMCQ, position))
             {
                 second_item_drawable = context.getResources().getDrawable(R.drawable.icon_done);
             }
