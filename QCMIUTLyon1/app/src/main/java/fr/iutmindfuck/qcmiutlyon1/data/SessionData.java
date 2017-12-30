@@ -1,11 +1,7 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Singleton class to keep session data and share it on all activities.
@@ -29,6 +25,7 @@ public class SessionData {
     /**************************/
 
     private boolean isTeacher;
+    private String userID;
 
     /**
      * Used to save the current answer of a user for a specific question
@@ -39,8 +36,16 @@ public class SessionData {
      */
     private HashMap<String, ArrayList<Boolean>> mcqUserAnswerSave;
 
+    public boolean isTeacher() {
+        return isTeacher;
+    }
+    public String getUserID() {
+        return userID;
+    }
 
-    public static void createNewSession(boolean isTeacher) {
+
+    public static void createNewSession(String userID, boolean isTeacher) {
+        ourInstance.userID = userID;
         ourInstance.isTeacher = isTeacher;
         ourInstance.mcqUserAnswerSave = new HashMap<>();
     }

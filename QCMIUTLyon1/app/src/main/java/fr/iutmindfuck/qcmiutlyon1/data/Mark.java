@@ -3,17 +3,17 @@ package fr.iutmindfuck.qcmiutlyon1.data;
 public class Mark
 {
     private int idMCQ;
-    private int idStudent;
+    private String username;
     private float value;
 
-    public Mark(int idMCQ, int idStudent, float value)
+    public Mark(int idMCQ, String username, float value)
     {
-        this.idStudent = idStudent;
         this.idMCQ = idMCQ;
+        this.username = username;
         this.value = value;
     }
 
     public int getIdMCQ(){ return idMCQ; }
-    public int getIdStudent(){ return idStudent; }
+    public String getUsername(){ return username; }
     public float getValue(){ return value; }
 }

@@ -27,7 +27,7 @@ public class UserSQLHandler {
 
     public static String getSQLForUserTableCreation() {
         return "CREATE TABLE " + USER_TABLE + "(" +
-                USER_ID + " int(8) PRIMARY KEY, " +
+                USER_ID + " varchar(8) PRIMARY KEY, " +
                 USER_LASTNAME + " varchar(32), " +
                 USER_FIRSTNAME + " varchar(32), " +
                 USER_EMAIL + " varchar(256), " +

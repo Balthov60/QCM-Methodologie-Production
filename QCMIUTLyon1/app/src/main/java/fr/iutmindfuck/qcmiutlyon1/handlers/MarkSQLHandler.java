@@ -41,7 +41,7 @@ public class MarkSQLHandler {
 
         if (cursor.moveToFirst())
             mark = new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
-                    cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
+                    cursor.getString(cursor.getColumnIndex(MARK_ID_STUDENT)),
                     cursor.getFloat(cursor.getColumnIndex(MARK_VALUE)));
 
         cursor.close();
@@ -71,7 +71,7 @@ public class MarkSQLHandler {
         ArrayList<Mark> marks = new ArrayList<>();
         do {
             marks.add(new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
-                    cursor.getInt(cursor.getColumnIndex(MARK_ID_STUDENT)),
+                    cursor.getString(cursor.getColumnIndex(MARK_ID_STUDENT)),
                     cursor.getFloat(cursor.getColumnIndex(MARK_VALUE))));
 
         }
@@ -89,7 +89,7 @@ public class MarkSQLHandler {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(MARK_ID_MCQ, mark.getIdMCQ());
-        contentValues.put(MARK_ID_STUDENT, mark.getIdStudent());
+        contentValues.put(MARK_ID_STUDENT, mark.getUsername());
         contentValues.put(MARK_VALUE, mark.getValue());
 
         sqlServices.createOrReplaceData(MARK_TABLE, contentValues);
