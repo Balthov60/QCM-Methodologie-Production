@@ -7,10 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.data.MCQCorrectionReport;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
@@ -85,6 +87,14 @@ public class QuestionListActivity extends AppCompatActivity {
             Intent intent = new Intent(this, QuestionEditionActivity.class);
             intent.putExtra("idMCQ", idMCQ);
             startActivity(intent);
+        }
+        else {
+            SQLServices sqlServices = new SQLServices(this);
+            MCQCorrectionReport correctionReport = new MCQCorrectionReport(idMCQ, sqlServices);
+
+            correctionReport.saveMark(sqlServices);
+            correctionReport.exportInJson();
+            correctionReport.displayPopUp();
         }
     }
 }

@@ -60,12 +60,12 @@ public class AuthActivity extends AppCompatActivity {
     private void launchPanelFor(String username) {
         if (userSQLHandler.isTeacher(username))
         {
-            SessionData.createNewSession(true);
+            SessionData.createNewSession(username, true);
             startActivity(new Intent(AuthActivity.this, TeacherPanelActivity.class));
         }
         else
         {
-            SessionData.createNewSession(false);
+            SessionData.createNewSession(username, false);
             startActivity(new Intent(AuthActivity.this, StudentPanelActivity.class));
         }
     }
