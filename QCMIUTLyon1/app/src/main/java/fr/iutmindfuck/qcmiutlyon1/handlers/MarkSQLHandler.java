@@ -33,20 +33,6 @@ public class MarkSQLHandler {
     /* Get Data */
     /************/
 
-    public Mark getMark(int idMCQ, int idStudent) {
-        Cursor cursor = sqlServices.getData(MARK_TABLE, null,
-                MARK_ID_STUDENT + " = ? AND " + MARK_ID_MCQ + " = ?",
-                new String[] {String.valueOf(idStudent), String.valueOf(idMCQ)});
-        Mark mark = null;
-
-        if (cursor.moveToFirst())
-            mark = new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
-                    cursor.getString(cursor.getColumnIndex(MARK_ID_STUDENT)),
-                    cursor.getFloat(cursor.getColumnIndex(MARK_VALUE)));
-
-        cursor.close();
-        return mark;
-    }
 
     public ArrayList<Mark> getAllMarksForMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
@@ -55,13 +41,45 @@ public class MarkSQLHandler {
 
         return getMarksFromCursor(cursor);
     }
+
+    public float getAverageForMCQ(int idMCQ)
+    {
+        ArrayList<Mark> list = getAllMarksForMCQ(idMCQ);
+        if(list == null)
+            return (-1);
+
+        float average =0.0f;
+
+        for(Mark mark : list)
+            average += mark.getValue();
+
+        return average / list.size();
+    }
+
+
+    public float getAverageForStudent(int idStudent)
+    {
+        ArrayList<Mark> marks = getAllMarksForStudent(idStudent);
+        if(marks == null)
+            return (-1);
+
+        float average = 0.0f;
+
+        for(Mark mark : marks)
+            average += mark.getValue();
+
+        return average / marks.size();
+    }
+
+
     public ArrayList<Mark> getAllMarksForStudent(int idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
-                                      MARK_ID_STUDENT + " = ?",
+                                      MARK_ID_STUDENT + " = ? ",
                                             new String[] {String.valueOf(idStudent)});
 
         return getMarksFromCursor(cursor);
     }
+
     private ArrayList<Mark> getMarksFromCursor(Cursor cursor) {
         if (!cursor.moveToFirst()) {
             cursor.close();

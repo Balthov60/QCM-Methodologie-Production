@@ -1,13 +1,10 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 
@@ -57,10 +54,6 @@ public class TeacherPanelActivity extends AppCompatActivity {
      * @param view Mark Button (provided on click).
      */
     public void onClickMark(View view){
-        Context context = getApplicationContext();
-
-        Toast toast = Toast.makeText(context, UNIMPLEMENTED_MARK_MESSAGE, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM,0,50);
-        toast.show();
+        startActivity(new Intent(TeacherPanelActivity.this, MarkTeacherActivity.class));
     }
 }

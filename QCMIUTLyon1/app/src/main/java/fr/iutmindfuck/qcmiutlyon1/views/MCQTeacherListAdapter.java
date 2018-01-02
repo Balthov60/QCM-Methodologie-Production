@@ -29,8 +29,8 @@ public class MCQTeacherListAdapter extends ArrayAdapter<MCQ> {
         this.context = context;
     }
 
-    @NonNull
     @Override
+    @NonNull
     public View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext())

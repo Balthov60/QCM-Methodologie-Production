@@ -37,10 +37,8 @@ public class MCQListActivity extends AppCompatActivity {
         ArrayList<MCQ> mcqs = getMCQList(mcqSQLHandler);
 
         if (SessionData.getInstance().isTeacher())
-        {
             mcqListView.setAdapter(new MCQTeacherListAdapter(MCQListActivity.this,
-                                                                    mcqs, mcqSQLHandler));
-        }
+                                                                     mcqs, mcqSQLHandler));
         else
         {
             mcqListView.setAdapter(new MCQStudentListAdapter(MCQListActivity.this, mcqs));

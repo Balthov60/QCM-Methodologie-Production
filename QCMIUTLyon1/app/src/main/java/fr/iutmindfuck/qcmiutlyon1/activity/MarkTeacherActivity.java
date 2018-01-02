@@ -11,19 +11,34 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
+import fr.iutmindfuck.qcmiutlyon1.views.MarkItem;
 import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
+import fr.iutmindfuck.qcmiutlyon1.data.Student;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.handlers.UserSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
-import fr.iutmindfuck.qcmiutlyon1.views.MCQStudentListAdapter;
-import fr.iutmindfuck.qcmiutlyon1.views.MCQTeacherListAdapter;
+import fr.iutmindfuck.qcmiutlyon1.views.MarkTeacherListAdapter;
 
 public class MarkTeacherActivity extends AppCompatActivity
 {
-    Spinner choices_spinner;
-    ArrayAdapter<CharSequence> spinner_adapter;
+
+    private enum OrderBy
+    {
+        MCQ,
+        STUDENT
+    }
+
+    private MCQSQLHandler mcqSqlHandler;
+    private UserSQLHandler userSQLHandler;
+    private ListView listView;
+    private MarkTeacherListAdapter markListAdapter;
+    private List<MarkItem> markItemsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,30 +46,6 @@ public class MarkTeacherActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_mark_teacher);
         setSupportActionBar((Toolbar) findViewById(R.id.default_list_toolbar));
-
-
-
-    }
-
-    private void initSpinner()
-    {
-        choices_spinner = (Spinner) findViewById(R.id.mark_sorting_spinner);
-        spinner_adapter = ArrayAdapter.createFromResource(this, R.array.mark_sorting_choices, android.R.layout.simple_spinner_item);
-        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        choices_spinner.setAdapter(spinner_adapter);
-
-        initSpinnerInteraction();
-    }
-
-
-    private void initSpinnerInteraction()
-    {
-        choices_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
-            }
-        });
     }
 
 
@@ -62,27 +53,60 @@ public class MarkTeacherActivity extends AppCompatActivity
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        MCQSQLHandler mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
-        ListView mcqListView = findViewById(R.id.default_list_view);
-        ArrayList<MCQ> mcqs = getMCQList(mcqSQLHandler);
+        mcqSqlHandler = new MCQSQLHandler(new SQLServices(this));
+        userSQLHandler = new UserSQLHandler(new SQLServices(this));
 
-        if (SessionData.getInstance().isTeacher())
-        {
-            //mcqListView.setAdapter(new MCQTeacherListAdapter(MCQListActivity.this,
-                    //mcqs, mcqSQLHandler));
-        }
-        else
-        {
-            //mcqListView.setAdapter(new MCQStudentListAdapter(MCQListActivity.this, mcqs));
-            findViewById(R.id.default_list_button).setVisibility(View.GONE);
-        }
+        listView = findViewById(R.id.default_list_view);
+
+        markItemsList = formateMCQListForMarkItems(mcqSqlHandler.getMCQs());
+        markListAdapter = new MarkTeacherListAdapter(MarkTeacherActivity.this,
+                                                     markItemsList);
+
+
+        listView.setAdapter(markListAdapter);
+
+        initSpinner();
     }
-    private ArrayList<MCQ> getMCQList(MCQSQLHandler mcqSQLHandler) {
-        ArrayList<MCQ> mcqs = mcqSQLHandler.getMCQs();
-        if (mcqs == null)
-            mcqs = new ArrayList<>();
 
-        return mcqs;
+    private void initSpinner() {
+        Spinner choices_spinner = findViewById(R.id.mark_sorting_spinner);
+        ArrayAdapter<CharSequence> spinner_adapter = ArrayAdapter.createFromResource(this,
+                                        R.array.mark_sorting_choices,
+                                        android.R.layout.simple_spinner_item);
+
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        choices_spinner.setAdapter(spinner_adapter);
+
+        setSpinnerListener(choices_spinner);
+    }
+
+    private void setSpinnerListener(Spinner spinner)
+    {
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (OrderBy.valueOf("STUDENT").ordinal() == id) {
+                    markItemsList = formateStudentListForMarkItems(userSQLHandler.getAllStudents());
+                    for(MarkItem i : markItemsList)
+                        System.out.println(i);
+                }
+
+                else {
+                    markItemsList = formateMCQListForMarkItems(mcqSqlHandler.getMCQs());
+                    for(MarkItem i : markItemsList)
+                        System.out.println(i);
+                    System.out.println("Ouais bisous ouais");
+                }
+
+                markListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -107,5 +131,35 @@ public class MarkTeacherActivity extends AppCompatActivity
                 }
             }
         });
+    }
+    
+    
+    private List<MarkItem> formateMCQListForMarkItems(ArrayList<MCQ> mcqArrayList)
+    {
+        List<MarkItem> marksList = new ArrayList<>();
+        MarkSQLHandler markSQLHandler = new MarkSQLHandler(new SQLServices(this));
+        marksList.clear();
+        for(MCQ mcq : mcqArrayList)
+            marksList.add(new MarkItem(mcq.getName(),
+                                mcq.getDescription(),
+                                Float.toString(markSQLHandler.getAverageForMCQ(mcq.getId()))));
+
+        return marksList;
+    }
+
+
+    private List<MarkItem> formateStudentListForMarkItems(ArrayList<Student> studentArrayList)
+    {
+        List<MarkItem> marksList = new ArrayList<>();
+        MarkSQLHandler markSQLHandler = new MarkSQLHandler(new SQLServices(this));
+        marksList.clear();
+        for(Student student : studentArrayList)
+            marksList.add(new MarkItem(student.getFirstname()
+                    + " " + student.getLastname().toUpperCase(),
+                    student.getGroup(),
+                    Float.toString(markSQLHandler.getAverageForStudent(student.getId()))));
+
+
+        return marksList;
     }
 }

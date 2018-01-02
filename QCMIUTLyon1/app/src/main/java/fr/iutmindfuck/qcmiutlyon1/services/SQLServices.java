@@ -117,8 +117,13 @@ public class SQLServices extends SQLiteOpenHelper {
     /* ****************** */
 
     private void insertTestData(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('user','lastname','firstname','user@mail.com','password',0,'bg_s3g2');");
-        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('teacher','lastname','firstname','teacher@mail.com','password',1,NULL);");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('user','lastname','firstname1','user1@mail.com','password',0,'bg_s3g2');");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('Sarah','Alecou','firstname2','user2@mail.com','password',0,'bg_s3g2');");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('Joachim','Gilbert','firstname3','us3er@mail.com','password',0,'bg_s3g2');");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('Pedro','Exposito','firstname4','user3@mail.com','password',0,'bg_s3g2');");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('Lucas','Victime','firstname5','user@m3ail.com','password',0,'bg_s3g2');");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('Lea','Lareine','firstname6','user@mail3.com','password',0,'bg_s3g2');");
+        db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('Emma','Latchoin','firstname7','teacher@3mail.com','password',1,NULL);");
         db.execSQL("INSERT INTO `StudentGroup` (groupName) VALUES ('bg_s3g1');");
         db.execSQL("INSERT INTO `StudentGroup` (groupName) VALUES ('bg_s3g2');");
         db.execSQL("INSERT INTO `StudentGroup` (groupName) VALUES ('bg_s3g3');");

@@ -16,14 +16,16 @@ import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 
 public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
 
-    private final List<MCQ> mcqList;
-    private final Context context;
+    private List<MCQ> mcqList;
+    private Context context;
 
-    public MCQStudentListAdapter(Context context, List<MCQ> mcqList) {
+    public MCQStudentListAdapter(Context context, List<MCQ> mcqList)
+    {
         super(context, 0, mcqList);
         this.mcqList = mcqList;
         this.context = context;
     }
+
 
     @NonNull
     @Override
