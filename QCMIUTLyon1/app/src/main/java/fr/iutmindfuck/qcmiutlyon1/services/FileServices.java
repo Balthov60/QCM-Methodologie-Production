@@ -19,7 +19,9 @@ public class FileServices {
 
         try
         {
-            new FileWriter(file).write(data);
+            FileWriter writer = new FileWriter(file);
+            writer.write(data);
+            writer.close();
         }
         catch (IOException e)
         {

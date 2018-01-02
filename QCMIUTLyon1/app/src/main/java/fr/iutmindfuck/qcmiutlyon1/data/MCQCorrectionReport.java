@@ -3,6 +3,8 @@ package fr.iutmindfuck.qcmiutlyon1.data;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -12,6 +14,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.activity.MCQListActivity;
+import fr.iutmindfuck.qcmiutlyon1.activity.QuestionListActivity;
+import fr.iutmindfuck.qcmiutlyon1.activity.StudentPanelActivity;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
@@ -35,6 +40,8 @@ public class MCQCorrectionReport {
 
         QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(sqlServices);
         questions = questionSQLHandler.getQuestions(idMCQ);
+        if (questions == null)
+            questions = new ArrayList<>();
 
         userAnswers = new ArrayList<>();
         for (Question question : questions) {
@@ -62,6 +69,9 @@ public class MCQCorrectionReport {
             }
         }
         markOutOf20 = (mark > 0) ? ((float)mark / maxMark * 20) : 0;
+
+        if (questions.isEmpty())
+            markOutOf20 = 20;
     }
 
     /**
@@ -112,7 +122,7 @@ public class MCQCorrectionReport {
     public void exportInJson(Context context) {
         FileServices fileServices = new FileServices(context);
 
-        String fileName = SessionData.getInstance().getUserID() + "\\" + mcq.getName();
+        String fileName = SessionData.getInstance().getUserID() + "_" + mcq.getName();
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -140,13 +150,22 @@ public class MCQCorrectionReport {
         return jsonQuestionsArray;
     }
 
-    public void displayPopUp(Context context) {
+    public void displayPopUp(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(R.layout.dialog_correction_report_layout);
 
         AlertDialog dialog = builder.create();
         dialog.show();
         setDialogContent(dialog, context);
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                Intent intent = new Intent(context, MCQListActivity.class);
+                intent.putExtra("Type", StudentPanelActivity.TODO_STUDENT_MOD);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void setDialogContent(AlertDialog dialog, Context context) {

@@ -33,10 +33,10 @@ public class MarkSQLHandler {
     /* Get Data */
     /************/
 
-    public Mark getMark(int idMCQ, int idStudent) {
+    public Mark getMark(int idMCQ, String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
                 MARK_ID_STUDENT + " = ? AND " + MARK_ID_MCQ + " = ?",
-                new String[] {String.valueOf(idStudent), String.valueOf(idMCQ)});
+                new String[] {idStudent, String.valueOf(idMCQ)});
         Mark mark = null;
 
         if (cursor.moveToFirst())
@@ -55,10 +55,10 @@ public class MarkSQLHandler {
 
         return getMarksFromCursor(cursor);
     }
-    public ArrayList<Mark> getAllMarksForStudent(int idStudent) {
+    public ArrayList<Mark> getAllMarksForStudent(String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
                                       MARK_ID_STUDENT + " = ?",
-                                            new String[] {String.valueOf(idStudent)});
+                                            new String[] {idStudent});
 
         return getMarksFromCursor(cursor);
     }
