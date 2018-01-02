@@ -81,14 +81,7 @@ public class SQLServices extends SQLiteOpenHelper {
 
         return isResult;
     }
-    public int getSizeOf(String table, String where, String whereValues[]) {
-        Cursor cursor = getData(table, null, where, whereValues);
 
-        int count = cursor.getCount();
-        cursor.close();
-
-        return count;
-    }
     public int getHighestID(String table, String idCol, String where, String whereValues[]) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(table, new String[]{idCol}, where, whereValues, null, null, idCol);
@@ -117,9 +110,9 @@ public class SQLServices extends SQLiteOpenHelper {
         db.delete(table, where, args);
     }
 
-    /* ****************** */
-    /* SQL DATA INSERTION */
-    /* ****************** */
+    /* ********************************* */
+    /* SQL Data insertion (for test only)*/
+    /* ********************************* */
 
     private void insertTestData(SQLiteDatabase db) {
         db.execSQL("INSERT INTO `User` (idUser,lastName,firstName,email,password,isTeacher,studentGroup) VALUES ('user','lastname','firstname','user@mail.com','password',0,'bg_s3g2');");

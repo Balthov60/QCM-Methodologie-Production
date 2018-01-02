@@ -1,6 +1,5 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,10 +19,6 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 
 public class MCQEditionActivity extends AppCompatActivity {
-
-    private static final String INVALID_SUBMISSION = "Vous devez renseigner tout les champs.";
-    private static final String SUCCESSFUL_CREATION = "Votre QCM à bien été ajouté.";
-    private static final String SUCCESSFUL_MODIFICATION = "Votre QCM à bien été modifié.";
 
     private MCQ currentMCQ;
 
@@ -69,6 +64,9 @@ public class MCQEditionActivity extends AppCompatActivity {
             initFormField();
     }
 
+    /**
+     * Init MCQ Edition Layout with currentMCQ Data.
+     */
     private void initFormField() {
         setMCQTitle(currentMCQ.getName());
         setMCQDescription(currentMCQ.getDescription());
@@ -90,29 +88,26 @@ public class MCQEditionActivity extends AppCompatActivity {
 
         if (title.isEmpty() || description.isEmpty() || coefficient.isNaN()) {
             displayErrorToast();
+            return;
         }
-        else {
-            if (currentMCQ == null)
-            {
-                new MCQSQLHandler(new SQLServices(this))
-                        .createOrReplaceMCQ(new MCQ(null, title,
-                                description, isNegative, coefficient));
-                displaySuccessToast(false);
-            }
-            else
-            {
-                new MCQSQLHandler(new SQLServices(this))
-                        .createOrReplaceMCQ(new MCQ(currentMCQ.getId(), title,
-                                description, isNegative, coefficient));
-                displaySuccessToast(true);
-            }
+
+        MCQ mcq;
+        if (currentMCQ == null)
+        {
+            mcq = new MCQ(null, title, description, isNegative, coefficient);
+            displaySuccessToast(false);
         }
+        else
+        {
+            mcq = new MCQ(currentMCQ.getId(), title, description, isNegative, coefficient);
+            displaySuccessToast(true);
+        }
+        new MCQSQLHandler(new SQLServices(this)).createOrReplaceMCQ(mcq);
 
         startActivity(new Intent(MCQEditionActivity.this, MCQListActivity.class));
     }
 
-
-    /* Get Value from MCQ Edition Form */
+    /* MCQ Edition Form getter */
 
     public String getMCQTitle() {
         return ((EditText) findViewById(R.id.mcq_edition_title_input)).getText().toString();
@@ -127,13 +122,11 @@ public class MCQEditionActivity extends AppCompatActivity {
         String coefficient = ((EditText)findViewById(R.id.mcq_edition_coefficient_input))
                              .getText().toString();
 
-        if (coefficient.isEmpty())
-            return null;
-
-        return Float.parseFloat(coefficient);
+        return ((coefficient.isEmpty()) ? null : Float.parseFloat(coefficient));
     }
 
-    /* Set Value from MCQ Edition Form */
+    /* MCQ Edition Form setter */
+
     public void setMCQTitle(String title) {
         ((EditText) findViewById(R.id.mcq_edition_title_input)).setText(title);
     }
@@ -156,27 +149,31 @@ public class MCQEditionActivity extends AppCompatActivity {
                 .setText(String.valueOf(coefficient));
     }
 
-    /* Toast */
+    /* Notifications handling */
+
+    /**
+     * Display a notification to inform user that filled are missing for mcq submission.
+     */
     public void displayErrorToast() {
         Context context = this.getApplicationContext();
 
-        Toast toast = Toast.makeText(context, INVALID_SUBMISSION, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, getString(R.string.mcq_submission_failed),
+                                              Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
     }
 
-    @SuppressLint("ShowToast")
+    /**
+     * Display a notification to inform user that mcq submission is successful.
+     *
+     * @param isEdition true if mcq already exist, false elsewhere.
+     */
     public void displaySuccessToast(boolean isEdition) {
         Context context = this.getApplicationContext();
+        String message = (isEdition) ? getString(R.string.mcq_successful_modification)
+                                     : getString(R.string.mcq_successful_creation);
 
-        Toast toast;
-        if (isEdition) {
-            toast = Toast.makeText(context, SUCCESSFUL_MODIFICATION, Toast.LENGTH_SHORT);
-        }
-        else {
-            toast = Toast.makeText(context, SUCCESSFUL_CREATION, Toast.LENGTH_SHORT);
-        }
-
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
     }

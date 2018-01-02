@@ -1,6 +1,5 @@
 package fr.iutmindfuck.qcmiutlyon1.activity;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +22,8 @@ import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
-public class QuestionEditionActivity extends AppCompatActivity {
 
-    private static final String INVALID_SUBMISSION = "Votre question n'est pas valide.";
+public class QuestionEditionActivity extends AppCompatActivity {
 
     QuestionSQLHandler questionSQLHandler;
     Question question;
@@ -34,9 +32,8 @@ public class QuestionEditionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
         getExtra();
+        questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
 
         setContentView(R.layout.activity_question_edition);
         setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
@@ -72,10 +69,11 @@ public class QuestionEditionActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        if (question != null) {
-            initFormField();
-            ((Button) findViewById(R.id.question_edition_submit)).setText(R.string.mcq_edition_edit);
-        }
+        if (question == null)
+            return;
+
+        initFormField();
+        ((Button) findViewById(R.id.question_edition_submit)).setText(R.string.mcq_edition_edit);
     }
 
     private void initFormField() {
@@ -168,7 +166,8 @@ public class QuestionEditionActivity extends AppCompatActivity {
     public void displayErrorToast() {
         Context context = this.getApplicationContext();
 
-        Toast toast = Toast.makeText(context, INVALID_SUBMISSION, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, getString(R.string.question_invalid_submission),
+                                              Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM,0,50);
         toast.show();
     }

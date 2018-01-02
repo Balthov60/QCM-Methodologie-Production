@@ -23,6 +23,11 @@ public class MCQSQLHandler {
         this.sqlServices = sqlServices;
     }
 
+    /* ********************/
+    /* Database LifeCycle */
+    /* ********************/
+
+
     public static String getSQLForTableCreation() {
         return "CREATE TABLE " + MCQ_TABLE + "(" +
                 MCQ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -34,6 +39,12 @@ public class MCQSQLHandler {
     public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + MCQ_TABLE;
     }
+
+
+    /* ***********************/
+    /* Database Manipulation */
+    /* ***********************/
+
 
     public ArrayList<MCQ> getMCQs() {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null, null, null);
@@ -81,9 +92,9 @@ public class MCQSQLHandler {
             return null;
         }
 
-        ArrayList<MCQ> mcqs = new ArrayList<>();
+        ArrayList<MCQ> mcqList = new ArrayList<>();
         do {
-            mcqs.add(new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
+            mcqList.add(new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
                     cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
                     cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
                     (cursor.getInt(cursor.getColumnIndex(MCQ_TYPE)) == 1),
@@ -92,7 +103,7 @@ public class MCQSQLHandler {
         while(cursor.moveToNext());
 
         cursor.close();
-        return mcqs;
+        return mcqList;
     }
 
     public void createOrReplaceMCQ(MCQ mcq) {
@@ -106,7 +117,6 @@ public class MCQSQLHandler {
 
         sqlServices.createOrReplaceData(MCQ_TABLE, contentValues);
     }
-
     public void removeMCQ(int idMCQ) {
         new QuestionSQLHandler(sqlServices).removeQuestionsFor(idMCQ);
 

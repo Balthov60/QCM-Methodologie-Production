@@ -22,6 +22,7 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 import fr.iutmindfuck.qcmiutlyon1.views.QuestionStudentListAdapter;
 import fr.iutmindfuck.qcmiutlyon1.views.QuestionTeacherListAdapter;
 
+
 public class QuestionListActivity extends AppCompatActivity {
 
     private int idMCQ;
@@ -29,8 +30,8 @@ public class QuestionListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getExtra();
+
         setContentView(R.layout.activity_default_list);
         setSupportActionBar((Toolbar) findViewById(R.id.default_list_toolbar));
     }
@@ -51,7 +52,7 @@ public class QuestionListActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        displayMCQInfos();
+        displayMCQInformation();
 
         QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
         ListView mcqListView = findViewById(R.id.default_list_view);
@@ -59,8 +60,9 @@ public class QuestionListActivity extends AppCompatActivity {
 
         if (SessionData.getInstance().isTeacher())
         {
-            mcqListView.setAdapter(new QuestionTeacherListAdapter(this, idMCQ,
-                                                                  questions, questionSQLHandler));
+            mcqListView.setAdapter(
+                    new QuestionTeacherListAdapter(this, idMCQ, questions, questionSQLHandler)
+            );
         }
         else
         {
@@ -69,7 +71,7 @@ public class QuestionListActivity extends AppCompatActivity {
             ((Button) findViewById(R.id.default_list_button)).setText(R.string.student_submit_mcq);
         }
     }
-    private void displayMCQInfos() {
+    private void displayMCQInformation() {
         MCQSQLHandler mcqsqlHandler = new MCQSQLHandler(new SQLServices(this));
         MCQ mcq = mcqsqlHandler.getMCQ(idMCQ);
 

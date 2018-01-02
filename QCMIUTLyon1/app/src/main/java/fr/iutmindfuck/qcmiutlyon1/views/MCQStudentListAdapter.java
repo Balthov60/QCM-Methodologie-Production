@@ -1,6 +1,5 @@
 package fr.iutmindfuck.qcmiutlyon1.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -82,7 +80,6 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
                                             "coef %.2f", mcq.getCoefficient()));
         }
     }
-
     private void initTodoView(View convertView, final int position) {
         DefaultItemViewHolder viewHolder = (DefaultItemViewHolder) convertView.getTag();
         if(viewHolder == null) {
@@ -112,7 +109,6 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
                 }
         );
     }
-
 
     class DoneItemViewHolder {
         TextView title;

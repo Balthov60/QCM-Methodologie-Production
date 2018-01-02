@@ -6,8 +6,8 @@ public class UserSQLHandler {
 
     private static final String USER_TABLE = "User";
     private static final String USER_ID = "idUser";
-    private static final String USER_LASTNAME = "lastName";
-    private static final String USER_FIRSTNAME = "firstName";
+    private static final String USER_LAST_NAME = "lastName";
+    private static final String USER_FIRST_NAME = "firstName";
     private static final String USER_EMAIL = "email";
     private static final String USER_PASSWORD = "password";
     private static final String USER_IS_TEACHER = "isTeacher";
@@ -15,9 +15,6 @@ public class UserSQLHandler {
 
     private static final String GROUP_TABLE = "StudentGroup";
     private static final String GROUP_NAME = "groupName";
-    public static final String GROUP_1 = "bg_s3g1";
-    public static final String GROUP_2 = "bg_s3g2";
-    public static final String GROUP_3 = "bg_s3g3";
 
     private SQLServices sqlServices;
 
@@ -25,11 +22,15 @@ public class UserSQLHandler {
         this.sqlServices = sqlServices;
     }
 
+    /* ********************/
+    /* Database LifeCycle */
+    /* ********************/
+
     public static String getSQLForUserTableCreation() {
         return "CREATE TABLE " + USER_TABLE + "(" +
                 USER_ID + " varchar(8) PRIMARY KEY, " +
-                USER_LASTNAME + " varchar(32), " +
-                USER_FIRSTNAME + " varchar(32), " +
+                USER_LAST_NAME + " varchar(32), " +
+                USER_FIRST_NAME + " varchar(32), " +
                 USER_EMAIL + " varchar(256), " +
                 USER_PASSWORD + " varchar(64), " +
                 USER_IS_TEACHER + " bool, " +
@@ -46,6 +47,10 @@ public class UserSQLHandler {
     public static String getSQLForGroupTableSuppression() {
         return "DROP TABLE IF EXISTS " + GROUP_TABLE;
     }
+
+    /* ***********************/
+    /* Database Manipulation */
+    /* ***********************/
 
     public boolean isPasswordCorrectFor(String id, String password) {
         return sqlServices.isResultsMatching(USER_TABLE, new String[]{USER_ID},

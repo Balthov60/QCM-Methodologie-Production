@@ -47,24 +47,22 @@ public class SessionData {
     public static void createNewSession(String userID, boolean isTeacher) {
         ourInstance.userID = userID;
         ourInstance.isTeacher = isTeacher;
-        //ourInstance.mcqUserAnswerSave = new HashMap<>();
     }
 
-    public void saveAnswers(int idMCQ, int idQuestion,
-                                   ArrayList<Integer> trueAnswersID, int answersQuantity) {
+    public void saveAnswers(int idMCQ, Question question, ArrayList<Integer> trueAnswersID) {
         if (!trueAnswersID.isEmpty())
         {
-            ourInstance.mcqUserAnswerSave.put(idMCQ + "_" + idQuestion,
-                                              formatAnswersID(trueAnswersID, answersQuantity));
+            ArrayList<Boolean> answersId = formatAnswersID(trueAnswersID, question.getAnswersQty());
+            mcqUserAnswerSave.put(idMCQ + "_" + question.getId(), answersId);
         }
-        else if (isQuestionAnswered(idMCQ, idQuestion))
+        else if (isQuestionAnswered(idMCQ, question.getId()))
         {
-            ourInstance.mcqUserAnswerSave.remove(idMCQ + "_" + idQuestion);
+            mcqUserAnswerSave.remove(idMCQ + "_" + question.getId());
         }
     }
 
     public boolean isQuestionAnswered(int idMCQ, int idQuestion) {
-        return ourInstance.mcqUserAnswerSave.containsKey(idMCQ + "_" + idQuestion);
+        return mcqUserAnswerSave.containsKey(idMCQ + "_" + idQuestion);
     }
     public ArrayList<Boolean> getAnswersStatus(int idMCQ, int idQuestion) {
         return ourInstance.mcqUserAnswerSave.get(idMCQ + "_" + idQuestion);

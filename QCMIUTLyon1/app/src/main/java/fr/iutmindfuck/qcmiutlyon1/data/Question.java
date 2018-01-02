@@ -18,4 +18,5 @@ public class Question implements Serializable {
     public Integer getId(){ return this.id; }
     public String getTitle() { return this.title; }
     public ArrayList<Answer> getAnswers(){ return this.answers; }
+    public int getAnswersQty() { return answers.size(); }
 }

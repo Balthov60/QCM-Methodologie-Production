@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.activity.MCQListActivity;
-import fr.iutmindfuck.qcmiutlyon1.activity.QuestionListActivity;
 import fr.iutmindfuck.qcmiutlyon1.activity.StudentPanelActivity;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
@@ -54,6 +53,13 @@ public class MCQCorrectionReport {
         correct();
     }
 
+    /* *********************/
+    /* Correction Handling */
+    /* *********************/
+
+    /**
+     * Correct MCQ & update class Fields.
+     */
     private void correct() {
         for (int i = 0; i < questions.size(); i++) {
             if (!userAnswersToQuestion(userAnswers.get(i)))
@@ -111,6 +117,12 @@ public class MCQCorrectionReport {
         return (isAnswerRight && userAnswer) || (!isAnswerRight && !userAnswer);
     }
 
+
+    /* *********************/
+    /* Export/Save Methods */
+    /* *********************/
+
+
     public void saveMark(SQLServices sqlServices) {
         MarkSQLHandler markSQLHandler = new MarkSQLHandler(sqlServices);
 
@@ -149,6 +161,12 @@ public class MCQCorrectionReport {
 
         return jsonQuestionsArray;
     }
+
+
+    /* ***************/
+    /* PopUp Methods */
+    /* ***************/
+
 
     public void displayPopUp(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
