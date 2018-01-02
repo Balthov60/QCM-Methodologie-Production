@@ -71,4 +71,9 @@
     <string name="dialog_correction_report_mark_text">Note : %.2f/20 (%d/%d)</string>
     <string name="dialog_correction_report_coefficient_text">Coefficient : %.2f</string>
 
+    <!-- Strings related to List Activities -->
+    <string name="default_list_description_teacher">Panneau d\'édition des QCMs</string>
+    <string name="default_list_description_done">Liste des QCMs finis</string>
+    <string name="default_list_description_todo">Liste des QCMs à faire</string>
+
 </resources>

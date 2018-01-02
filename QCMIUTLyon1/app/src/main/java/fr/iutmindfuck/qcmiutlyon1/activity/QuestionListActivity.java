@@ -7,13 +7,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQCorrectionReport;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
+import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 import fr.iutmindfuck.qcmiutlyon1.views.QuestionStudentListAdapter;
@@ -48,6 +51,8 @@ public class QuestionListActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
+        displayMCQInfos();
+
         QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
         ListView mcqListView = findViewById(R.id.default_list_view);
         ArrayList<Question> questions = getQuestions(questionSQLHandler);
@@ -63,6 +68,13 @@ public class QuestionListActivity extends AppCompatActivity {
 
             ((Button) findViewById(R.id.default_list_button)).setText(R.string.student_submit_mcq);
         }
+    }
+    private void displayMCQInfos() {
+        MCQSQLHandler mcqsqlHandler = new MCQSQLHandler(new SQLServices(this));
+        MCQ mcq = mcqsqlHandler.getMCQ(idMCQ);
+
+        ((Toolbar) findViewById(R.id.default_list_toolbar)).setTitle(mcq.getName());
+        ((TextView) findViewById(R.id.default_list_description)).setText(mcq.getDescription());
     }
     private ArrayList<Question> getQuestions(QuestionSQLHandler questionSQLHandler) {
         ArrayList<Question> questions = questionSQLHandler.getQuestions(idMCQ);

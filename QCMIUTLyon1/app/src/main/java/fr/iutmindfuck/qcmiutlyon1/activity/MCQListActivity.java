@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,6 +37,8 @@ public class MCQListActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
+        setDescription();
+
         MCQSQLHandler mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
         ListView mcqListView = findViewById(R.id.default_list_view);
         ArrayList<MCQ> mcqs = getMCQList(mcqSQLHandler);
@@ -52,6 +55,27 @@ public class MCQListActivity extends AppCompatActivity {
             findViewById(R.id.default_list_button).setVisibility(View.GONE);
         }
     }
+
+    private void setDescription() {
+        TextView description = (TextView) findViewById(R.id.default_list_description);
+
+        if (SessionData.getInstance().isTeacher())
+        {
+            description.setText(R.string.default_list_description_teacher);
+        }
+        else
+        {
+            if (Objects.equals(mcqSelector, StudentPanelActivity.DONE_STUDENT_MOD))
+            {
+                description.setText(R.string.default_list_description_done);
+            }
+            else
+            {
+                description.setText(R.string.default_list_description_todo);
+            }
+        }
+    }
+
     private void getExtra() {
         Bundle extra = getIntent().getExtras();
 
