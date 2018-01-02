@@ -38,23 +38,7 @@ public class MCQSQLHandler {
     public ArrayList<MCQ> getMCQs() {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null, null, null);
 
-        if (!cursor.moveToFirst()) {
-            cursor.close();
-            return null;
-        }
-
-        ArrayList<MCQ> mcqs = new ArrayList<>();
-        do {
-            mcqs.add(new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
-                             cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
-                             cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
-                            (cursor.getInt(cursor.getColumnIndex(MCQ_TYPE)) == 1),
-                             cursor.getFloat(cursor.getColumnIndex(MCQ_COEFFICIENT))));
-        }
-        while(cursor.moveToNext());
-
-        cursor.close();
-        return mcqs;
+        return getMCQListFromCursor(cursor);
     }
     public MCQ getMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MCQ_TABLE, null,
@@ -72,6 +56,43 @@ public class MCQSQLHandler {
 
         cursor.close();
         return mcq;
+    }
+    public ArrayList<MCQ> getTodoMCQ(String idStudent) {
+        Cursor cursor = sqlServices.getData("SELECT * " +
+                                                     "FROM MCQ m " +
+                                                     "WHERE m.idMCQ NOT IN (" +
+                                                        "SELECT idMCQ " +
+                                                        "FROM Mark u " +
+                                                        "WHERE u.idStudent = '" + idStudent + "');");
+        return getMCQListFromCursor(cursor);
+    }
+    public ArrayList<MCQ> getDoneMCQ(String idStudent) {
+        Cursor cursor = sqlServices.getData("SELECT * " +
+                                                    "FROM MCQ m " +
+                                                    "WHERE m.idMCQ IN (" +
+                                                        "SELECT idMCQ " +
+                                                        "FROM Mark u " +
+                                                        "WHERE u.idStudent = '" + idStudent + "');");
+        return getMCQListFromCursor(cursor);
+    }
+    private ArrayList<MCQ> getMCQListFromCursor(Cursor cursor) {
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+
+        ArrayList<MCQ> mcqs = new ArrayList<>();
+        do {
+            mcqs.add(new MCQ(cursor.getInt(cursor.getColumnIndex(MCQ_ID)),
+                    cursor.getString(cursor.getColumnIndex(MCQ_NAME)),
+                    cursor.getString(cursor.getColumnIndex(MCQ_DESCRIPTION)),
+                    (cursor.getInt(cursor.getColumnIndex(MCQ_TYPE)) == 1),
+                    cursor.getFloat(cursor.getColumnIndex(MCQ_COEFFICIENT))));
+        }
+        while(cursor.moveToNext());
+
+        cursor.close();
+        return mcqs;
     }
 
     public void createOrReplaceMCQ(MCQ mcq) {

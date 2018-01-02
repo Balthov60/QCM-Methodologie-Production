@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:padding="@dimen/wide_view_margin"
+    tools:context="fr.iutmindfuck.qcmiutlyon1.activity.MCQListActivity">
+
+    <TextView tools:text="Titre"
+        android:id="@+id/done_list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/wide_view_margin"
+
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:ellipsize="end"/>
+
+    <TextView tools:text="sous-titre"
+        android:id="@+id/done_list_item_description"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/done_list_item_title"
+        android:layout_below="@+id/done_list_item_title"
+
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:ellipsize="end" />
+
+    <TextView tools:text="coef 3.00"
+        android:id="@+id/done_list_item_coefficient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/done_list_item_description"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView tools:text="20.00"
+        android:id="@+id/done_list_item_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_toStartOf="@+id/done_list_item_coefficient"
+        android:layout_alignBaseline="@+id/done_list_item_description"
+        android:layout_marginEnd="10dp"/>
+
+</RelativeLayout>

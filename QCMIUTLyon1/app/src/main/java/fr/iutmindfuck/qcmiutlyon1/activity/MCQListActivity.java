@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
@@ -20,9 +22,12 @@ import fr.iutmindfuck.qcmiutlyon1.views.MCQTeacherListAdapter;
 
 public class MCQListActivity extends AppCompatActivity {
 
+    String mcqSelector = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getExtra();
 
         setContentView(R.layout.activity_default_list);
         setSupportActionBar((Toolbar) findViewById(R.id.default_list_toolbar));
@@ -31,6 +36,8 @@ public class MCQListActivity extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+
+        setDescription();
 
         MCQSQLHandler mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
         ListView mcqListView = findViewById(R.id.default_list_view);
@@ -43,12 +50,57 @@ public class MCQListActivity extends AppCompatActivity {
         }
         else
         {
-            mcqListView.setAdapter(new MCQStudentListAdapter(MCQListActivity.this, mcqs));
+            mcqListView.setAdapter(new MCQStudentListAdapter(MCQListActivity.this, mcqs,
+                                                                     mcqSelector));
             findViewById(R.id.default_list_button).setVisibility(View.GONE);
         }
     }
+
+    private void setDescription() {
+        TextView description = (TextView) findViewById(R.id.default_list_description);
+
+        if (SessionData.getInstance().isTeacher())
+        {
+            description.setText(R.string.default_list_description_teacher);
+        }
+        else
+        {
+            if (Objects.equals(mcqSelector, StudentPanelActivity.DONE_STUDENT_MOD))
+            {
+                description.setText(R.string.default_list_description_done);
+            }
+            else
+            {
+                description.setText(R.string.default_list_description_todo);
+            }
+        }
+    }
+
+    private void getExtra() {
+        Bundle extra = getIntent().getExtras();
+
+        if (extra != null && extra.getString("Type") != null)
+           mcqSelector = extra.getString("Type");
+    }
     private ArrayList<MCQ> getMCQList(MCQSQLHandler mcqSQLHandler) {
-        ArrayList<MCQ> mcqs = mcqSQLHandler.getMCQs();
+        ArrayList<MCQ> mcqs;
+
+        if (SessionData.getInstance().isTeacher())
+        {
+            mcqs = mcqSQLHandler.getMCQs();
+        }
+        else
+        {
+            if (Objects.equals(mcqSelector, StudentPanelActivity.DONE_STUDENT_MOD))
+            {
+                mcqs = mcqSQLHandler.getDoneMCQ(SessionData.getInstance().getUserID());
+            }
+            else
+            {
+                mcqs = mcqSQLHandler.getTodoMCQ(SessionData.getInstance().getUserID());
+            }
+        }
+
         if (mcqs == null)
             mcqs = new ArrayList<>();
 

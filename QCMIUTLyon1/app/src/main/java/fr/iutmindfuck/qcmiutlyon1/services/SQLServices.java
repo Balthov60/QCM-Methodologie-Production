@@ -67,6 +67,11 @@ public class SQLServices extends SQLiteOpenHelper {
                 where, whereValues,
                 null, null, null);
     }
+    public Cursor getData(String rawQuery) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return db.rawQuery(rawQuery, null);
+    }
     public boolean isResultsMatching(String table, String[] select,
                                      String where, String[] whereValues) {
         Cursor cursor = getData(table, select, where, whereValues);

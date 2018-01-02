@@ -10,8 +10,8 @@
     <string name="auth_login_button">Login</string>
     <string name="auth_error">Nom d\'utilisateur ou mot de passe incorrect.</string>
 
-    <string name="contentDescriptionOnIutBrand">Official IUT brand</string>
-    <string name="contentDescriptionOnRightHandUpperCorner">Pink triangle</string>
+    <string name="content_description_on_iut_brand">Official IUT brand</string>
+    <string name="content_description_on_right_hand_upper_corner">Pink triangle</string>
 
     <string name="set_prof">prof</string>
     <string name="set_user">user</string>
@@ -66,5 +66,14 @@
     <string name="previous_question_button">Previous Question Button</string>
     <string name="question_answer_next">SUIVANT</string>
     <string name="next_question_button">Next Question Button</string>
+
+    <!-- Strings related to Correction Report Dialog -->
+    <string name="dialog_correction_report_mark_text">Note : %.2f/20 (%d/%d)</string>
+    <string name="dialog_correction_report_coefficient_text">Coefficient : %.2f</string>
+
+    <!-- Strings related to List Activities -->
+    <string name="default_list_description_teacher">Panneau d\'édition des QCMs</string>
+    <string name="default_list_description_done">Liste des QCMs finis</string>
+    <string name="default_list_description_todo">Liste des QCMs à faire</string>
 
 </resources>
