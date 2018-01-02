@@ -5,12 +5,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.services.FileServices;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class MCQCorrectionReport {
@@ -104,7 +109,35 @@ public class MCQCorrectionReport {
                                markOutOf20));
     }
 
-    public void exportInJson() {
+    public void exportInJson(Context context) {
+        FileServices fileServices = new FileServices(context);
+
+        String fileName = SessionData.getInstance().getUserID() + "\\" + mcq.getName();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("mcq_id", mcq.getId());
+            jsonObject.put("mark", markOutOf20);
+            jsonObject.put("user_answers", getUserAnswersAsArray());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        fileServices.saveFile(jsonObject.toString(), fileName);
+    }
+    private JSONArray getUserAnswersAsArray() throws JSONException {
+        JSONArray jsonQuestionsArray = new JSONArray();
+        JSONObject question;
+
+        for (int i = 0; i < questions.size(); i++) {
+            question = new JSONObject();
+            question.put("question_id", questions.get(i).getId());
+            question.put("question_user_answers", userAnswers.get(i));
+            jsonQuestionsArray.put(question);
+        }
+
+        return jsonQuestionsArray;
     }
 
     public void displayPopUp(Context context) {
@@ -137,7 +170,6 @@ public class MCQCorrectionReport {
                     .setText(context.getString(R.string.mcq_edition_type_classic));
         }
     }
-
     private String formatMarkForAlertDialog(Context context) {
         String raw = context.getString(R.string.dialog_correction_report_mark_text);
         return String.format(raw, markOutOf20, mark, maxMark);

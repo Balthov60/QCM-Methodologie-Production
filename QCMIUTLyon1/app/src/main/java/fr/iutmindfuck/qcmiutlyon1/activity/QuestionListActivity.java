@@ -109,7 +109,7 @@ public class QuestionListActivity extends AppCompatActivity {
             MCQCorrectionReport correctionReport = new MCQCorrectionReport(idMCQ, sqlServices);
 
             correctionReport.saveMark(sqlServices);
-            correctionReport.exportInJson();
+            correctionReport.exportInJson(QuestionListActivity.this);
             correctionReport.displayPopUp(QuestionListActivity.this);
         }
     }
