@@ -22,11 +22,8 @@
             </intent-filter>
         </activity>
 
-
         <activity android:name=".activity.TeacherPanelActivity"
             android:screenOrientation="portrait"/>
-
-
         <activity
             android:name=".activity.StudentPanelActivity"
             android:screenOrientation="portrait" />
