@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
 
-    private String id;
-    private String firstName;
-    private String lastName;
-    private String group;
+    private final String id;
+    private final String firstName;
+    private final String lastName;
+    private final String group;
 
     public Student(String id, String firstName, String lastName, String group)
     {

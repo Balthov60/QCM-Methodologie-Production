@@ -21,7 +21,7 @@ public class UserSQLHandler {
     private static final String GROUP_TABLE = "StudentGroup";
     private static final String GROUP_NAME = "groupName";
 
-    private SQLServices sqlServices;
+    private final SQLServices sqlServices;
 
     public UserSQLHandler(SQLServices sqlServices) {
         this.sqlServices = sqlServices;

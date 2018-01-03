@@ -2,9 +2,9 @@ package fr.iutmindfuck.qcmiutlyon1.data;
 
 public class Mark
 {
-    private int idMCQ;
-    private String username;
-    private float value;
+    private final int idMCQ;
+    private final String username;
+    private final float value;
 
     public Mark(int idMCQ, String username, float value)
     {

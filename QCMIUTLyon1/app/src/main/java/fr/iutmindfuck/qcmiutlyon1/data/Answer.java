@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Answer implements Serializable {
 
-    private String title;
-    private boolean isRightAnswer;
+    private final String title;
+    private final boolean isRightAnswer;
 
     public Answer(String title, boolean isRightAnswer) {
         this.title = title;

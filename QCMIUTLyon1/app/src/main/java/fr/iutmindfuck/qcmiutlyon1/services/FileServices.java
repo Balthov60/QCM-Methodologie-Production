@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class FileServices {
 
-    private Context context;
+    private final Context context;
 
     public FileServices(Context context) {
         this.context = context;

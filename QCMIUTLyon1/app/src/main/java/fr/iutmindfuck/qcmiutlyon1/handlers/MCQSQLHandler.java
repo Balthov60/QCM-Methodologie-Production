@@ -17,7 +17,7 @@ public class MCQSQLHandler {
     private static final String MCQ_TYPE = "isNegative";
     private static final String MCQ_COEFFICIENT = "coefficient";
 
-    private SQLServices sqlServices;
+    private final SQLServices sqlServices;
 
     public MCQSQLHandler(SQLServices sqlServices) {
         this.sqlServices = sqlServices;

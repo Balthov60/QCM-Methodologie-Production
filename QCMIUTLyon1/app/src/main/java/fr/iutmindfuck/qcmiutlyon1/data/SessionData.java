@@ -34,7 +34,7 @@ public class SessionData {
      *   Key   : <MCQ_ID>_<QUESTION_ID>
      *   Value : List of answer index that have been marked as true (with '_' separator)
      */
-    private HashMap<String, ArrayList<Boolean>> mcqUserAnswerSave = new HashMap<>();
+    private final HashMap<String, ArrayList<Boolean>> mcqUserAnswerSave = new HashMap<>();
 
     public boolean isTeacher() {
         return isTeacher;

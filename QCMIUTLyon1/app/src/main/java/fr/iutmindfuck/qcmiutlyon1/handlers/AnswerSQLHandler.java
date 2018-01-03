@@ -17,7 +17,7 @@ public class AnswerSQLHandler {
     private static final String ANSWER_TITLE = "title";
     private static final String ANSWER_IS_RIGHT = "isRight";
 
-    private SQLServices sqlServices;
+    private final SQLServices sqlServices;
 
     AnswerSQLHandler(SQLServices sqlServices){
         this.sqlServices = sqlServices;

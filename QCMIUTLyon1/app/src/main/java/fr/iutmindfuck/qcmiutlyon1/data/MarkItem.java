@@ -1,9 +1,9 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
 public class MarkItem {
-    private String title;
-    private String description;
-    private String average;
+    private final String title;
+    private final String description;
+    private final String average;
 
     public MarkItem(String title, String description, String average) {
         this.title = title;

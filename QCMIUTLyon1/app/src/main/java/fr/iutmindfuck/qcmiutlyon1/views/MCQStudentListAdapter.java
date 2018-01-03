@@ -25,7 +25,7 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
 
     private final List<MCQ> mcqList;
     private final Context context;
-    private String type;
+    private final String type;
 
     public MCQStudentListAdapter(Context context, List<MCQ> mcqList, String type) {
         super(context, 0, mcqList);

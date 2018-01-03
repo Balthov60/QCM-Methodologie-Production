@@ -24,14 +24,14 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class MCQCorrectionReport {
 
-    private MCQ mcq;
+    private final MCQ mcq;
     private ArrayList<Question> questions;
 
-    private ArrayList<ArrayList<Boolean>> userAnswers;
+    private final ArrayList<ArrayList<Boolean>> userAnswers;
 
     private float markOutOf20;
     private int mark;
-    private int maxMark;
+    private final int maxMark;
 
     public MCQCorrectionReport(int idMCQ, SQLServices sqlServices) {
         MCQSQLHandler mcqsqlHandler = new MCQSQLHandler(sqlServices);

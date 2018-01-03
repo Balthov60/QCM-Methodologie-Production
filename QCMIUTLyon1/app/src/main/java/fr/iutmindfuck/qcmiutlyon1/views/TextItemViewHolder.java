@@ -6,10 +6,10 @@ import android.widget.TextView;
 import fr.iutmindfuck.qcmiutlyon1.R;
 
 class TextItemViewHolder {
-    TextView title;
-    TextView description;
-    TextView mark;
-    TextView coefficient;
+    final TextView title;
+    final TextView description;
+    final TextView mark;
+    final TextView coefficient;
 
     TextItemViewHolder(View convertView) {
         title = convertView.findViewById(R.id.done_list_item_title);

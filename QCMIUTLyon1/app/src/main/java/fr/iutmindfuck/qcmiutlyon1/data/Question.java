@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Question implements Serializable {
 
-    private Integer id;
-    private String title;
-    private ArrayList<Answer> answers;
+    private final Integer id;
+    private final String title;
+    private final ArrayList<Answer> answers;
 
     public Question(Integer id, String title, ArrayList<Answer> answerArray) {
         this.id = id;

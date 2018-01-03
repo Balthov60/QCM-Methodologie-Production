@@ -15,7 +15,7 @@ public class MarkSQLHandler {
     private static final String MARK_ID_STUDENT = "idStudent";
     private static final String MARK_VALUE = "value";
 
-    private SQLServices sqlServices;
+    private final SQLServices sqlServices;
 
     public MarkSQLHandler(SQLServices sqlServices){ this.sqlServices = sqlServices; }
 
@@ -76,7 +76,7 @@ public class MarkSQLHandler {
     public float getAverageForStudent(String idStudent) {
         ArrayList<Mark> marks = getAllMarksForStudent(idStudent);
         MCQSQLHandler mcqsqlHandler = new MCQSQLHandler(sqlServices);
-        float totalCoeff = 0;
+        float totalCoefficient = 0;
         if(marks == null)
             return (-1);
 
@@ -84,9 +84,9 @@ public class MarkSQLHandler {
 
         for(Mark mark : marks) {
             average += mark.getValue();
-            totalCoeff += mcqsqlHandler.getMCQ(mark.getIdMCQ()).getCoefficient();
+            totalCoefficient += mcqsqlHandler.getMCQ(mark.getIdMCQ()).getCoefficient();
         }
-        return average / totalCoeff;
+        return average / totalCoefficient;
     }
     private ArrayList<Mark> getAllMarksForStudent(String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,

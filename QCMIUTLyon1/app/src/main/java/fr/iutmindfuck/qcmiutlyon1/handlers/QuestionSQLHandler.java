@@ -16,8 +16,8 @@ public class QuestionSQLHandler {
     private static final String QUESTION_ID = "idQuestion";
     private static final String QUESTION_TITLE = "title";
 
-    private SQLServices sqlServices;
-    private AnswerSQLHandler answerSQLHandler;
+    private final SQLServices sqlServices;
+    private final AnswerSQLHandler answerSQLHandler;
 
     public QuestionSQLHandler(SQLServices sqlServices){
         this.sqlServices = sqlServices;

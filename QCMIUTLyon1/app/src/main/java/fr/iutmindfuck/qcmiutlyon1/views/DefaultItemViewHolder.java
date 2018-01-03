@@ -8,10 +8,10 @@ import fr.iutmindfuck.qcmiutlyon1.R;
 
 
 class DefaultItemViewHolder {
-    TextView title;
-    TextView description;
-    ImageView list_item_first_interaction;
-    ImageView list_item_second_interaction;
+    final TextView title;
+    final TextView description;
+    final ImageView list_item_first_interaction;
+    final ImageView list_item_second_interaction;
 
     DefaultItemViewHolder(View convertView) {
         title = convertView.findViewById(R.id.list_item_title);
