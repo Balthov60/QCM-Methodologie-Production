@@ -16,10 +16,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView style="@style/BasicText" tools:text="Description"
+            android:id="@+id/default_list_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textAlignment="center"/>
+
+        <ImageView style="@style/separator"
+            android:id="@+id/default_list_description_separator"
+            android:layout_below="@+id/default_list_description"
+            android:contentDescription="@string/separator" />
+
         <LinearLayout
             android:id="@+id/default_list_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/default_list_description_separator">
 
             <ListView
                 android:id="@+id/default_list_view"

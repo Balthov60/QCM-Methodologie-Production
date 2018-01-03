@@ -33,7 +33,20 @@ public class MarkSQLHandler {
     /* Get Data */
     /************/
 
+    public Mark getMark(int idMCQ, String idStudent) {
+        Cursor cursor = sqlServices.getData(MARK_TABLE, null,
+                MARK_ID_STUDENT + " = ? AND " + MARK_ID_MCQ + " = ?",
+                new String[] {idStudent, String.valueOf(idMCQ)});
+        Mark mark = null;
 
+        if (cursor.moveToFirst())
+            mark = new Mark(cursor.getInt(cursor.getColumnIndex(MARK_ID_MCQ)),
+                    cursor.getString(cursor.getColumnIndex(MARK_ID_STUDENT)),
+                    cursor.getFloat(cursor.getColumnIndex(MARK_VALUE)));
+
+        cursor.close();
+        return mark;
+    }
     public ArrayList<Mark> getAllMarksForMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
                                       MARK_ID_MCQ + " = ?",
@@ -41,7 +54,6 @@ public class MarkSQLHandler {
 
         return getMarksFromCursor(cursor);
     }
-
     public float getAverageForMCQ(int idMCQ)
     {
         ArrayList<Mark> list = getAllMarksForMCQ(idMCQ);
@@ -70,13 +82,11 @@ public class MarkSQLHandler {
 
         return average / marks.size();
     }
-
-
-    public ArrayList<Mark> getAllMarksForStudent(int idStudent) {
+  
+    public ArrayList<Mark> getAllMarksForStudent(String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
-                                      MARK_ID_STUDENT + " = ? ",
-                                            new String[] {String.valueOf(idStudent)});
-
+                                      MARK_ID_STUDENT + " = ?",
+                                            new String[] {idStudent});
         return getMarksFromCursor(cursor);
     }
 

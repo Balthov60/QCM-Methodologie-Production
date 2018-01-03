@@ -24,6 +24,10 @@ public class QuestionSQLHandler {
         this.answerSQLHandler = new AnswerSQLHandler(sqlServices);
     }
 
+    /* ********************/
+    /* Database LifeCycle */
+    /* ********************/
+
     public static String getSQLForTableCreation() {
         return "CREATE TABLE " + QUESTION_TABLE + "(" +
                 QUESTION_MCQ_ID + " INTEGER, " +
@@ -35,7 +39,11 @@ public class QuestionSQLHandler {
         return "DROP TABLE IF EXISTS " + QUESTION_TABLE;
     }
 
-    /* Data Manipulation */
+
+    /* ***********************/
+    /* Database Manipulation */
+    /* ***********************/
+
 
     public ArrayList<Question> getQuestions(int idMCQ) {
         Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
@@ -57,22 +65,6 @@ public class QuestionSQLHandler {
 
         cursor.close();
         return questions;
-    }
-    public Question getQuestion(int idMCQ, int idQuestion) {
-        Cursor cursor = sqlServices.getData(QUESTION_TABLE, null,
-                QUESTION_MCQ_ID + " = ? AND " + QUESTION_ID +" = ? ",
-                      new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
-
-        if (!cursor.moveToFirst()) {
-            cursor.close();
-            return null;
-        }
-        Question question = new Question(cursor.getInt(cursor.getColumnIndex(QUESTION_ID)),
-                                         cursor.getString(cursor.getColumnIndex(QUESTION_TITLE)),
-                                         answerSQLHandler.getAnswers(idMCQ, idQuestion));
-
-        cursor.close();
-        return question;
     }
     public void createOrReplaceQuestion(Question question, int idMCQ) {
         ContentValues contentValues = new ContentValues();
@@ -96,13 +88,6 @@ public class QuestionSQLHandler {
             answerSQLHandler.createAnswer(question.getAnswers().get(i), idMCQ, id, i);
     }
 
-    void removeQuestionsFor(int idMCQ) {
-        answerSQLHandler.removeAnswersFor(idMCQ);
-
-        sqlServices.removeEntries(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
-                                                      new String[] {String.valueOf(idMCQ)});
-    }
-
     public void removeQuestion(int idMCQ, int idQuestion) {
         answerSQLHandler.removeAnswersFor(idMCQ, idQuestion);
 
@@ -110,6 +95,11 @@ public class QuestionSQLHandler {
                           QUESTION_MCQ_ID + " = ? AND " + QUESTION_ID + " = ?",
                                 new String[] {String.valueOf(idMCQ), String.valueOf(idQuestion)});
     }
+    void removeQuestionsFor(int idMCQ) {
+        answerSQLHandler.removeAnswersFor(idMCQ);
 
+        sqlServices.removeEntries(QUESTION_TABLE, QUESTION_MCQ_ID + " = ?",
+                new String[] {String.valueOf(idMCQ)});
+    }
 
 }

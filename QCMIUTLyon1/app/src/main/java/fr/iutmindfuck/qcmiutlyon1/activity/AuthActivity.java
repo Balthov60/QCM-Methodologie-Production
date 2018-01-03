@@ -24,8 +24,9 @@ public class AuthActivity extends AppCompatActivity {
         userSQLHandler = new UserSQLHandler(new SQLServices(this));
     }
 
+
     /**
-     * While user click on the login button, check if his username & password is correct
+     * When user click on the login button, check if his username & password is correct
      * and open his panel or display an error message.
      *
      * @param view Login Button (provided on click).
@@ -44,7 +45,6 @@ public class AuthActivity extends AppCompatActivity {
                     .setText(getResources().getText(R.string.auth_error));
         }
     }
-
     /**
      * Check if user is teacher or student and launch the matching panel.
      *

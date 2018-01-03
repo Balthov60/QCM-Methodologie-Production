@@ -23,11 +23,15 @@ public class AnswerSQLHandler {
         this.sqlServices = sqlServices;
     }
 
+    /* ********************/
+    /* Database LifeCycle */
+    /* ********************/
+
     public static String getSQLForTableCreation() {
         return "CREATE TABLE " + ANSWER_TABLE + "(" +
                 ANSWER_ID_MCQ + " INTEGER, " +
                 ANSWER_ID_QUESTION + " INTEGER, " +
-                ANSWER_ID + " INTGER, " +
+                ANSWER_ID + " INTEGER, " +
                 ANSWER_TITLE + " varchar(128), " +
                 ANSWER_IS_RIGHT + " bool, " +
                 "PRIMARY KEY(" + ANSWER_ID_MCQ + ", " +
@@ -38,6 +42,10 @@ public class AnswerSQLHandler {
     public static String getSQLForTableSuppression() {
         return "DROP TABLE IF EXISTS " + ANSWER_TABLE;
     }
+
+    /* ***********************/
+    /* Database Manipulation */
+    /* ***********************/
 
     ArrayList<Answer> getAnswers(int idMCQ, int idQuestion){
         Cursor cursor = sqlServices.getData(ANSWER_TABLE, null,
@@ -70,7 +78,6 @@ public class AnswerSQLHandler {
 
         sqlServices.createOrReplaceData(ANSWER_TABLE, contentValues);
     }
-
 
     void removeAnswersFor(int idMCQ) {
         sqlServices.removeEntries(ANSWER_TABLE, ANSWER_ID_MCQ + " = ?",

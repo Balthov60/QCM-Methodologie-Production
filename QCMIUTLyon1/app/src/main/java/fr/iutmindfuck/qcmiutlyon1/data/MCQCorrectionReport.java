@@ -1,11 +1,25 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.activity.MCQListActivity;
+import fr.iutmindfuck.qcmiutlyon1.activity.StudentPanelActivity;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
+import fr.iutmindfuck.qcmiutlyon1.services.FileServices;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class MCQCorrectionReport {
@@ -16,7 +30,7 @@ public class MCQCorrectionReport {
     private ArrayList<ArrayList<Boolean>> userAnswers;
 
     private float markOutOf20;
-    private float mark;
+    private int mark;
     private int maxMark;
 
     public MCQCorrectionReport(int idMCQ, SQLServices sqlServices) {
@@ -25,6 +39,8 @@ public class MCQCorrectionReport {
 
         QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(sqlServices);
         questions = questionSQLHandler.getQuestions(idMCQ);
+        if (questions == null)
+            questions = new ArrayList<>();
 
         userAnswers = new ArrayList<>();
         for (Question question : questions) {
@@ -37,6 +53,13 @@ public class MCQCorrectionReport {
         correct();
     }
 
+    /* *********************/
+    /* Correction Handling */
+    /* *********************/
+
+    /**
+     * Correct MCQ & update class Fields.
+     */
     private void correct() {
         for (int i = 0; i < questions.size(); i++) {
             if (!userAnswersToQuestion(userAnswers.get(i)))
@@ -51,7 +74,10 @@ public class MCQCorrectionReport {
                 mark -= (mcq.isPointNegative()) ? 1 : 0;
             }
         }
-        markOutOf20 = mark / maxMark * 20;
+        markOutOf20 = (mark > 0) ? ((float)mark / maxMark * 20) : 0;
+
+        if (questions.isEmpty())
+            markOutOf20 = 20;
     }
 
     /**
@@ -91,6 +117,12 @@ public class MCQCorrectionReport {
         return (isAnswerRight && userAnswer) || (!isAnswerRight && !userAnswer);
     }
 
+
+    /* *********************/
+    /* Export/Save Methods */
+    /* *********************/
+
+
     public void saveMark(SQLServices sqlServices) {
         MarkSQLHandler markSQLHandler = new MarkSQLHandler(sqlServices);
 
@@ -99,9 +131,89 @@ public class MCQCorrectionReport {
                                markOutOf20));
     }
 
-    public void exportInJson() {
+    public void exportInJson(Context context) {
+        FileServices fileServices = new FileServices(context);
+
+        String fileName = SessionData.getInstance().getUserID() + "_" + mcq.getName();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("mcq_id", mcq.getId());
+            jsonObject.put("mark", markOutOf20);
+            jsonObject.put("user_answers", getUserAnswersAsArray());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        fileServices.saveFile(jsonObject.toString(), fileName);
+    }
+    private JSONArray getUserAnswersAsArray() throws JSONException {
+        JSONArray jsonQuestionsArray = new JSONArray();
+        JSONObject question;
+
+        for (int i = 0; i < questions.size(); i++) {
+            question = new JSONObject();
+            question.put("question_id", questions.get(i).getId());
+            question.put("question_user_answers", userAnswers.get(i));
+            jsonQuestionsArray.put(question);
+        }
+
+        return jsonQuestionsArray;
     }
 
-    public void displayPopUp() {
+
+    /* ***************/
+    /* PopUp Methods */
+    /* ***************/
+
+
+    public void displayPopUp(final Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(R.layout.dialog_correction_report_layout);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        setDialogContent(dialog, context);
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                Intent intent = new Intent(context, MCQListActivity.class);
+                intent.putExtra("Type", StudentPanelActivity.TODO_STUDENT_MOD);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    private void setDialogContent(AlertDialog dialog, Context context) {
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_title))
+                .setText(mcq.getName());
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_description))
+                .setText(mcq.getDescription());
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_mark))
+                .setText(formatMarkForAlertDialog(context));
+        ((TextView) dialog.findViewById(R.id.dialog_correction_report_coefficient))
+                .setText(formatCoefficientForAlertDialog(context));
+
+        if (mcq.isPointNegative())
+        {
+            ((TextView) dialog.findViewById(R.id.dialog_correction_report_type))
+                    .setText(context.getString(R.string.mcq_edition_type_negative));
+        }
+        else
+        {
+            ((TextView) dialog.findViewById(R.id.dialog_correction_report_type))
+                    .setText(context.getString(R.string.mcq_edition_type_classic));
+        }
+    }
+    private String formatMarkForAlertDialog(Context context) {
+        String raw = context.getString(R.string.dialog_correction_report_mark_text);
+        return String.format(raw, markOutOf20, mark, maxMark);
+
+    }
+    private String formatCoefficientForAlertDialog(Context context) {
+        String raw = context.getString(R.string.dialog_correction_report_coefficient_text);
+        return String.format(raw, mcq.getCoefficient());
     }
 }

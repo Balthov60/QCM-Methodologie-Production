@@ -10,8 +10,8 @@
     <string name="auth_login_button">Login</string>
     <string name="auth_error">Nom d\'utilisateur ou mot de passe incorrect.</string>
 
-    <string name="contentDescriptionOnIutBrand">Official IUT brand</string>
-    <string name="contentDescriptionOnRightHandUpperCorner">Pink triangle</string>
+    <string name="content_description_on_iut_brand">Official IUT brand</string>
+    <string name="content_description_on_right_hand_upper_corner">Pink triangle</string>
 
     <string name="set_prof">prof</string>
     <string name="set_user">user</string>
@@ -74,5 +74,20 @@
         <item>QCM</item>
         <item>Etudiant</item>
     </string-array>
+
+    <!-- Strings related to Correction Report Dialog -->
+    <string name="dialog_correction_report_mark_text">Note : %.2f/20 (%d/%d)</string>
+    <string name="dialog_correction_report_coefficient_text">Coefficient : %.2f</string>
+
+    <!-- Strings related to List Activities -->
+    <string name="default_list_description_teacher">Panneau d\'édition des QCMs</string>
+    <string name="default_list_description_done">Liste des QCMs finis</string>
+    <string name="default_list_description_todo">Liste des QCMs à faire</string>
+  
+    <!-- Strings related to Toast -->
+    <string name="mcq_successful_modification">Votre QCM à bien été modifié.</string>
+    <string name="mcq_successful_creation">Votre QCM à bien été ajouté.</string>
+    <string name="mcq_submission_failed">Vous devez renseigner tout les champs.</string>
+    <string name="question_invalid_submission">Votre question n\'est pas valide.</string>
 
 </resources>

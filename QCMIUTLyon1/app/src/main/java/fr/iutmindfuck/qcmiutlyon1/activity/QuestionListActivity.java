@@ -7,17 +7,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
+import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQCorrectionReport;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
+import fr.iutmindfuck.qcmiutlyon1.handlers.MCQSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.handlers.QuestionSQLHandler;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 import fr.iutmindfuck.qcmiutlyon1.views.QuestionStudentListAdapter;
 import fr.iutmindfuck.qcmiutlyon1.views.QuestionTeacherListAdapter;
+
 
 public class QuestionListActivity extends AppCompatActivity {
 
@@ -26,8 +30,8 @@ public class QuestionListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getExtra();
+
         setContentView(R.layout.activity_default_list);
         setSupportActionBar((Toolbar) findViewById(R.id.default_list_toolbar));
     }
@@ -48,14 +52,17 @@ public class QuestionListActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
+        displayMCQInformation();
+
         QuestionSQLHandler questionSQLHandler = new QuestionSQLHandler(new SQLServices(this));
         ListView mcqListView = findViewById(R.id.default_list_view);
         ArrayList<Question> questions = getQuestions(questionSQLHandler);
 
         if (SessionData.getInstance().isTeacher())
         {
-            mcqListView.setAdapter(new QuestionTeacherListAdapter(this, idMCQ,
-                                                                  questions, questionSQLHandler));
+            mcqListView.setAdapter(
+                    new QuestionTeacherListAdapter(this, idMCQ, questions, questionSQLHandler)
+            );
         }
         else
         {
@@ -63,6 +70,13 @@ public class QuestionListActivity extends AppCompatActivity {
 
             ((Button) findViewById(R.id.default_list_button)).setText(R.string.student_submit_mcq);
         }
+    }
+    private void displayMCQInformation() {
+        MCQSQLHandler mcqsqlHandler = new MCQSQLHandler(new SQLServices(this));
+        MCQ mcq = mcqsqlHandler.getMCQ(idMCQ);
+
+        ((Toolbar) findViewById(R.id.default_list_toolbar)).setTitle(mcq.getName());
+        ((TextView) findViewById(R.id.default_list_description)).setText(mcq.getDescription());
     }
     private ArrayList<Question> getQuestions(QuestionSQLHandler questionSQLHandler) {
         ArrayList<Question> questions = questionSQLHandler.getQuestions(idMCQ);
@@ -109,8 +123,8 @@ public class QuestionListActivity extends AppCompatActivity {
             MCQCorrectionReport correctionReport = new MCQCorrectionReport(idMCQ, sqlServices);
 
             correctionReport.saveMark(sqlServices);
-            correctionReport.exportInJson();
-            correctionReport.displayPopUp();
+            correctionReport.exportInJson(QuestionListActivity.this);
+            correctionReport.displayPopUp(QuestionListActivity.this);
         }
     }
 }

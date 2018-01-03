@@ -17,7 +17,7 @@ import fr.iutmindfuck.qcmiutlyon1.data.Answer;
 import fr.iutmindfuck.qcmiutlyon1.data.Question;
 import fr.iutmindfuck.qcmiutlyon1.data.SessionData;
 
-public class QuestionActivity extends AppCompatActivity{
+public class QuestionActivity extends AppCompatActivity {
 
     private Question question;
     private int idMCQ;
@@ -30,6 +30,7 @@ public class QuestionActivity extends AppCompatActivity{
         setContentView(R.layout.activity_question);
         setSupportActionBar((Toolbar) findViewById(R.id.question_answer_toolbar));
     }
+
     private void getExtra() {
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
@@ -64,20 +65,19 @@ public class QuestionActivity extends AppCompatActivity{
         displayQuestion();
     }
 
-    public void displayQuestion(){
+    public void displayQuestion() {
         ((TextView) findViewById(R.id.question_answer_title)).setText(question.getTitle());
 
-        if(question.getAnswers() != null)
+        if (question.getAnswers() != null)
             displayAnswers();
     }
-
     @SuppressLint("InflateParams")
     public void displayAnswers() {
         LinearLayout parent = findViewById(R.id.question_answer_container);
         ArrayList<Boolean> answersMarkedAsTrue
                 = SessionData.getInstance().getAnswersStatus(idMCQ, question.getId());
 
-        for (int i = 0; i < question.getAnswers().size(); i++) {
+        for (int i = 0; i < question.getAnswersQty(); i++) {
             View custom = getLayoutInflater().inflate(R.layout.answer_reply_section, null);
             Answer answer = question.getAnswers().get(i);
 
@@ -93,30 +93,29 @@ public class QuestionActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        saveAnswerInSessionData();
+        SessionData.getInstance().saveAnswers(idMCQ, question, getAnswersIndexMarkedAsTrue());
     }
-    private void saveAnswerInSessionData() {
-        SessionData.getInstance().saveAnswers(idMCQ, question.getId(), getAnswersIndexMarkedAsTrue(),
-                                              question.getAnswers().size());
-    }
+
+    /**
+     * Get Answers checked by the user.
+     *
+     * @return Array List of Answers Id checked by the user.
+     */
     private ArrayList<Integer> getAnswersIndexMarkedAsTrue() {
         ArrayList<Integer> trueAnswersID = new ArrayList<>();
         LinearLayout answersContainer = findViewById(R.id.question_answer_container);
 
         for (int i = 0; i < answersContainer.getChildCount(); i++) {
-            LinearLayout answerSection = (LinearLayout) answersContainer.getChildAt(i);
-            if (((CheckBox) answerSection.getChildAt(0)).isChecked())
+            if (isAnswerCheckedAt(i, answersContainer))
                 trueAnswersID.add(i);
         }
 
         return trueAnswersID;
     }
+    private boolean isAnswerCheckedAt(int index, LinearLayout answersContainer) {
+        LinearLayout answerSection = (LinearLayout) answersContainer.getChildAt(index);
 
-    public void nextQuestion(View view) {
-        // TODO
-    }
-    public void previousQuestion(View view) {
-        // TODO
+        return ((CheckBox) answerSection.getChildAt(0)).isChecked();
     }
 }
 

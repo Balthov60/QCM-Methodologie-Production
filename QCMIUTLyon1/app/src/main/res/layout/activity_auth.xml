@@ -12,7 +12,7 @@
         android:layout_height="75dp"
 
         android:src="@drawable/triangle_upper_corner"
-        android:contentDescription="@string/contentDescriptionOnRightHandUpperCorner" />
+        android:contentDescription="@string/content_description_on_right_hand_upper_corner" />
 
     <ImageView
         android:id="@+id/iut_official_brand"
@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/auth_iut_brand_margin_top"
 
         android:src="@drawable/iut_official_brand"
-        android:contentDescription="@string/contentDescriptionOnIutBrand" />
+        android:contentDescription="@string/content_description_on_iut_brand" />
 
     <EditText style="@style/WideView"
         android:id="@+id/auth_username"
