@@ -1,5 +1,10 @@
 package fr.iutmindfuck.qcmiutlyon1.handlers;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
+
+import fr.iutmindfuck.qcmiutlyon1.data.Student;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class UserSQLHandler {
@@ -48,10 +53,40 @@ public class UserSQLHandler {
         return "DROP TABLE IF EXISTS " + GROUP_TABLE;
     }
 
+  
     /* ***********************/
     /* Database Manipulation */
     /* ***********************/
 
+
+    public ArrayList<Student> getAllStudents()
+    {
+        Cursor cursor = sqlServices.getData(USER_TABLE, null, USER_IS_TEACHER + " = ?",
+                                                                    new String[]{"0"});
+        return getStudentFromCursor(cursor);
+    }
+
+    private ArrayList<Student> getStudentFromCursor(Cursor cursor)
+    {
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+
+        ArrayList<Student> students = new ArrayList<>();
+        do {
+            students.add(new Student(cursor.getString(cursor.getColumnIndex(USER_ID)),
+                                     cursor.getString(cursor.getColumnIndex(USER_FIRST_NAME)),
+                                     cursor.getString(cursor.getColumnIndex(USER_LAST_NAME)),
+                                     cursor.getString(cursor.getColumnIndex(USER_GROUP))));
+
+        }
+        while(cursor.moveToNext());
+        cursor.close();
+
+        return students;
+    }
+  
     public boolean isPasswordCorrectFor(String id, String password) {
         return sqlServices.isResultsMatching(USER_TABLE, new String[]{USER_ID},
                 USER_ID + " = ? AND " + USER_PASSWORD + " = ?",
@@ -62,4 +97,5 @@ public class UserSQLHandler {
                 USER_ID + " = ? AND " + USER_IS_TEACHER + " = ?",
                 new String[]{id, "1"});
     }
+
 }

@@ -67,6 +67,14 @@
     <string name="question_answer_next">SUIVANT</string>
     <string name="next_question_button">Next Question Button</string>
 
+    <!-- Strings related to marks -->
+    <string name="mark_sorting_text">Trier par : </string>
+    <string name="average">Moyenne</string>
+    <string-array name="mark_sorting_choices">
+        <item>QCM</item>
+        <item>Etudiant</item>
+    </string-array>
+
     <!-- Strings related to Correction Report Dialog -->
     <string name="dialog_correction_report_mark_text">Note : %.2f/20 (%d/%d)</string>
     <string name="dialog_correction_report_coefficient_text">Coefficient : %.2f</string>
@@ -75,6 +83,8 @@
     <string name="default_list_description_teacher">Panneau d\'édition des QCMs</string>
     <string name="default_list_description_done">Liste des QCMs finis</string>
     <string name="default_list_description_todo">Liste des QCMs à faire</string>
+  
+    <!-- Strings related to Toast -->
     <string name="mcq_successful_modification">Votre QCM à bien été modifié.</string>
     <string name="mcq_successful_creation">Votre QCM à bien été ajouté.</string>
     <string name="mcq_submission_failed">Vous devez renseigner tout les champs.</string>

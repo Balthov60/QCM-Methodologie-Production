@@ -32,7 +32,7 @@ public class MCQListActivity extends AppCompatActivity {
         mcqSQLHandler = new MCQSQLHandler(new SQLServices(this));
 
         setContentView(R.layout.activity_default_list);
-        setSupportActionBar((Toolbar) findViewById(R.id.default_list_toolbar));
+        setSupportActionBar((Toolbar) findViewById(R.id.mark_teacher_toolbar));
     }
     private void getExtra() {
         Bundle extra = getIntent().getExtras();

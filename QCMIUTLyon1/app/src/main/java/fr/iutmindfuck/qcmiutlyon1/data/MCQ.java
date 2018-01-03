@@ -33,4 +33,10 @@ public class MCQ implements Serializable {
     public float getCoefficient() {
         return coefficient;
     }
+
+    public String toString()
+    {
+        return name + " / " + description;
+    }
+
 }

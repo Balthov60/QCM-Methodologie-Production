@@ -12,18 +12,18 @@
 
         android:supportsRtl="true"
         android:allowBackup="false" >
-
-        <activity android:name=".activity.AuthActivity"
-                  android:screenOrientation="portrait" >
+      
+        <activity
+            android:name=".activity.AuthActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      
-        <activity
-            android:name=".activity.TeacherPanelActivity"
-            android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.TeacherPanelActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.StudentPanelActivity"
             android:screenOrientation="portrait" />
@@ -44,6 +44,9 @@
       
         <activity
             android:name=".activity.QuestionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.MarkTeacherActivity"
             android:screenOrientation="portrait" />
       
     </application>  

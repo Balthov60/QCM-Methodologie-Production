@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import java.util.List;
 import java.util.Locale;
@@ -35,6 +34,7 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
         this.type = type;
     }
 
+
     @NonNull
     @Override
     public View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
@@ -42,7 +42,7 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
         {
             if(convertView == null) {
                 convertView = LayoutInflater.from(getContext())
-                        .inflate(R.layout.done_list_item, parent, false);
+                        .inflate(R.layout.text_list_item, parent, false);
             }
             initDoneView(convertView, position);
         }
@@ -60,9 +60,9 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
     }
 
     private void initDoneView(View convertView, final int position) {
-        DoneItemViewHolder viewHolder = (DoneItemViewHolder) convertView.getTag();
+        TextItemViewHolder viewHolder = (TextItemViewHolder) convertView.getTag();
         if(viewHolder == null) {
-            viewHolder = new DoneItemViewHolder(convertView);
+            viewHolder = new TextItemViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
 
@@ -108,19 +108,5 @@ public class MCQStudentListAdapter extends ArrayAdapter<MCQ> {
                     }
                 }
         );
-    }
-
-    class DoneItemViewHolder {
-        TextView title;
-        TextView description;
-        TextView mark;
-        TextView coefficient;
-
-        DoneItemViewHolder(View convertView) {
-            title = convertView.findViewById(R.id.done_list_item_title);
-            description = convertView.findViewById(R.id.done_list_item_description);
-            mark = convertView.findViewById(R.id.done_list_item_mark);
-            coefficient = convertView.findViewById(R.id.done_list_item_coefficient);
-        }
     }
 }
