@@ -22,8 +22,8 @@ import fr.iutmindfuck.qcmiutlyon1.views.MCQTeacherListAdapter;
 
 public class MCQListActivity extends AppCompatActivity {
 
-    String mcqSelector = "";
-    MCQSQLHandler mcqSQLHandler;
+    private String mcqSelector = "";
+    private MCQSQLHandler mcqSQLHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

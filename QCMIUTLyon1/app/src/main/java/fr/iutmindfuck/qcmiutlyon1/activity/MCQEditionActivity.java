@@ -31,7 +31,7 @@ public class MCQEditionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mcq_edition);
         setSupportActionBar((Toolbar) findViewById(R.id.mcq_edition_toolbar));
     }
-    public void getExtra() {
+    private void getExtra() {
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -86,7 +86,7 @@ public class MCQEditionActivity extends AppCompatActivity {
         boolean isNegative = isMCQNegative();
         Float coefficient = getMCQCoefficient();
 
-        if (title.isEmpty() || description.isEmpty() || coefficient.isNaN()) {
+        if (title.isEmpty() || description.isEmpty() || coefficient == null) {
             displayErrorToast();
             return;
         }
@@ -109,16 +109,16 @@ public class MCQEditionActivity extends AppCompatActivity {
 
     /* MCQ Edition Form getter */
 
-    public String getMCQTitle() {
+    private String getMCQTitle() {
         return ((EditText) findViewById(R.id.mcq_edition_title_input)).getText().toString();
     }
-    public String getMCQDescription() {
+    private String getMCQDescription() {
         return ((EditText) findViewById(R.id.mcq_edition_description_input)).getText().toString();
     }
-    public boolean isMCQNegative() {
+    private boolean isMCQNegative() {
         return ((RadioButton) findViewById(R.id.mcq_edition_type_selector_negative)).isChecked();
     }
-    public Float getMCQCoefficient() {
+    private Float getMCQCoefficient() {
         String coefficient = ((EditText)findViewById(R.id.mcq_edition_coefficient_input))
                              .getText().toString();
 
@@ -127,13 +127,13 @@ public class MCQEditionActivity extends AppCompatActivity {
 
     /* MCQ Edition Form setter */
 
-    public void setMCQTitle(String title) {
+    private void setMCQTitle(String title) {
         ((EditText) findViewById(R.id.mcq_edition_title_input)).setText(title);
     }
-    public void setMCQDescription(String description) {
+    private void setMCQDescription(String description) {
         ((EditText) findViewById(R.id.mcq_edition_description_input)).setText(description);
     }
-    public void setMCQNegative(boolean isNegative) {
+    private void setMCQNegative(boolean isNegative) {
         if (isNegative) {
             ((RadioButton) findViewById(R.id.mcq_edition_type_selector_negative))
                     .setChecked(true);
@@ -144,7 +144,7 @@ public class MCQEditionActivity extends AppCompatActivity {
         }
 
     }
-    public void setMCQCoefficient(float coefficient) {
+    private void setMCQCoefficient(float coefficient) {
         ((EditText)findViewById(R.id.mcq_edition_coefficient_input))
                 .setText(String.valueOf(coefficient));
     }
@@ -154,7 +154,7 @@ public class MCQEditionActivity extends AppCompatActivity {
     /**
      * Display a notification to inform user that filled are missing for mcq submission.
      */
-    public void displayErrorToast() {
+    private void displayErrorToast() {
         Context context = this.getApplicationContext();
 
         Toast toast = Toast.makeText(context, getString(R.string.mcq_submission_failed),
@@ -168,7 +168,7 @@ public class MCQEditionActivity extends AppCompatActivity {
      *
      * @param isEdition true if mcq already exist, false elsewhere.
      */
-    public void displaySuccessToast(boolean isEdition) {
+    private void displaySuccessToast(boolean isEdition) {
         Context context = this.getApplicationContext();
         String message = (isEdition) ? getString(R.string.mcq_successful_modification)
                                      : getString(R.string.mcq_successful_creation);

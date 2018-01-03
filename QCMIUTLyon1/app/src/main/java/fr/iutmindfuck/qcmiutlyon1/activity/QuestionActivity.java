@@ -65,14 +65,14 @@ public class QuestionActivity extends AppCompatActivity {
         displayQuestion();
     }
 
-    public void displayQuestion() {
+    private void displayQuestion() {
         ((TextView) findViewById(R.id.question_answer_title)).setText(question.getTitle());
 
         if (question.getAnswers() != null)
             displayAnswers();
     }
     @SuppressLint("InflateParams")
-    public void displayAnswers() {
+    private void displayAnswers() {
         LinearLayout parent = findViewById(R.id.question_answer_container);
         ArrayList<Boolean> answersMarkedAsTrue
                 = SessionData.getInstance().getAnswersStatus(idMCQ, question.getId());

@@ -14,7 +14,7 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class AuthActivity extends AppCompatActivity {
 
-    UserSQLHandler userSQLHandler;
+    private UserSQLHandler userSQLHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

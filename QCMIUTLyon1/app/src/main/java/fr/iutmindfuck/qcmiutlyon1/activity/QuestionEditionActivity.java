@@ -25,9 +25,9 @@ import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class QuestionEditionActivity extends AppCompatActivity {
 
-    QuestionSQLHandler questionSQLHandler;
-    Question question;
-    int idMCQ;
+    private QuestionSQLHandler questionSQLHandler;
+    private Question question;
+    private int idMCQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class QuestionEditionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_edition);
         setSupportActionBar((Toolbar) findViewById(R.id.question_edition_toolbar));
     }
-    public void getExtra() {
+    private void getExtra() {
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             question = (Question) extra.getSerializable("question");
@@ -83,11 +83,11 @@ public class QuestionEditionActivity extends AppCompatActivity {
             setAnswers(question.getAnswers());
     }
 
-    public void setQuestionTitle(String title) {
+    private void setQuestionTitle(String title) {
         ((EditText) findViewById(R.id.question_edition_title_input)).setText(title);
     }
     @SuppressLint("InflateParams")
-    public void setAnswers(ArrayList<Answer> answers) {
+    private void setAnswers(ArrayList<Answer> answers) {
         LinearLayout parent = findViewById(R.id.question_edition_answer_container);
 
         for (Answer answer : answers) {
@@ -144,10 +144,10 @@ public class QuestionEditionActivity extends AppCompatActivity {
     }
 
     /* Get Value from Question Form */
-    public String getQuestionTitle() {
+    private String getQuestionTitle() {
         return ((EditText) findViewById(R.id.question_edition_title_input)).getText().toString();
     }
-    public ArrayList<Answer> getQuestionAnswers() {
+    private ArrayList<Answer> getQuestionAnswers() {
         ArrayList<Answer> answers = new ArrayList<>();
 
         LinearLayout layout = findViewById(R.id.question_edition_answer_container);
@@ -163,7 +163,7 @@ public class QuestionEditionActivity extends AppCompatActivity {
     }
 
     /* Toast */
-    public void displayErrorToast() {
+    private void displayErrorToast() {
         Context context = this.getApplicationContext();
 
         Toast toast = Toast.makeText(context, getString(R.string.question_invalid_submission),

@@ -1,5 +1,7 @@
 package fr.iutmindfuck.qcmiutlyon1.data;
 
+import java.util.Locale;
+
 public class MarkItem {
     private final String title;
     private final String description;
@@ -20,7 +22,7 @@ public class MarkItem {
     }
     public String getAverage() {
         if (Float.parseFloat(average) >= 0)
-            return average;
+            return String.format(Locale.getDefault(), "%.2f/20", Float.parseFloat(average));
         else
             return "N/A";
     }
