@@ -9,10 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.iutmindfuck.qcmiutlyon1.R;
 import fr.iutmindfuck.qcmiutlyon1.data.MCQ;
 import fr.iutmindfuck.qcmiutlyon1.views.MarkItem;
@@ -27,18 +25,12 @@ import fr.iutmindfuck.qcmiutlyon1.views.MarkTeacherListAdapter;
 public class MarkTeacherActivity extends AppCompatActivity
 {
 
-    private enum OrderBy
-    {
-        MCQ,
-        STUDENT
-    }
-
     private MCQSQLHandler mcqSqlHandler;
     private UserSQLHandler userSQLHandler;
-    private ListView listView;
     private MarkTeacherListAdapter markListAdapter;
-    private List<MarkItem> markItemsList;
 
+    private List<MarkItem> markItemsList;
+    private int orderByMCQ = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +48,11 @@ public class MarkTeacherActivity extends AppCompatActivity
         mcqSqlHandler = new MCQSQLHandler(new SQLServices(this));
         userSQLHandler = new UserSQLHandler(new SQLServices(this));
 
-        listView = findViewById(R.id.default_list_view);
+        ListView listView = findViewById(R.id.default_list_view);
 
         markItemsList = formateMCQListForMarkItems(mcqSqlHandler.getMCQs());
         markListAdapter = new MarkTeacherListAdapter(MarkTeacherActivity.this,
                                                      markItemsList);
-
 
         listView.setAdapter(markListAdapter);
 
@@ -69,42 +60,34 @@ public class MarkTeacherActivity extends AppCompatActivity
     }
 
     private void initSpinner() {
-        Spinner choices_spinner = findViewById(R.id.mark_sorting_spinner);
+        Spinner spinner = findViewById(R.id.mark_sorting_spinner);
         ArrayAdapter<CharSequence> spinner_adapter = ArrayAdapter.createFromResource(this,
                                         R.array.mark_sorting_choices,
                                         android.R.layout.simple_spinner_item);
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        choices_spinner.setAdapter(spinner_adapter);
+        spinner.setAdapter(spinner_adapter);
 
-        setSpinnerListener(choices_spinner);
+        setSpinnerListener(spinner);
     }
 
     private void setSpinnerListener(Spinner spinner)
     {
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 markItemsList.clear();
-                if (OrderBy.valueOf("STUDENT").ordinal() == id) {
+                if (id == orderByMCQ)
                     markItemsList.addAll(formateStudentListForMarkItems(userSQLHandler.getAllStudents()));
-                    for(MarkItem i : markItemsList)
-                        System.out.println(i);
-                }
 
-                else {
+                else
                     markItemsList.addAll(formateMCQListForMarkItems(mcqSqlHandler.getMCQs()));
-                    for(MarkItem i : markItemsList)
-                        System.out.println(i);
-                }
 
                 markListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -132,7 +115,8 @@ public class MarkTeacherActivity extends AppCompatActivity
             }
         });
     }
-    
+
+
     
     private List<MarkItem> formateMCQListForMarkItems(ArrayList<MCQ> mcqArrayList)
     {

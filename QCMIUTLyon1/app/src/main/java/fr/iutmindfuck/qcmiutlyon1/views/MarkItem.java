@@ -1,7 +1,5 @@
 package fr.iutmindfuck.qcmiutlyon1.views;
 
-import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
-
 public class MarkItem {
     private String title;
     private String description;

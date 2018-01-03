@@ -69,6 +69,7 @@
 
     <!-- Strings related to marks -->
     <string name="mark_sorting_text">Trier par : </string>
+    <string name="average">Moyenne</string>
     <string-array name="mark_sorting_choices">
         <item>QCM</item>
         <item>Etudiant</item>

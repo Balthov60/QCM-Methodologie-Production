@@ -9,8 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.List;
 import fr.iutmindfuck.qcmiutlyon1.R;
-import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
-import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class MarkTeacherListAdapter extends ArrayAdapter<MarkItem> {
 
@@ -26,17 +24,15 @@ public class MarkTeacherListAdapter extends ArrayAdapter<MarkItem> {
         }
     }
 
-    private MarkSQLHandler markSQLHandler;
 
     public MarkTeacherListAdapter(Context context, List<MarkItem> list) {
         super(context, 0, list);
-        this.markSQLHandler = new MarkSQLHandler(new SQLServices(context));
     }
 
 
     @Override
     @NonNull
-    public View getView(final int position, View convertView, final ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
                     .inflate(R.layout.mark_teacher_list_item, parent, false);
@@ -67,11 +63,6 @@ public class MarkTeacherListAdapter extends ArrayAdapter<MarkItem> {
         viewHolder.average.setText(markItem != null && markItem.getAverage() != null
                 ? "Moyenne : " + markItem.getAverage()
                 : "Moyenne : Non disponible");
-    }
-
-    public void updateData()
-    {
-        notifyDataSetChanged();
     }
 
 }

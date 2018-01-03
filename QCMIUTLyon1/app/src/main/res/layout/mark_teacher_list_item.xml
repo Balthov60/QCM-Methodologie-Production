@@ -40,7 +40,6 @@
         android:layout_marginStart="40dp"
         android:layout_toEndOf="@+id/list_item_description"
 
-        android:text="Moyenne"
+        android:text="@string/average"
         android:textColor="@android:color/black"/>
-
 </RelativeLayout>

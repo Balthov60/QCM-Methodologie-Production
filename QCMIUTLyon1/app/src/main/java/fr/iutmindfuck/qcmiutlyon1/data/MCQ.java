@@ -2,9 +2,6 @@ package fr.iutmindfuck.qcmiutlyon1.data;
 
 import java.io.Serializable;
 
-import fr.iutmindfuck.qcmiutlyon1.handlers.MarkSQLHandler;
-import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
-
 public class MCQ implements Serializable {
 
     private Integer id;
