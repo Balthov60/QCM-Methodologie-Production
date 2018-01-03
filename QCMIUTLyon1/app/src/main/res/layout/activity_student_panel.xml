@@ -18,7 +18,6 @@
         android:gravity="center">
 
         <TextView style="@style/BigButton"
-            android:id="@+id/student_panel_mcq_to_do"
             android:gravity="bottom|center"
 
             android:text="@string/student_panel_mcq_to_do"
@@ -27,7 +26,6 @@
 
 
         <TextView style="@style/BigButton"
-            android:id="@+id/student_panel_mcq_done"
             android:layout_marginTop="40dp"
             android:gravity="bottom|center"
 

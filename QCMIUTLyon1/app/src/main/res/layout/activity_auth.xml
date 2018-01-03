@@ -56,7 +56,6 @@
         android:inputType="textPassword" />
 
     <Button style="@style/BasicButton"
-        android:id="@+id/auth_login_button"
 
         android:layout_below="@id/auth_password"
         android:layout_marginTop="@dimen/auth_button_margin_top"

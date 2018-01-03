@@ -19,9 +19,6 @@
     <dimen name="mcq_list_item_description_width">200dp</dimen>
 
     <!-- Question Answer linked dimens -->
-    <dimen name="label_question_selected_margin_top">100dp</dimen>
-    <dimen name="label_question_selected_margin_right">50dp</dimen>
-    <dimen name="question_answer_checkbox_margin_top">15dp</dimen>
 
 
 </resources>

@@ -13,9 +13,6 @@
     <string name="content_description_on_iut_brand">Official IUT brand</string>
     <string name="content_description_on_right_hand_upper_corner">Pink triangle</string>
 
-    <string name="set_prof">prof</string>
-    <string name="set_user">user</string>
-
     <!-- Strings related to group -->
     <string name="group1_1">S1G1</string>
     <string name="group1_2">S1G2</string>
@@ -62,14 +59,9 @@
 
     <!-- Strings related to student sections -->
     <string name="student_submit_mcq">Valider QCM</string>
-    <string name="question_answer_previous">PRECEDENT</string>
-    <string name="previous_question_button">Previous Question Button</string>
-    <string name="question_answer_next">SUIVANT</string>
-    <string name="next_question_button">Next Question Button</string>
 
     <!-- Strings related to marks -->
     <string name="mark_sorting_text">Trier par : </string>
-    <string name="average">Moyenne</string>
     <string-array name="mark_sorting_choices">
         <item>QCM</item>
         <item>Etudiant</item>
