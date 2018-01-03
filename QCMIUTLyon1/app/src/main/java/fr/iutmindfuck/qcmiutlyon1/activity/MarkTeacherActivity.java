@@ -86,17 +86,17 @@ public class MarkTeacherActivity extends AppCompatActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                markItemsList.clear();
                 if (OrderBy.valueOf("STUDENT").ordinal() == id) {
-                    markItemsList = formateStudentListForMarkItems(userSQLHandler.getAllStudents());
+                    markItemsList.addAll(formateStudentListForMarkItems(userSQLHandler.getAllStudents()));
                     for(MarkItem i : markItemsList)
                         System.out.println(i);
                 }
 
                 else {
-                    markItemsList = formateMCQListForMarkItems(mcqSqlHandler.getMCQs());
+                    markItemsList.addAll(formateMCQListForMarkItems(mcqSqlHandler.getMCQs()));
                     for(MarkItem i : markItemsList)
                         System.out.println(i);
-                    System.out.println("Ouais bisous ouais");
                 }
 
                 markListAdapter.notifyDataSetChanged();
@@ -138,7 +138,6 @@ public class MarkTeacherActivity extends AppCompatActivity
     {
         List<MarkItem> marksList = new ArrayList<>();
         MarkSQLHandler markSQLHandler = new MarkSQLHandler(new SQLServices(this));
-        marksList.clear();
         for(MCQ mcq : mcqArrayList)
             marksList.add(new MarkItem(mcq.getName(),
                                 mcq.getDescription(),
@@ -152,7 +151,6 @@ public class MarkTeacherActivity extends AppCompatActivity
     {
         List<MarkItem> marksList = new ArrayList<>();
         MarkSQLHandler markSQLHandler = new MarkSQLHandler(new SQLServices(this));
-        marksList.clear();
         for(Student student : studentArrayList)
             marksList.add(new MarkItem(student.getFirstname()
                     + " " + student.getLastname().toUpperCase(),

@@ -69,5 +69,9 @@ public class MarkTeacherListAdapter extends ArrayAdapter<MarkItem> {
                 : "Moyenne : Non disponible");
     }
 
+    public void updateData()
+    {
+        notifyDataSetChanged();
+    }
 
 }
