@@ -34,27 +34,20 @@
 
             android:layout_toEndOf="@+id/mark_sorting_text"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="50dp" />
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="20dp"/>
 
         <LinearLayout
             android:id="@+id/default_list_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="70dp">
 
             <ListView
                 android:id="@+id/default_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
-        <Button style="@style/BasicButton"
-            android:id="@+id/default_list_button"
-
-            android:layout_below="@+id/default_list_container"
-            android:layout_marginTop="35dp"
-
-            android:text="@string/default_list_create_button" />
     </RelativeLayout>
 </LinearLayout>

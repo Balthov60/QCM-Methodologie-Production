@@ -11,13 +11,15 @@
 
     <TextView tools:text="Titre"
         android:id="@+id/list_item_title"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/mcq_list_item_description_width"
         android:layout_height="wrap_content"
 
         android:layout_marginStart="@dimen/wide_view_margin"
 
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:ellipsize="end" />
 
     <TextView tools:text="sous-titre"
         android:id="@+id/list_item_description"

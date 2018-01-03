@@ -30,7 +30,7 @@ public class MarkTeacherActivity extends AppCompatActivity
     private MarkTeacherListAdapter markListAdapter;
 
     private List<MarkItem> markItemsList;
-    private int orderByMCQ = 0;
+    private final int orderByMCQ = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
