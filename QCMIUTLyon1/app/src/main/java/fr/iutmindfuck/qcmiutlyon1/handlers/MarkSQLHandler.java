@@ -9,14 +9,19 @@ import fr.iutmindfuck.qcmiutlyon1.data.Mark;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
 
 public class MarkSQLHandler {
+
+    private static final String MARK_TABLE = "Mark";
     private static final String MARK_ID_MCQ = "idMCQ";
     private static final String MARK_ID_STUDENT = "idStudent";
     private static final String MARK_VALUE = "value";
-    private static final String MARK_TABLE = "Mark";
 
     private SQLServices sqlServices;
 
     public MarkSQLHandler(SQLServices sqlServices){ this.sqlServices = sqlServices; }
+
+    /* *******************/
+    /* Data Manipulation */
+    /*********************/
 
     public static String getSQLForTableCreation() {
         return "CREATE TABLE " + MARK_TABLE + " (" +
@@ -29,9 +34,9 @@ public class MarkSQLHandler {
         return "DROP TABLE IF EXISTS " + MARK_TABLE;
     }
 
-    /* **********/
-    /* Get Data */
-    /************/
+    /* *******************/
+    /* Data Manipulation */
+    /*********************/
 
     public Mark getMark(int idMCQ, String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
@@ -47,20 +52,19 @@ public class MarkSQLHandler {
         cursor.close();
         return mark;
     }
-    public ArrayList<Mark> getAllMarksForMCQ(int idMCQ) {
+    private ArrayList<Mark> getAllMarksForMCQ(int idMCQ) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
                                       MARK_ID_MCQ + " = ?",
                                             new String[] {String.valueOf(idMCQ)});
 
         return getMarksFromCursor(cursor);
     }
-    public float getAverageForMCQ(int idMCQ)
-    {
+    public float getAverageForMCQ(int idMCQ) {
         ArrayList<Mark> list = getAllMarksForMCQ(idMCQ);
         if(list == null)
             return (-1);
 
-        float average =0.0f;
+        float average = 0.0f;
 
         for(Mark mark : list)
             average += mark.getValue();
@@ -69,8 +73,7 @@ public class MarkSQLHandler {
     }
 
 
-    public float getAverageForStudent(int idStudent)
-    {
+    public float getAverageForStudent(String idStudent) {
         ArrayList<Mark> marks = getAllMarksForStudent(idStudent);
         if(marks == null)
             return (-1);
@@ -82,8 +85,7 @@ public class MarkSQLHandler {
 
         return average / marks.size();
     }
-  
-    public ArrayList<Mark> getAllMarksForStudent(String idStudent) {
+    private ArrayList<Mark> getAllMarksForStudent(String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,
                                       MARK_ID_STUDENT + " = ?",
                                             new String[] {idStudent});
@@ -108,10 +110,6 @@ public class MarkSQLHandler {
         cursor.close();
         return marks;
     }
-
-    /* *******************/
-    /* Data Manipulation */
-    /*********************/
 
     public void addMark(Mark mark) {
         ContentValues contentValues = new ContentValues();

@@ -4,15 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import fr.iutmindfuck.qcmiutlyon1.R;
 
 
 public class TeacherPanelActivity extends AppCompatActivity {
-
-    private static final String UNIMPLEMENTED_MARK_MESSAGE
-                                      = "La gestion des notes n'a pas encore été implémenté";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

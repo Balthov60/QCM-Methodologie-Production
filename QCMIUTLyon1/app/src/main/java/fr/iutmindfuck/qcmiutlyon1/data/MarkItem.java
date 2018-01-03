@@ -1,4 +1,4 @@
-package fr.iutmindfuck.qcmiutlyon1.views;
+package fr.iutmindfuck.qcmiutlyon1.data;
 
 public class MarkItem {
     private String title;
@@ -19,7 +19,10 @@ public class MarkItem {
         return description;
     }
     public String getAverage() {
-        return average;
+        if (Float.parseFloat(average) >= 0)
+            return average;
+        else
+            return "N/A";
     }
 
     public String toString()

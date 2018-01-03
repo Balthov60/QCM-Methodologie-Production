@@ -4,28 +4,22 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
 
-    private int id;
-    private String firstname;
-    private String lastname;
+    private String id;
+    private String firstName;
+    private String lastName;
     private String group;
 
-    public Student(int id, String firstname, String lastname, String group)
+    public Student(String id, String firstName, String lastName, String group)
     {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.group = group;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
-    }
-    public String getFirstname() {
-        return firstname;
-    }
-    public String getLastname() {
-        return lastname;
     }
     public String getGroup() {
         return group;
@@ -33,6 +27,6 @@ public class Student implements Serializable {
 
     public String toString()
     {
-        return firstname + " " + lastname.toUpperCase() + " / " + group;
+        return firstName + " " + lastName.toUpperCase() + " / " + group;
     }
 }

@@ -1,10 +1,8 @@
 package fr.iutmindfuck.qcmiutlyon1.handlers;
 
 import android.database.Cursor;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.iutmindfuck.qcmiutlyon1.data.Student;
 import fr.iutmindfuck.qcmiutlyon1.services.SQLServices;
@@ -60,20 +58,14 @@ public class UserSQLHandler {
     /* Database Manipulation */
     /* ***********************/
 
-  
-    public ArrayList<Student> getStudent(int idStudent)
-    {
-        Cursor cursor = sqlServices.getData(USER_TABLE, null ,null, new String[]{String.valueOf(idStudent)});
-        return getStudentFromCursor(cursor);
-    }
 
     public ArrayList<Student> getAllStudents()
     {
-        Cursor cursor = sqlServices.getData(USER_TABLE, new String[]{"*"}, null, null);
+        Cursor cursor = sqlServices.getData(USER_TABLE, null, USER_IS_TEACHER + " = ?",
+                                                                    new String[]{"0"});
         return getStudentFromCursor(cursor);
     }
 
-    @Nullable
     private ArrayList<Student> getStudentFromCursor(Cursor cursor)
     {
         if (!cursor.moveToFirst()) {
@@ -83,10 +75,10 @@ public class UserSQLHandler {
 
         ArrayList<Student> students = new ArrayList<>();
         do {
-            students.add(new Student(cursor.getInt(cursor.getColumnIndex(USER_ID)),
-                    cursor.getString(cursor.getColumnIndex(USER_FIRSTNAME)),
-                    cursor.getString(cursor.getColumnIndex(USER_LASTNAME)),
-                    cursor.getString(cursor.getColumnIndex(USER_GROUP))));
+            students.add(new Student(cursor.getString(cursor.getColumnIndex(USER_ID)),
+                                     cursor.getString(cursor.getColumnIndex(USER_FIRST_NAME)),
+                                     cursor.getString(cursor.getColumnIndex(USER_LAST_NAME)),
+                                     cursor.getString(cursor.getColumnIndex(USER_GROUP))));
 
         }
         while(cursor.moveToNext());
@@ -105,9 +97,5 @@ public class UserSQLHandler {
                 USER_ID + " = ? AND " + USER_IS_TEACHER + " = ?",
                 new String[]{id, "1"});
     }
-
-
-
-
 
 }
