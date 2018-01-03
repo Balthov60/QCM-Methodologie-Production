@@ -75,15 +75,18 @@ public class MarkSQLHandler {
 
     public float getAverageForStudent(String idStudent) {
         ArrayList<Mark> marks = getAllMarksForStudent(idStudent);
+        MCQSQLHandler mcqsqlHandler = new MCQSQLHandler(sqlServices);
+        float totalCoeff = 0;
         if(marks == null)
             return (-1);
 
         float average = 0.0f;
 
-        for(Mark mark : marks)
+        for(Mark mark : marks) {
             average += mark.getValue();
-
-        return average / marks.size();
+            totalCoeff += mcqsqlHandler.getMCQ(mark.getIdMCQ()).getCoefficient();
+        }
+        return average / totalCoeff;
     }
     private ArrayList<Mark> getAllMarksForStudent(String idStudent) {
         Cursor cursor = sqlServices.getData(MARK_TABLE, null,

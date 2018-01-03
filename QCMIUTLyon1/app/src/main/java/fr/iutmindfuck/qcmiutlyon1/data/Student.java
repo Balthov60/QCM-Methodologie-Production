@@ -22,11 +22,12 @@ public class Student implements Serializable {
         return id;
     }
     public String getGroup() {
-        return group;
+        String subGroup = group.substring(3);
+        return subGroup.toUpperCase();
     }
 
     public String toString()
     {
-        return firstName + " " + lastName.toUpperCase() + " / " + group;
+        return lastName.toUpperCase() + " " + firstName;
     }
 }
