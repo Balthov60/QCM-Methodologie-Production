@@ -60,7 +60,7 @@ public class MarkTeacherListAdapter extends ArrayAdapter<MarkItem> {
 
         viewHolder.title.setText(markItem != null ? markItem.getTitle() : null);
         viewHolder.description.setText(markItem != null ? markItem.getDescription() : null);
-        viewHolder.average.setText(markItem != null && markItem.getAverage() != null
+        viewHolder.average.setText(markItem != null && Float.parseFloat(markItem.getAverage()) >= 0.0f
                 ? "Moyenne : " + markItem.getAverage()
                 : "Moyenne : Non disponible");
     }
