@@ -86,7 +86,7 @@ public class MCQEditionActivity extends AppCompatActivity {
         boolean isNegative = isMCQNegative();
         Float coefficient = getMCQCoefficient();
 
-        if (title.isEmpty() || description.isEmpty() || coefficient == null) {
+        if (title.isEmpty() || description.isEmpty() || coefficient == null || coefficient == 0) {
             displayErrorToast();
             return;
         }
