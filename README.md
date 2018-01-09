@@ -1,9 +1,9 @@
 # QCM-Methodologie-Production
 
-Identifiant Utilisateur :
+Identifiants Utilisateur :
 user / password
 
-Identifiant Enseignant :
+Identifiants Enseignant :
 teacher / password
 
-Les 2 premiers QCM disponnibles peuvent être fait les autre sont juste la pour faire des tests, ils ne possède pas de questions. 
+Les 2 premiers QCM disponnibles peuvent être fait les autres sont juste la pour faire des tests, ils ne possèdent pas de questions. 
