@@ -83,8 +83,9 @@ public class MarkSQLHandler {
         float average = 0.0f;
 
         for(Mark mark : marks) {
-            average += mark.getValue();
-            totalCoefficient += mcqsqlHandler.getMCQ(mark.getIdMCQ()).getCoefficient();
+            float coefficient = mcqsqlHandler.getMCQ(mark.getIdMCQ()).getCoefficient();
+            average += mark.getValue() * coefficient;
+            totalCoefficient += coefficient;
         }
         return average / totalCoefficient;
     }
@@ -122,5 +123,10 @@ public class MarkSQLHandler {
         contentValues.put(MARK_VALUE, mark.getValue());
 
         sqlServices.createOrReplaceData(MARK_TABLE, contentValues);
+    }
+
+    void removeMarksFor(int idMCQ) {
+        sqlServices.removeEntries(MARK_TABLE, MARK_ID_MCQ + " = ?",
+                                                    new String[] {String.valueOf(idMCQ)});
     }
 }

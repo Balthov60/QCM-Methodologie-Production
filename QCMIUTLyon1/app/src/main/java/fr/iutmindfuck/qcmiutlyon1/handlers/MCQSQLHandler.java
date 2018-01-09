@@ -119,6 +119,7 @@ public class MCQSQLHandler {
     }
     public void removeMCQ(int idMCQ) {
         new QuestionSQLHandler(sqlServices).removeQuestionsFor(idMCQ);
+        new MarkSQLHandler(sqlServices).removeMarksFor(idMCQ);
 
         sqlServices.removeEntries(MCQ_TABLE, MCQ_ID + " = ?",
                 new String[] {String.valueOf(idMCQ)});
